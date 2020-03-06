@@ -14,6 +14,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * hold ctrl: zoom
 
 ### shortcuts
+* Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo
 * ctrl+S: save 
