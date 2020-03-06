@@ -1,0 +1,46 @@
+[x] make drawing
+[x] line simplification (linear interp)
+[x] grid
+[ ] smarter grid
+[-] song structure tracks, notes
+[x] eraser tool
+[x] zooming 
+[x] panning
+[x] playhead
+[x] simple audio engine
+[x] save/load
+[ ] move tool
+[ ] grab tool
+[ ] rect select tool
+[ ] copy paste
+[x] undo/redo
+[ ] multiple tracks
+[ ] input smoothing
+[ ] edit time
+[ ] move time
+[ ] smooth brush
+[ ] flatten brush
+[ ] add geometry (when moving?) (dynamic subdiv?)
+[ ] overwrite/edit draw brush
+[ ] vibrato?
+[ ] split/seperate selection
+[ ] select time 
+[ ] lasso select tool
+[ ] cursor images
+[ ] entropy relax tool
+[ ] export
+[ ] switch to open source fonts
+
+[=] xyz color
+[=] blur
+
+units: 	y ~ 1 cent (100 = 1st)
+		x ~ 100 = 1/16 note
+
+
+selection = boolean
+edit mask = falloff (number per vertex)
+
+move -> move selection or whole notes
+grab -> move w faloff*selection
+pull -> string IK motion (useful??)
