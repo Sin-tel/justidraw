@@ -1,0 +1,1266 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Audio",
+				"love.audio.play"
+			],
+			[
+				"random",
+				"love.math.randomNormal(stddev, mean)"
+			],
+			[
+				"setC",
+				"love.graphics.setColor(rgba)"
+			],
+			[
+				"lovekey",
+				"love.keyboard.isDown"
+			],
+			[
+				"push",
+				"love.graphics.push"
+			],
+			[
+				"lovesetc",
+				"love.graphics.setColor"
+			],
+			[
+				"setF",
+				"love.graphics.setFont(font)"
+			],
+			[
+				"setli",
+				"love.graphics.setLineStyle"
+			],
+			[
+				"setLin",
+				"love.graphics.setLineWidth"
+			],
+			[
+				"print",
+				"love.graphics.print(text, x, y, r, sx, sy, ox, oy, kx, ky)"
+			],
+			[
+				"gr",
+				"love.graphics.circle"
+			],
+			[
+				"key",
+				"love.keyboard"
+			],
+			[
+				"canv",
+				"love.graphics.newCanvas"
+			],
+			[
+				"getMove",
+				"getMoveHard"
+			],
+			[
+				"pr",
+				"private"
+			],
+			[
+				"dela",
+				"delayAction"
+			],
+			[
+				"turn",
+				"turnCounter"
+			],
+			[
+				"sy",
+				"System"
+			],
+			[
+				"ke",
+				"love.keyboard"
+			],
+			[
+				"setLine",
+				"love.graphics.setLineStyle(style)"
+			],
+			[
+				"i",
+				"if	if cond then"
+			],
+			[
+				"setL",
+				"love.graphics.setLineWidth(width)"
+			],
+			[
+				"mouse",
+				"love.mouse.isDown"
+			],
+			[
+				"setMax",
+				"setMaxForce"
+			],
+			[
+				"parent",
+				"parentJoint"
+			],
+			[
+				"moveTim",
+				"MoveTimeStart"
+			],
+			[
+				"setB",
+				"love.graphics.setBlendMode"
+			],
+			[
+				"func",
+				"function	function"
+			],
+			[
+				"spawn",
+				"Spawner"
+			],
+			[
+				"grr",
+				"love.graphics.rotate"
+			],
+			[
+				"timer",
+				"love.timer.getTime"
+			],
+			[
+				"graphr",
+				"love.graphics.rectangle"
+			],
+			[
+				"els",
+				"elseif	elseif cond then"
+			],
+			[
+				"graph",
+				"love.graphics.rectangle"
+			],
+			[
+				"pre",
+				"prevAction"
+			],
+			[
+				"sp",
+				"spaceTime"
+			],
+			[
+				"combo",
+				"combo_stretch"
+			],
+			[
+				"setTar",
+				"setTargetPitch"
+			],
+			[
+				"str",
+				"strobeSpeed"
+			],
+			[
+				"_",
+				"_energy"
+			],
+			[
+				"get",
+				"getEngineUse"
+			],
+			[
+				"h",
+				"h"
+			],
+			[
+				"edit",
+				"editstate"
+			],
+			[
+				"in",
+				"instancemanager"
+			],
+			[
+				"draw",
+				"draw_outer"
+			],
+			[
+				"fun",
+				"function	function"
+			],
+			[
+				"hu",
+				"hullslot"
+			],
+			[
+				"img_s",
+				"img_selected"
+			],
+			[
+				"draw_",
+				"draw_selected"
+			],
+			[
+				"sel",
+				"selected"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"fx",
+				"fx"
+			],
+			[
+				"hull",
+				"hull_selected"
+			],
+			[
+				"ne",
+				"new_obj"
+			],
+			[
+				"ship",
+				"shipRotation"
+			],
+			[
+				"set",
+				"setFilter"
+			],
+			[
+				"mousec",
+				"mousec2Y"
+			],
+			[
+				"num",
+				"numPlanets"
+			],
+			[
+				"camZ",
+				"camZoomTarget"
+			],
+			[
+				"shipre",
+				"shipRelX-cameraX"
+			],
+			[
+				"Camer",
+				"shipRelX-cameraX"
+			],
+			[
+				"else",
+				"elseif"
+			],
+			[
+				"up",
+				"upgrade_available"
+			],
+			[
+				"dt",
+				"dt"
+			],
+			[
+				"max",
+				"maxLevel"
+			],
+			[
+				"tile",
+				"tileQuad"
+			],
+			[
+				"fu",
+				"function	function"
+			],
+			[
+				"time",
+				"timer_swirl"
+			],
+			[
+				"flick",
+				"flicker_timer"
+			],
+			[
+				"dam",
+				"damage"
+			],
+			[
+				"table",
+				"table.sort	table.sort"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.lua",
+			"settings":
+			{
+				"buffer_size": 4358,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tablet.lua",
+			"settings":
+			{
+				"buffer_size": 6645,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "file.lua",
+			"settings":
+			{
+				"buffer_size": 787,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "todo.txt",
+			"settings":
+			{
+				"buffer_size": 848,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "audio.lua",
+			"settings":
+			{
+				"buffer_size": 3094,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "view.lua",
+			"settings":
+			{
+				"buffer_size": 2072,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "undo.lua",
+			"settings":
+			{
+				"buffer_size": 1375,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "qaudio.lua",
+			"settings":
+			{
+				"buffer_size": 1142,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/LOVE2D run.sublime-build",
+	"command_palette":
+	{
+		"height": 219.0,
+		"selected_items":
+		[
+			[
+				"run",
+				"Build: Run Java"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"love",
+				"Set Syntax: Lua (Love)"
+			],
+			[
+				"inde",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"set syntax lua",
+				"Set Syntax: Lua (Love)"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"git ",
+				"Git: Gui"
+			],
+			[
+				"git gui",
+				"Git: Gui"
+			],
+			[
+				"git",
+				"Git: Gui"
+			],
+			[
+				"glsl",
+				"Set Syntax: GLSL"
+			],
+			[
+				"insll",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"g",
+				"Git: Gui"
+			],
+			[
+				"gi",
+				"Git: Gui"
+			],
+			[
+				"git pull",
+				"Git: Pull Current Branch"
+			],
+			[
+				"git reset",
+				"Git: Reset (hard) HEAD"
+			],
+			[
+				"git p",
+				"Git: Pull"
+			],
+			[
+				"git fetch",
+				"Git: Fetch"
+			],
+			[
+				"packag",
+				"Package Control: Remove Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"git pus",
+				"Git: Push Current Branch"
+			],
+			[
+				"git push",
+				"Git: Push Current Branch"
+			],
+			[
+				"git  status",
+				"Git: Status"
+			],
+			[
+				"git fet",
+				"Git: Fetch"
+			],
+			[
+				"git add",
+				"Git: Add Remote"
+			],
+			[
+				"git ad",
+				"Git: Add Remote"
+			],
+			[
+				"git add ",
+				"Git: Add Remote"
+			],
+			[
+				"git remote",
+				"Git: Remote"
+			],
+			[
+				"git init",
+				"Git: Init"
+			],
+			[
+				"git clone",
+				"Git: Quick Log Current File"
+			],
+			[
+				"git f",
+				"Git: Fetch"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 204.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Documenten/LUA/justidraw2/tool_draw.lua",
+		"/D/Documenten/LUA/justidraw2/binser.lua",
+		"/C/Users/casyv/AppData/Roaming/LOVE/justidraw2/save Thu Mar 05 12.58.35.sav",
+		"/C/Users/casyv/AppData/Roaming/LOVE/justidraw2/save Thu Mar 05 12.38.17.sav",
+		"/D/Documenten/LUA/justidraw2/qaudio.lua",
+		"/D/Documenten/LUA/justidraw2/todo.txt",
+		"/D/Documenten/LUA/justidraw2/edit.lua",
+		"/D/Documenten/LUA/justidraw2/view.lua",
+		"/D/Documenten/LUA/justidraw2/audio.lua",
+		"/D/Documenten/LUA/justidraw2/tablet.lua",
+		"/D/Documenten/LUA/justidraw2/conf.lua",
+		"/D/Documenten/LUA/justidraw2/tool_erase.lua",
+		"/D/Documenten/LUA/justidraw2/tool_zoom.lua",
+		"/D/Documenten/LUA/justidraw2/tool_pan.lua",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/PressureTest.cpp",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/WINTAB.H",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/Utils.h",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/Utils.cpp",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/Resource.h",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/PressureTest.h",
+		"/D/Documenten/LUA/justidraw2/blur2.glsl",
+		"/D/Documenten/LUA/justidraw2/comp.glsl",
+		"/D/Documenten/LUA/justidraw2/blur1.glsl",
+		"/D/Documenten/LUA/justidraw2/spectrum.lua",
+		"/D/Documenten/LUA/justidraw2/tool_pan",
+		"/D/Downloads/blender-2.82-3dcddf83bfd4-windows64/blender-2.82-3dcddf83bfd4-windows64/2.82/scripts/addons/blenderkit/oauth.py",
+		"/D/Documenten/LUA/pressuretest/main.lua",
+		"/D/Documenten/LUA/pressuretest/PressureTest/PressureTest/PKTDEF.H",
+		"/D/Documenten/LUA/pressuretest/binary.lua",
+		"/D/Documenten/LUA/pressuretest/conf.lua",
+		"/D/Documenten/LUA/pressuretest/love.conf",
+		"/D/Downloads/main.lua",
+		"/D/Documenten/tic80/music/voice.lua",
+		"/D/Documenten/tic80/music/main.lua",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/MSGPACK.H",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/Utils.h",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/WINTAB.H",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/PressureTest.cpp",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/Utils.cpp",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/PKTDEF.H",
+		"/D/Documenten/LUA/main.lua",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/PressureTest.h",
+		"/C/Users/casyv/love.js/emscripten/system/include/emscripten/xmmintrin.h",
+		"/D/Downloads/bbtablet-2009-01-07/bbtablet/samples/test1.cpp",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/targetver.h",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/stdafx.h",
+		"/D/Downloads/PressureTest/PressureTest/PressureTest/stdafx.cpp",
+		"/D/Downloads/TiltTest/TiltTest/WINTAB.H",
+		"/D/Downloads/TiltTest/TiltTest/TILTTEST.H",
+		"/D/Downloads/TiltTest/TiltTest/TILTTEST.C",
+		"/D/Documenten/LUA/renderer/comp.glsl",
+		"/D/Documenten/LUA/renderer/spectrum2.lua",
+		"/D/Documenten/LUA/renderer/spectrum.lua",
+		"/D/Documenten/LUA/renderer/main.lua",
+		"/D/Documenten/1 MA/time series/Casper van Bavel script.r",
+		"/C/Users/casyv/AppData/Local/Temp/Rar$DIa0.316/PressureTest.h",
+		"/D/Documenten/LUA/renderer/threadCode.lua",
+		"/D/Documenten/LUA/rdf/main.lua",
+		"/D/Documenten/LUA/rdf/flow.lua",
+		"/D/Documenten/LUA/renderer/backup/main.lua",
+		"/D/Documenten/LUA/renderer/backup/main.love",
+		"/D/Documenten/JAVA/memory/ScoreWriter.java",
+		"/D/Downloads/Casper_van_Bavel.R",
+		"/D/Documenten/PYTHON/assignment/assignment.py",
+		"/D/Documenten/JAVA/memory/StateFinish.java",
+		"/D/Documenten/JAVA/memory/Board.java",
+		"/D/Documenten/JAVA/memory/GameWindow.java",
+		"/D/Documenten/JAVA/memory/Memory.java",
+		"/D/Documenten/JAVA/memory/Card.java",
+		"/D/Documenten/JAVA/memory/StateHelp.java",
+		"/D/Documenten/JAVA/memory/RadioButton.java",
+		"/D/Documenten/JAVA/memory/StateStart.java",
+		"/D/Documenten/JAVA/memory/StateMain.java",
+		"/D/Documenten/JAVA/memory/AI.java",
+		"/D/Documenten/JAVA/memory/Score.java",
+		"/D/Documenten/JAVA/memory/State.java",
+		"/D/Documenten/JAVA/memory/Memory.jar",
+		"/D/Documenten/JAVA/memory/CardSpecial.java",
+		"/D/Documenten/JAVA/memory/Button.java",
+		"/D/Documenten/JAVA/memory/score.sav",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/User/javaBuild.sublime-build",
+		"/D/Documenten/JAVA/memory/Selector.java",
+		"/D/Documenten/JAVA/memory/score2.txt",
+		"/C/Program Files/Steinberg/VstPlugins/protoplug/ProtoplugFiles/include/core/stereofx.lua",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/Java/JavaC.sublime-build",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/Java/JavaC_backup.sublime-build",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/Java/Ant.sublime-build",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/User/Java.sublime-settings",
+		"/D/Documenten/MATLAB/tides.m",
+		"/C/Users/casyv/AppData/Roaming/krita/kis_paintoppresets.blacklist",
+		"/D/Documenten/JAVA/memory/Window.java",
+		"/D/Downloads/scripts(1)/scripts/for.sh",
+		"/D/Downloads/scripts(1)/scripts/quest.sh",
+		"/D/Documenten/ubuntu/shared/bio/medium.sh",
+		"/D/Documenten/JAVA/memory/HelloWorld.java",
+		"/D/Documenten/LUA/justidraw/view.lua",
+		"/D/Documenten/LUA/justidraw/tool_draw.lua",
+		"/D/Documenten/LUA/justidraw/edit.lua",
+		"/D/Documenten/LUA/justidraw/main.lua",
+		"/C/Users/casyv/love.js/emscripten/tests/poppler/poppler/JBIG2Stream.h",
+		"/D/Documenten/LUA/justidraw/tool_draw",
+		"/D/Documenten/JAVASCRIPT/audiotest/index.html",
+		"/D/Documenten/LUA/_Done/PETRI/music.lua",
+		"/D/Documenten/JUCE projects/testsynth/JuceLibraryCode/AppConfig.h",
+		"/D/Documenten/Arduinofiles/sSequencer303/t03_DEF.h",
+		"/D/Documenten/JUCE projects/NewProjectVstTest/JuceLibraryCode/AppConfig.h",
+		"/C/JUCE/examples/Plugins/ArpeggiatorPluginDemo.h",
+		"/C/JUCE/examples/Plugins/AudioPluginDemo.h",
+		"/D/Downloads/impact_matlab/impact_matlab/impact_modal.m",
+		"/D/Downloads/impact_matlab/impact_matlab/nlsheared.m",
+		"/D/Documenten/LUA/cambrian/main.lua",
+		"/D/Documenten/JAVASCRIPT/test/index.html",
+		"/C/Users/casyv/AppData/Roaming/Sublime Text 2/Packages/User/open in chrome.sublime-build",
+		"/D/Documenten/JAVASCRIPT/test/test.js",
+		"/D/Documenten/JAVASCRIPT/test.html",
+		"/D/Documenten/LUA/harmony_relaxation/entropy.lua",
+		"/D/Documenten/LUA/harmony_relaxation/voice.lua",
+		"/D/Documenten/LUA/harmony_relaxation/main.lua",
+		"/D/Documenten/LUA/harmony relaxation/intrument.lua",
+		"/D/Documenten/LUA/harmony relaxation/voice.lua",
+		"/D/Documenten/LUA/harmony relaxation/main.lua",
+		"/D/Documenten/LUA/ProcMusic/intrument.lua",
+		"/D/Documenten/LUA/ProcMusic/master.lua",
+		"/D/Documenten/LUA/physics_test/entities.lua",
+		"/D/Documenten/LUA/physics_test/components/eyes.lua",
+		"/D/Documenten/LUA/physics_test/entity.lua",
+		"/D/Documenten/LUA/physics_test/draw_f.lua",
+		"/D/Documenten/LUA/physics_test/components/spine.lua"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"print",
+			"Audio",
+			"deser",
+			"serialize_to_file",
+			"des",
+			"deseriali",
+			"20",
+			"Audio.play",
+			"Quadio",
+			"Pan",
+			"erase",
+			"Pan",
+			"ptNew",
+			"prsNew",
+			"ptNew",
+			"lppoint",
+			"LPPOINT",
+			"point",
+			"POINT",
+			"ptNew",
+			"WM_PAINT",
+			"ScreenToClient",
+			"Pan.zoom",
+			"lastTool",
+			"currentTool",
+			"Draw",
+			"Pressure",
+			"print",
+			"Pressure",
+			"print",
+			"DVC_X",
+			"axis",
+			"orient",
+			"PK_",
+			"PK_ORIENTATION",
+			"curso",
+			"int",
+			"PACKETMODE",
+			"pk_b",
+			"PK_BUTTONS",
+			"PK_",
+			"__MODE",
+			"PACKET",
+			"pkt",
+			"WndProc",
+			"lresult",
+			"WT_P",
+			"CALLBACK",
+			"// ",
+			"PACKETDATA",
+			"hInst",
+			"PK_",
+			"WTPKT",
+			"PK_X",
+			"glogContext",
+			"WTOpenA",
+			"WTPKT",
+			"DECLARE_HANDLE",
+			"hctx",
+			"hWnd",
+			"glogContext",
+			"LPLOGCONTEXT",
+			"axis",
+			"LPVOID",
+			"lpvoid",
+			"wtinfo",
+			"normal",
+			"GETPROCADDRESS",
+			"WTINFOA",
+			"dll",
+			"gpWTPacket",
+			"dll",
+			"csr",
+			"mm_get",
+			"getcsr",
+			"pkt",
+			"gpWTPacket",
+			"WT_DEFBASE",
+			"MSG",
+			"pres",
+			"press",
+			"$",
+			"E",
+			",",
+			"rayintersect",
+			"v3y",
+			"v3x",
+			"points",
+			"thread",
+			"print",
+			"thread",
+			"radius",
+			"+",
+			"current_state",
+			"startGame",
+			"back",
+			"help",
+			"startGame",
+			"Selector",
+			"main",
+			"StateMain",
+			"help",
+			"StateStart",
+			"s - 10",
+			"StateFinish",
+			"Button",
+			"size",
+			"drawCenteredString(",
+			",",
+			",GameWindow.HEIGHT/2",
+			"StateMain",
+			"highschore",
+			"scoreHard",
+			"scoreMedium",
+			"scoreEasy",
+			"scoreMed",
+			"Score",
+			"private",
+			"star",
+			"Card",
+			"computer",
+			"Score",
+			"Board",
+			"bounds",
+			"StateMain",
+			"image",
+			"gameRender",
+			"g2"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"M",
+			"65",
+			"Audio.isPlaying",
+			"Qaudio",
+			"Zoom",
+			"Erase",
+			"Pan.isZoom",
+			"currentTool",
+			"selectedTool",
+			"Pan",
+			"Tablet",
+			"-- ",
+			",",
+			"e",
+			", ",
+			"intersectLine",
+			"ny",
+			"nx",
+			"samples",
+			"blur",
+			" ",
+			"",
+			"currentState",
+			"startButton",
+			"backButton",
+			"helpButton",
+			"startButton",
+			"RadioButton",
+			"start",
+			"StateStart",
+			"back",
+			"sStateHelp",
+			"s2",
+			"StateStart",
+			"Selector",
+			"boardSize",
+			"drawCenteredString(g, ",
+			", ",
+			"",
+			" ",
+			"StateFinish",
+			"score[2]",
+			"score[1]",
+			"score[0]",
+			"scoreMedium",
+			"ScoreWriter",
+			"protected",
+			"img",
+			"CardSpecial",
+			"singlePlayer",
+			"AI",
+			"Score",
+			"check",
+			"Board",
+			"canvas",
+			"draw",
+			"graphics",
+			"window",
+			"frame",
+			"sidePanel",
+			"setupPanel",
+			"sidePanel",
+			"Window",
+			"leftIndex",
+			"bass",
+			"beat",
+			"newVoice",
+			"x2",
+			"y2",
+			"y1",
+			"x1",
+			"phase",
+			"p_t",
+			"o",
+			":",
+			"C",
+			"Entity",
+			"physics",
+			"physics.world",
+			"world_physics",
+			"M",
+			"physics.newBall",
+			"physics.join(",
+			"physics:newBall",
+			"tentacleJoint",
+			"moveTimeStart",
+			"score.scores[self.index]",
+			"stamped",
+			"score.scores",
+			"state_progress",
+			"Despawn",
+			"dmgPassable()",
+			"minH",
+			"new",
+			"parallax",
+			"parallax_",
+			"k",
+			"Dust",
+			"Consumable",
+			"Effect",
+			"Lotus",
+			"Crate",
+			"transition",
+			"Transition",
+			"Next",
+			"self",
+			"stopped",
+			"state_dead",
+			"time",
+			"beat",
+			"self.targetPitch",
+			"self.beatResidual",
+			"self.beatIndex",
+			"self.beatTime",
+			"self.elapsedBeats",
+			"self.index",
+			"getState()",
+			"state_main",
+			"state_pause",
+			"State",
+			"Interact",
+			"Heart",
+			"Shop",
+			"Spikes",
+			"Platform",
+			"charged",
+			"Spawner",
+			"Magic"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.lua",
+					"settings":
+					{
+						"buffer_size": 4358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2469,
+								2469
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2150.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "tablet.lua",
+					"settings":
+					{
+						"buffer_size": 6645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6605,
+								6605
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5479.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "file.lua",
+					"settings":
+					{
+						"buffer_size": 787,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								521,
+								521
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "todo.txt",
+					"settings":
+					{
+						"buffer_size": 848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								339,
+								339
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 240.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "audio.lua",
+					"settings":
+					{
+						"buffer_size": 3094,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2792,
+								2792
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2779.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "view.lua",
+					"settings":
+					{
+						"buffer_size": 2072,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "undo.lua",
+					"settings":
+					{
+						"buffer_size": 1375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 120.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "qaudio.lua",
+					"settings":
+					{
+						"buffer_size": 1142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeLove/Love.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 194.0
+	},
+	"output.git":
+	{
+		"height": 267.0
+	},
+	"output.git-commit":
+	{
+		"height": 363.0
+	},
+	"output.git-fetch":
+	{
+		"height": 100.0
+	},
+	"output.git-init":
+	{
+		"height": 100.0
+	},
+	"output.git-pull":
+	{
+		"height": 100.0
+	},
+	"output.git-push":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"CLF/Game/main.lua"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 219.0,
+	"status_bar_visible": true
+}
