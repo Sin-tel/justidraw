@@ -34,9 +34,12 @@ mousePX, mousePY = 0,0
 
 mouseDown = {false,false,false}
 
-mainFont = love.graphics.newFont("res/GothamRoundedLight.ttf", 22, "normal")
-smallFont = love.graphics.newFont("res/GothamRoundedBook.ttf", 12, "normal")
---mainFont = love.graphics.newFont("IBMPlexMono-Regular.ttf", 16, "none")
+--mainFont = love.graphics.newFont("res/GothamRoundedLight.ttf", 22, "normal")
+--smallFont = love.graphics.newFont("res/GothamRoundedBook.ttf", 12, "normal")
+
+mainFont = love.graphics.newFont(22)
+smallFont = love.graphics.newFont(12)
+
 
 function love.load()
 	math.randomseed(os.time())
@@ -159,6 +162,7 @@ function love.draw()
 	if currentTool.radius then
 		love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
 	end
+	love.graphics.setColor(.8,.8,.8)
 	love.graphics.print(currentTool.name,10,10)
 
 	--[[for i,v in ipairs(Audio.voice) do
