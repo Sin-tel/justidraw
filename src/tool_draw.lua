@@ -4,8 +4,7 @@ Draw.points = {}
 Draw.lastpoint = {}
 Draw.name = "draw"
 
-function Draw.mousepressed()
-	
+function Draw.mousepressed()	
 	Draw.points = {}
 
 	local pt = {mouseX,mouseY,pres}

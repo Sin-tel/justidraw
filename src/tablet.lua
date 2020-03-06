@@ -11,7 +11,7 @@ function Tablet.init()
 	print("CHECK", ok, lib)
 	if ok then
 		wt = lib
-	
+
 
 		local sdl = ffi.load 'SDL2'
 
@@ -55,8 +55,8 @@ function Tablet.init()
 		{
 		struct
 		{
-		HWND window;                /**< The window handle */
-		HDC hdc;                    /**< The window device context */
+		HWND window;                /* The window handle */
+		HDC hdc;                    /* The window device context */
 		} win;
 		} info;
 		} SDL_SysWMinfo;
@@ -162,8 +162,8 @@ function Tablet.init()
 		} PACKET;
 
 		typedef struct tagPOINT {
-		  LONG x;
-		  LONG y;
+		LONG x;
+		LONG y;
 		} POINT;
 
 
@@ -276,16 +276,16 @@ function Tablet.update()
 				pres=0.5
 			else
 				pres= 0
-			end]]
+				end]]
+			end
+		else
+			tabletInput = false
+			mouseX,mouseY = love.mouse.getPosition()
 		end
-	else
-		tabletInput = false
-		mouseX,mouseY = love.mouse.getPosition()
 	end
-end
 
-function Tablet.close()
-	if wt then
-		wt.WTClose(hctx)
+	function Tablet.close()
+		if wt then
+			wt.WTClose(hctx)
+		end
 	end
-end

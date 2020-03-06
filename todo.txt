@@ -14,13 +14,12 @@
 [ ] rect select tool
 [ ] copy paste
 [x] undo/redo
-[ ] multiple tracks
 [ ] input smoothing
 [ ] edit time
 [ ] move time
 [ ] smooth brush
 [ ] flatten brush
-[ ] add geometry (when moving?) (dynamic subdiv?)
+[ ] add geometry (when moving?) (dynamic subdiv?) -> 'snake hook'
 [ ] overwrite/edit draw brush
 [ ] vibrato?
 [ ] split/seperate selection
@@ -30,6 +29,12 @@
 [ ] entropy relax tool
 [ ] export
 [ ] switch to open source fonts
+[ ] add message/popup system
+[ ] brush icons
+
+[ ] multiple tracks
+[ ] layer manager
+[ ] add more synths to audio engine
 
 [=] xyz color
 [=] blur

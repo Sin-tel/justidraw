@@ -97,17 +97,17 @@ end
 
 function Edit.removeNotes(remove)
 	for i=#song.track[1],1,-1 do
-	    if remove[i] then
-	    	local v = song.track[1][i]
-	    	if v.l then
-	    		v.l.w = 0
-	    		v.l.r = nil
-	    	end
-	    	if v.r then
-	    		v.r.l = nil
-	    	end
-	        table.remove(song.track[1], i)
-	    end
+		if remove[i] then
+			local v = song.track[1][i]
+			if v.l then
+				v.l.w = 0
+				v.l.r = nil
+			end
+			if v.r then
+				v.r.l = nil
+			end
+			table.remove(song.track[1], i)
+		end
 	end
 	Edit.removeSingles()
 end

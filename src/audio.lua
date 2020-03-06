@@ -79,7 +79,7 @@ function M.update()
 	Qaudio.update()
 
 	
- 	if not M.isPlaying then
+	if not M.isPlaying then
 		for i,v in ipairs(M.voice) do
 			v.amp = 0
 		end
@@ -161,12 +161,12 @@ end
 
 function clip(x)
 	if x <= -1.5 then
-        return -1
-    elseif x >= 1.5 then
-        return 1
-    else
-        return x - (4/27)*x*x*x
-    end
+		return -1
+	elseif x >= 1.5 then
+		return 1
+	else
+		return x - (4/27)*x*x*x
+	end
 end
 
 return M

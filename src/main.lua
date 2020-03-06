@@ -113,20 +113,20 @@ function mousereleased(button)
 end
 
 function love.wheelmoved(x, y)
-    if y > 0 then
-        View.zoomX = View.zoomX*1.2
-        View.zoomY = View.zoomY*1.2
+	if y > 0 then
+		View.zoomX = View.zoomX*1.2
+		View.zoomY = View.zoomY*1.2
 
-        View.x = View.x + (mouseX - View.x)*(1 - 1.2)
+		View.x = View.x + (mouseX - View.x)*(1 - 1.2)
 		View.y = View.y + (mouseY - View.y)*(1 - 1.2)
 
-    elseif y < 0 then
+	elseif y < 0 then
 		View.zoomX = View.zoomX/1.2
-    	View.zoomY = View.zoomY/1.2
+		View.zoomY = View.zoomY/1.2
 
-    	View.x = View.x + (mouseX - View.x)*(1 - 1/1.2)
+		View.x = View.x + (mouseX - View.x)*(1 - 1/1.2)
 		View.y = View.y + (mouseY - View.y)*(1 - 1/1.2)
-    end
+	end
 end
 
 function love.update(dt)
@@ -168,12 +168,12 @@ function love.draw()
 	--[[for i,v in ipairs(Audio.voice) do
 		love.graphics.print(math.floor(v.amp*100),10,i*20)
 		love.graphics.print(v.delta,100,i*20)
-	end]]
+		end]]
 	--[[love.graphics.print(#Undo.stack,10,20)
 	love.graphics.print(Undo.index,10,30)
 	for i,v in ipairs(Undo.stack) do
 		love.graphics.print(#v.track[1],50,i*20)
-	end]]
+		end]]
 	--love.graphics.print(love.filesystem.getSaveDirectory(),10,30)
 end
 
