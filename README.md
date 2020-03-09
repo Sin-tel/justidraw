@@ -6,10 +6,10 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 
 # how to run
 
-1. Install the latest version of [love2d](https://love2d.org/).
-2. Compress the contents of src to a .zip file. (Make sure main.lua is at the top level of the zip)
-3. Change the extension from .zip to .love.
-4. Run the .love file.
+1. Install the latest version of [love2d](https://love2d.org/)
+2. Compress the contents of src to a .zip file (Make sure main.lua is at the top level of the zip)
+3. Change the extension from .zip to .love
+4. Run the .love file
 
 # controls
 
