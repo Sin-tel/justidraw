@@ -20,14 +20,14 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * left click: draw
 * hold ctrl: erase
 ### line tool
-* left click: draw straight lines
+* left click: draw flat lines
 * hold alt: draw slanted lines
 * hold ctrl: erase
 ### pan/zoom tool
 * left click: pan
 * hold ctrl: zoom
 ### grab tool
-* left click: nudge curve
+* left click: grab part of note
 * hold ctrl: move whole note
 
 ## shortcuts
@@ -36,6 +36,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * E: Eraser
 * P: Pan/zoom
 * G: Grab
+* S: Smooth
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo

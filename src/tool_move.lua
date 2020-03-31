@@ -6,7 +6,7 @@ function Move.mousepressed()
 	Move.table = {}
 	Move.x = mouseX
 	Move.y = mouseY
-	local d = 10000
+	local d = math.huge
 	local index = 0
 	for i,v in ipairs(song.track[1]) do
 		local x,y = View.transform(v.x,v.y)

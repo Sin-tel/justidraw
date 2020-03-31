@@ -12,6 +12,7 @@ require "tool_zoom"
 require "tool_line"
 require "tool_grab"
 require "tool_move"
+require "tool_smooth"
 
 
 
@@ -57,7 +58,7 @@ function love.load()
 	love.keyboard.setKeyRepeat( true )
 
 
-	selectTool(Grab)
+	selectTool(Smooth)
 	Audio.load()
 
 	File.new()
@@ -205,6 +206,8 @@ function love.keypressed(key)
 		selectTool(Grab)
 	elseif key == "e" then
 		selectTool(Erase)
+	elseif key == "s" then
+		selectTool(Smooth)
 
 	elseif key == "[" then
 		if selectedTool.radius then

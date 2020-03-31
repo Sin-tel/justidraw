@@ -16,12 +16,10 @@ local function audiocb()
 					break
 				end
 			end
-
 			M.startIndex = M.startIndex + 1
 		end
 
 		for i,v in ipairs(M.voice) do
-
 			if v.active then
 				while v.vert.r and M.time > v.vert.r.x do
 					v.vert = v.vert.r
