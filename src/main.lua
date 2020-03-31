@@ -206,7 +206,7 @@ function love.keypressed(key)
 		selectTool(Grab)
 	elseif key == "e" then
 		selectTool(Erase)
-	elseif key == "s" then
+	elseif key == "s" and not love.keyboard.isDown("lctrl") then
 		selectTool(Smooth)
 
 	elseif key == "[" then
