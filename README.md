@@ -33,7 +33,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ## shortcuts
 * B: freehand draw (Brush)
 * L: Line tool
-* E: eraser
+* E: Eraser
 * P: Pan/zoom
 * G: Grab
 * [ and ]: chage brush radius (when applicable)
