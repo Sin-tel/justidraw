@@ -36,7 +36,6 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * E: eraser
 * P: Pan/zoom
 * G: Grab
-
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo
