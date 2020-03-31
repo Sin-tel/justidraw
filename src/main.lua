@@ -43,6 +43,7 @@ smallFont = love.graphics.newFont(12)
 
 
 minLength = 100
+automergeDist = 100
 
 function love.load()
 	math.randomseed(os.time())
@@ -136,7 +137,7 @@ function love.update(dt)
 		currentTool.mousedown()
 	else
 		if love.keyboard.isDown("lctrl") then
-			if selectedTool == Draw then
+			if selectedTool.draw then
 				currentTool = Erase
 			elseif selectedTool == Pan then
 				currentTool = Zoom

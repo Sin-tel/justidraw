@@ -83,11 +83,14 @@ function M.update()
 	if not M.isPlaying then
 		for i,v in ipairs(M.voice) do
 			v.amp = 0
+			v.active = false
 		end
 	end
 
 	if mouseDown[1] and currentTool.preview and not M.isPlaying then
+
 		M.voice[M.voiceLimit].amp = pres
+		M.voice[M.voiceLimit].active = pres
 		
 		local x,y = View.invTransform(mouseX,mouseY)
 		local fr = 440*2^(-y/1200)
@@ -105,6 +108,7 @@ function M.update()
 				local fr = 440*2^(-yy/1200)
 				M.voice[j].delta = fr*2*math.pi/44100
 				M.voice[j].amp = (1-a)*v.w + a*v.r.w
+				M.voice[j].active = true
 				if j < M.voiceLimit then
 					j = j + 1
 				end

@@ -19,6 +19,10 @@ function Edit.addNote(list)
 		pts[i] = pt
 	end
 
+	local first = pts[1]
+	local last = pts[#pts]
+	print(#pts)
+
 	for i,v in ipairs(pts) do
 		if(pts[i-1]) then
 			pts[i].l = pts[i-1]
@@ -30,6 +34,30 @@ function Edit.addNote(list)
 			pts[i].w = 0
 		end
 		table.insert(song.track[1],pts[i])
+	end
+	print(pts[1].r)
+	print(last.r)
+
+
+	for i,v in ipairs(song.track[1]) do
+		if not v.l then
+			local dist = math.sqrt((last.x-v.x)^2 + (last.y-v.y)^2)
+			if dist < automergeDist and v ~= first then
+				Edit.merge(last,v,true)
+				break
+			end
+		end
+	end
+
+
+	for i,v in ipairs(song.track[1]) do
+		if not v.r then
+			local dist = math.sqrt((first.x-v.x)^2 + (first.y-v.y)^2)
+			if dist < automergeDist and v ~= last then
+				Edit.merge(v,first)
+				break
+			end
+		end
 	end
 
 	
@@ -95,6 +123,29 @@ function Edit.addNote(list)
 	song.track[1] = newTrack]]
 end
 
+function Edit.merge(v1,v2)
+	assert(not v1.r)
+	assert(not v2.l)
+
+	local newx = (v1.x + v2.x) * 0.5
+
+	if v1.l.x < newx and newx < v2.r.x then
+		v1.x = newx
+		v1.y = (v1.y + v2.y) * 0.5
+		v1.w = math.max(v1.w,v2.w)
+
+		v1.r = v2.r
+		v2.r.l = v1
+
+		for i,v in ipairs(song.track[1]) do
+			if v == v2 then
+				table.remove(song.track[1],i)
+			end
+		end
+	end
+	
+end
+
 function Edit.removeNotes(remove)
 	for i=#song.track[1],1,-1 do
 		if remove[i] then
@@ -130,7 +181,7 @@ function Edit.getTangent(pt)
 		local m = (pt.l.y - pt.r.y) / (pt.l.x - pt.r.x)
 		local m1 = (pt.y - pt.r.y) / (pt.x - pt.r.x)
 		local m2 = (pt.l.y - pt.y) / (pt.l.x - pt.x)
-	
+
 		
 		return m --/ (1 + .05*math.abs(m1-m2))
 	end

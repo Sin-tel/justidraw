@@ -32,13 +32,30 @@ function Line.mousedown()
 			local m = (mouseY - Line.first[2]) / (mouseX - Line.first[1])
 
 
+
 			v[2] = dx*m + Line.first[2]
+
+			Line.removePointsLine()
 		end
 	else
 		for i,v in ipairs(Line.points) do
 			v[2] = mouseY
 		end
 	end
+end
+
+function Line.removePointsLine()
+	newTable = {}
+	for  k,v in ipairs(Line.points) do
+		sign = 1
+		if mouseX < Line.first[1] then
+			sign = -1
+		end
+		if sign*Line.first[1] <= sign*v[1] and sign*v[1] <= sign*mouseX then
+			table.insert(newTable,v)
+		end
+	end
+	Line.points = newTable
 end
 
 function Line.removePoints()
@@ -62,14 +79,18 @@ function Line.removePoints()
 end
 
 function Line.mousereleased()
+	print("============")
 	for i,v in ipairs(Line.points) do
 		v[1],v[2] = View.invTransform(v[1],v[2])
 	end
 	if(#Line.points > 2) then
+
 		Line.keep = {}
 		for i in ipairs(Line.points) do
 			Line.keep[i] = false
 		end
+		Line.keep[1] = true
+		Line.keep[#Line.points] = true
 		
 		Line.simplify(1,#Line.points,true)
 
@@ -130,7 +151,7 @@ function Line.simplify(i1,i2,alwaysKeep)
 	local y1 = first[2]
 	local m = vy/vx
 
-	local dmax = -1
+	local dmax = 0
 	local index = 0
 	for i = i1+1,i2-1 do
 		local x = Line.points[i][1]

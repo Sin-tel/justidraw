@@ -54,6 +54,8 @@ function Draw.mousereleased()
 		for i in ipairs(Draw.points) do
 			Draw.keep[i] = false
 		end
+		Draw.keep[1] = true
+		Draw.keep[#Draw.points] = true
 	
 		Draw.simplify(1,#Draw.points,true)
 	
@@ -91,7 +93,7 @@ function Draw.simplify(i1,i2,alwaysKeep)
 	local y1 = first[2]
 	local m = vy/vx
 
-	local dmax = 0
+	local dmax = -1
 	local index = 0
 	for i = i1+1,i2-1 do
 		local x = Draw.points[i][1]

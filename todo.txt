@@ -11,7 +11,7 @@
 [x] save/load
 [x] pan key
 [ ] automerge
-[ ] straight line tool
+[x] straight line tool
 [ ] move tool
 [ ] grab tool
 [ ] rect select tool
