@@ -44,7 +44,7 @@ function Smooth.mousedown()
 		
 		local dist = math.sqrt(0.69*(x-mouseX)^2 + (y-mouseY)^2)
 
-		local weight = math.exp(-(0.7*dist/radius)^2)*pres
+		local weight = math.exp(-(dist/radius)^2)*pres
 
 		if v.l and v.r then
 			updates[i].dx = (0.5*(v.l.x+v.r.x) - v.x)*weight

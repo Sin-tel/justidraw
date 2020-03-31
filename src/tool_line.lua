@@ -26,7 +26,7 @@ function Line.mousedown()
 		Line.lastpoint = pt
 	end
 
-	if love.keyboard.isDown("lalt") then
+	if modifierKeys.alt then
 		for i,v in ipairs(Line.points) do
 			local dx = v[1] - Line.first[1]
 			local m = (mouseY - Line.first[2]) / (mouseX - Line.first[1])

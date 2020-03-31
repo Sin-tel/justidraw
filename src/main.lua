@@ -36,6 +36,10 @@ mouseX, mouseY = 0,0
 mousePX, mousePY = 0,0
 
 mouseDown = {false,false,false}
+modifierKeys = {}
+modifierKeys.ctrl = false
+modifierKeys.shift = false
+modifierKeys.alt = false
 
 --mainFont = love.graphics.newFont("res/GothamRoundedLight.ttf", 22, "normal")
 --smallFont = love.graphics.newFont("res/GothamRoundedBook.ttf", 12, "normal")
@@ -73,6 +77,30 @@ function selectTool(t)
 	currentTool = t
 end
 
+function setTool()
+	if not (mouseDown[1] or mouseDown[3]) then
+		if modifierKeys.ctrl then
+			if selectedTool.draw then
+				currentTool = Erase
+			elseif selectedTool == Pan then
+				currentTool = Zoom
+			elseif selectedTool == Grab then
+				currentTool = Move
+			end
+		elseif modifierKeys.shift then
+			if selectedTool == Grab then
+				currentTool = Smooth
+			end
+		else
+			currentTool = selectedTool
+		end
+
+		if selectedTool.draw and erase then
+			currentTool = Erase
+		end
+	end
+end
+
 function love.mousepressed(x, y, button)
 	if not tabletInput then
 		pres = 0.5
@@ -89,6 +117,8 @@ end
 
 function mousepressed(button)
 	mouseDown[button] = true
+
+	setTool()
 
 	if button == 3 then
 		if love.keyboard.isDown("lctrl") then
@@ -137,26 +167,12 @@ function love.update(dt)
 	
 	if mouseDown[1] or mouseDown[3] then
 		currentTool.mousedown()
-	else
-		if love.keyboard.isDown("lctrl") then
-			if selectedTool.draw then
-				currentTool = Erase
-			elseif selectedTool == Pan then
-				currentTool = Zoom
-			elseif selectedTool == Grab then
-				currentTool = Move
-			end
-		else
-			currentTool = selectedTool
-		end
-
-		if selectedTool.draw and erase then
-			currentTool = Erase
-		end
 	end
 
 	Audio.update()
 end
+
+
 
 
 function love.draw()
@@ -167,7 +183,11 @@ function love.draw()
 	
 	love.graphics.setColor(.5,.5,.5)
 	if currentTool.radius then
-		love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
+		if currentTool.tempRadius then
+			love.graphics.circle("line", mouseX, mouseY, currentTool.tempRadius)
+		else
+			love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
+		end
 	end
 	love.graphics.setColor(.8,.8,.8)
 	love.graphics.print(currentTool.name,10,10)
@@ -186,6 +206,16 @@ end
 
 
 function love.keypressed(key)
+	if key == "lshift" or key == "rshift" then
+		modifierKeys.shift = true
+	elseif key == "lctrl" or key == "rctrl" then
+		modifierKeys.ctrl = true
+	elseif key == "lalt" or key == "ralt" then
+		modifierKeys.alt = true
+	end
+
+	setTool()
+
 	if key == "space" then
 		if Audio.isPlaying then
 			Audio.stop()
@@ -206,7 +236,7 @@ function love.keypressed(key)
 		selectTool(Grab)
 	elseif key == "e" then
 		selectTool(Erase)
-	elseif key == "s" and not love.keyboard.isDown("lctrl") then
+	elseif key == "s" and not modifierKeys.ctrl then
 		selectTool(Smooth)
 
 	elseif key == "[" then
@@ -217,13 +247,13 @@ function love.keypressed(key)
 		if selectedTool.radius then
 			selectedTool.radius = selectedTool.radius*1.1
 		end
-	elseif key == "z" and love.keyboard.isDown("lctrl") and not love.keyboard.isDown("lshift") then
+	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
 		Undo.undo()
-	elseif (key == "y" and love.keyboard.isDown("lctrl")) or (key == "z" and love.keyboard.isDown("lctrl") and love.keyboard.isDown("lshift")) then
+	elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then
 		Undo.redo()
-	elseif key == "s" and love.keyboard.isDown("lctrl") then
+	elseif key == "s" and modifierKeys.ctrl then
 		File.save()
-	elseif key == "o" and love.keyboard.isDown("lctrl") then
+	elseif key == "o" and modifierKeys.ctrl then
 		--File.load()
 		love.system.openURL("file://"..love.filesystem.getSaveDirectory())
 	elseif key == "b" then
@@ -232,6 +262,17 @@ function love.keypressed(key)
 	elseif key == "escape" then
 		love.event.quit( )
 	end
+end
+
+function love.keyreleased(key)
+	if key == "lshift" or key == "rshift" then
+		modifierKeys.shift = false
+	elseif key == "lctrl" or key == "rctrl" then
+		modifierKeys.ctrl = false
+	elseif key == "lalt" or key == "ralt" then
+		modifierKeys.alt = false
+	end
+	setTool()
 end
 
 function love.quit()

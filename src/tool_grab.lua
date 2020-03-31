@@ -1,6 +1,6 @@
 Grab = {}
 
-Grab.radius = 50
+Grab.radius = 30
 Grab.name = "grab and nudge"
 
 function Grab.mousepressed()
