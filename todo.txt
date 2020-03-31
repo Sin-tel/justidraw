@@ -10,14 +10,14 @@
 [x] simple audio engine
 [x] save/load
 [x] pan key
-[ ] automerge
+[x] automerge
 [x] straight line tool
-[ ] move tool
-[ ] grab tool
+[x] move tool
+[x] grab tool
 [ ] rect select tool
 [ ] copy paste
 [x] undo/redo
-[ ] input smoothing
+[ ] input smoothing?
 [ ] edit time
 [ ] move time
 [ ] smooth brush

@@ -21,7 +21,6 @@ function Edit.addNote(list)
 
 	local first = pts[1]
 	local last = pts[#pts]
-	print(#pts)
 
 	for i,v in ipairs(pts) do
 		if(pts[i-1]) then
@@ -35,8 +34,6 @@ function Edit.addNote(list)
 		end
 		table.insert(song.track[1],pts[i])
 	end
-	print(pts[1].r)
-	print(last.r)
 
 
 	for i,v in ipairs(song.track[1]) do

@@ -10,7 +10,8 @@ require "tool_erase"
 require "tool_pan"
 require "tool_zoom"
 require "tool_line"
-
+require "tool_grab"
+require "tool_move"
 
 
 
@@ -56,7 +57,7 @@ function love.load()
 	love.keyboard.setKeyRepeat( true )
 
 
-	selectTool(Line)
+	selectTool(Grab)
 	Audio.load()
 
 	File.new()
@@ -141,6 +142,8 @@ function love.update(dt)
 				currentTool = Erase
 			elseif selectedTool == Pan then
 				currentTool = Zoom
+			elseif selectedTool == Grab then
+				currentTool = Move
 			end
 		else
 			currentTool = selectedTool
@@ -198,6 +201,19 @@ function love.keypressed(key)
 		selectTool(Pan)
 	elseif key == "l" then
 		selectTool(Line)
+	elseif key == "g" then
+		selectTool(Grab)
+	elseif key == "e" then
+		selectTool(Erase)
+
+	elseif key == "[" then
+		if selectedTool.radius then
+			selectedTool.radius = selectedTool.radius*0.9
+		end
+	elseif key == "]" then
+		if selectedTool.radius then
+			selectedTool.radius = selectedTool.radius*1.1
+		end
 	elseif key == "z" and love.keyboard.isDown("lctrl") and not love.keyboard.isDown("lshift") then
 		Undo.undo()
 	elseif (key == "y" and love.keyboard.isDown("lctrl")) or (key == "z" and love.keyboard.isDown("lctrl") and love.keyboard.isDown("lshift")) then

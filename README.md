@@ -26,11 +26,18 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ### pan/zoom tool
 * left click: pan
 * hold ctrl: zoom
+### grab tool
+* left click: nudge curve
+* hold ctrl: move whole note
 
 ## shortcuts
 * B: freehand draw (Brush)
 * L: Line tool
+* E: eraser
 * P: Pan/zoom
+* G: Grab
+
+* [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo

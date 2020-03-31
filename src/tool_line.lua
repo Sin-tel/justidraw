@@ -79,7 +79,6 @@ function Line.removePoints()
 end
 
 function Line.mousereleased()
-	print("============")
 	for i,v in ipairs(Line.points) do
 		v[1],v[2] = View.invTransform(v[1],v[2])
 	end
@@ -155,11 +154,9 @@ function Line.simplify(i1,i2,alwaysKeep)
 	local index = 0
 	for i = i1+1,i2-1 do
 		local x = Line.points[i][1]
-		--local dy = math.abs(Line.points[i][2] - (y1 + m*(x-x1)))/math.sqrt(1+m*m)
 
 		local t = (x-x1)/vx
 		dy = math.abs(Line.points[i][3] - (last[3]*t + first[3]*(1-t)))*20
-		--print(dy)
 		if dy > dmax then
 			dmax = dy
 			index = i
