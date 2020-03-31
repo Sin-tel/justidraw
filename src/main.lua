@@ -9,6 +9,7 @@ require "tool_draw"
 require "tool_erase"
 require "tool_pan"
 require "tool_zoom"
+require "tool_line"
 
 
 
@@ -41,6 +42,8 @@ mainFont = love.graphics.newFont(22)
 smallFont = love.graphics.newFont(12)
 
 
+minLength = 100
+
 function love.load()
 	math.randomseed(os.time())
 	Tablet.init()
@@ -52,13 +55,14 @@ function love.load()
 	love.keyboard.setKeyRepeat( true )
 
 
-	selectTool(Draw)
+	selectTool(Line)
 	Audio.load()
 
 	File.new()
 	File.loadLast()
 
 	Undo.load()
+
 end
 
 function selectTool(t)
@@ -82,10 +86,6 @@ end
 
 function mousepressed(button)
 	mouseDown[button] = true
-	--print("press: " .. button)
-	--currentTool = selectedTool
-
-	
 
 	if button == 3 then
 		if love.keyboard.isDown("lctrl") then
@@ -100,7 +100,6 @@ end
 
 function mousereleased(button)
 	mouseDown[button] = false
-	--print("release: " .. button)
 
 	
 	currentTool.mousereleased()
@@ -146,7 +145,7 @@ function love.update(dt)
 			currentTool = selectedTool
 		end
 
-		if selectedTool == Draw and erase then
+		if selectedTool.draw and erase then
 			currentTool = Erase
 		end
 	end
@@ -157,7 +156,10 @@ end
 
 function love.draw()
 	View.draw()
-	Draw.draw()
+	if currentTool.draw then
+		currentTool.draw()
+	end
+	
 	love.graphics.setColor(.5,.5,.5)
 	if currentTool.radius then
 		love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
@@ -189,6 +191,12 @@ function love.keypressed(key)
 	elseif key == "delete" then
 		File.new()
 		Undo.register()
+	elseif key == "b" then
+		selectTool(Draw)
+	elseif key == "p" then
+		selectTool(Pan)
+	elseif key == "l" then
+		selectTool(Line)
 	elseif key == "z" and love.keyboard.isDown("lctrl") and not love.keyboard.isDown("lshift") then
 		Undo.undo()
 	elseif (key == "y" and love.keyboard.isDown("lctrl")) or (key == "z" and love.keyboard.isDown("lctrl") and love.keyboard.isDown("lshift")) then
@@ -198,6 +206,9 @@ function love.keypressed(key)
 	elseif key == "o" and love.keyboard.isDown("lctrl") then
 		--File.load()
 		love.system.openURL("file://"..love.filesystem.getSaveDirectory())
+	elseif key == "b" then
+		print('bb')
+		debug.debug()
 	elseif key == "escape" then
 		love.event.quit( )
 	end

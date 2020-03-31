@@ -41,12 +41,13 @@ local function audiocb()
 		end
 	end
 	local out = 0
-	for i = 1,10 do
-		local v = M.voice[i]
-		v.accum = v.accum + v.delta
-		local s = v.amp*math.sin(v.accum + 2*v.pout)
-		v.pout = s
-		out = out + s
+	for i,v in ipairs(M.voice) do
+		if v.active then
+			v.accum = v.accum + v.delta
+			local s = v.amp*math.sin(v.accum + 2*v.pout)
+			v.pout = s
+			out = out + s
+		end
 	end
 	out = clip(out*0.5)
 	
@@ -54,10 +55,10 @@ local function audiocb()
 end
 
 function M.load()
-	
+	M.voiceLimit = 100
 
 	M.voice = {}
-	for i = 1,10 do
+	for i = 1,M.voiceLimit do
 		M.voice[i] = {}
 		M.voice[i].amp = 0
 		M.voice[i].accum = 0
@@ -85,12 +86,12 @@ function M.update()
 		end
 	end
 
-	if mouseDown[1] and currentTool == Draw and not M.isPlaying then
-		M.voice[10].amp = pres
+	if mouseDown[1] and currentTool.preview and not M.isPlaying then
+		M.voice[M.voiceLimit].amp = pres
 		
 		local x,y = View.invTransform(mouseX,mouseY)
 		local fr = 440*2^(-y/1200)
-		M.voice[10].delta = fr*2*math.pi/44100
+		M.voice[M.voiceLimit].delta = fr*2*math.pi/44100
 	
 		local j = 1
 
@@ -104,7 +105,7 @@ function M.update()
 				local fr = 440*2^(-yy/1200)
 				M.voice[j].delta = fr*2*math.pi/44100
 				M.voice[j].amp = (1-a)*v.w + a*v.r.w
-				if j < 10 then
+				if j < M.voiceLimit then
 					j = j + 1
 				end
 			end

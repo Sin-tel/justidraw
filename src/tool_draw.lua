@@ -2,7 +2,10 @@ Draw = {}
 
 Draw.points = {}
 Draw.lastpoint = {}
-Draw.name = "draw"
+Draw.name = "freehand draw"
+
+Draw.preview = true
+Draw.draw = true
 
 function Draw.mousepressed()	
 	Draw.points = {}
@@ -103,7 +106,7 @@ function Draw.simplify(i1,i2,alwaysKeep)
 		end
 	end
 
-	if dmax > 0.5 or (alwaysKeep and index > 0) then
+	if dmax > 1 or (alwaysKeep and index > 0) then
 		Draw.simplify(i1,index)
 		Draw.simplify(index,i2)
 	end

@@ -9,6 +9,9 @@
 [x] playhead
 [x] simple audio engine
 [x] save/load
+[x] pan key
+[ ] automerge
+[ ] straight line tool
 [ ] move tool
 [ ] grab tool
 [ ] rect select tool
@@ -49,3 +52,14 @@ edit mask = falloff (number per vertex)
 move -> move selection or whole notes
 grab -> move w faloff*selection
 pull -> string IK motion (useful??)
+
+draw tool: join note if start or end is close to start or end of other note
+
+=====
+draw note tool: draws straight lines
+auto add vibrato?
+
+press shift: grab
+	middle of note: move whole note
+	end/start: grab w falloff
+
