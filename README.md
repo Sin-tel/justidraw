@@ -30,7 +30,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ### grab tool
 * left click: grab part of note
 * hold ctrl: move whole note / selection
-### envelop tool
+### envelope tool
 * left click: add
 * hold ctrl: subtract
 ### selection
