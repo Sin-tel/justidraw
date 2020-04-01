@@ -91,9 +91,11 @@ function setTool()
 				currentTool = Zoom
 			elseif selectedTool == Grab then
 				currentTool = Move
+			elseif selectedTool == Move then
+				currentTool = Grab
 			end
 		elseif modifierKeys.shift then
-			if selectedTool == Grab or selectedTool == Flatten or selectedTool.drawTool then
+			if selectedTool == Grab or selectedTool == Flatten or selectedTool == Envelope or selectedTool.drawTool then
 				currentTool = Smooth
 			end
 		else
@@ -250,6 +252,8 @@ function love.keypressed(key)
 		selectTool(Line)
 	elseif key == "g" then
 		selectTool(Grab)
+	elseif key == "m" then
+		selectTool(Move)
 	elseif key == "e" then
 		selectTool(Erase)
 	elseif key == "s" and not modifierKeys.ctrl then

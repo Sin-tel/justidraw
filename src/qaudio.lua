@@ -2,7 +2,7 @@ Qaudio = {}
 
 love.audio.setEffect('reverb', {
 	type = 'reverb',
-	gain = 0.15,
+	gain = 0.3,
 	decaytime = 3.0,
 })
 

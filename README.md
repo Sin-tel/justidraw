@@ -44,10 +44,12 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * E: Eraser
 * P: Pan/zoom
 * G: Grab
+* M: Move
 * S: Smooth
 * F: Flatten
 * R: Rectangular selection
 * N: eNvelope tool
+* D: Deselect
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo

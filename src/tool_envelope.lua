@@ -3,6 +3,8 @@ Envelope = {}
 Envelope.radius = 30
 Envelope.name = "Envelope"
 
+Envelope.preview = true
+
 function Envelope.mousepressed()
 	Envelope.table = {}
 	Envelope.x = mouseX
