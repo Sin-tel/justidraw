@@ -8,36 +8,37 @@ function Move.mousepressed()
 	Move.table = {}
 	Move.x = mouseX
 	Move.y = mouseY
-	local d = math.huge
-	local index = 0
-	for i,v in ipairs(song.track[1]) do
-		local x,y = View.transform(v.x,v.y)
-		local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
 
-		if (dist < d) then
-			
-			index = i
-			d = dist
+	local tbl = {}
+	local list = {}
+	if Selection.isEmpty() then
+		tbl = song.track[1]
+		local d = math.huge
+		local index = 0
+		for i,v in ipairs(tbl) do
+			local x,y = View.transform(v.x,v.y)
+			local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
+
+			if (dist < d) then
+				
+				index = i
+				d = dist
+			end
 		end
+
+		local vert = song.track[1][index]
+
+		list = Edit.getNote(vert)
+	else
+		list = Selection.list
 	end
 
-	local vert = song.track[1][index]
-
-	if vert then
-		while vert.l do
-			vert = vert.l
-		end
-
-		
-		while vert do
-			local n = {}
-			n.x = vert.x
-			n.y = vert.y
-			n.vert = vert
-			table.insert(Move.table,n)
-
-			vert = vert.r
-		end
+	for i,v in ipairs(list) do
+		local n = {}
+		n.x = v.x
+		n.y = v.y
+		n.vert = v
+		table.insert(Move.table,n)
 	end
 end
 

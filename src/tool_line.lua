@@ -5,7 +5,7 @@ Line.lastpoint = {}
 Line.name = "draw lines"
 
 Line.preview = true
-Line.draw = true
+Line.drawTool = true
 
 function Line.mousepressed()	
 	Line.points = {}

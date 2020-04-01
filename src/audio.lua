@@ -86,13 +86,15 @@ function M.update()
 	end
 
 	if mouseDown[1] and currentTool.preview and not M.isPlaying then
-
-		M.voice[M.voiceLimit].amp = pres
-		M.voice[M.voiceLimit].active = pres
+		if currentTool.drawTool then
+			M.voice[M.voiceLimit].amp = pres
+			M.voice[M.voiceLimit].active = pres
+			local x,y = View.invTransform(mouseX,mouseY)
+			local fr = 440*2^(-y/1200)
+			M.voice[M.voiceLimit].delta = fr*2*math.pi/44100
+		end
 		
-		local x,y = View.invTransform(mouseX,mouseY)
-		local fr = 440*2^(-y/1200)
-		M.voice[M.voiceLimit].delta = fr*2*math.pi/44100
+		
 	
 		local j = 1
 

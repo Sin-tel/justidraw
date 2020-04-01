@@ -7,31 +7,25 @@ function Flatten.mousepressed()
 	Flatten.table = {}
 	Flatten.x = mouseX
 	Flatten.y = mouseY
-	local d = math.huge
-	local index = 0
-	for i,v in ipairs(song.track[1]) do
-		local x,y = View.transform(v.x,v.y)
-		local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
 
-		if (dist < d) then
-			index = i
-			d = dist
+	if Selection.isEmpty() then
+		local d = math.huge
+		local index = 0
+		for i,v in ipairs(song.track[1]) do
+			local x,y = View.transform(v.x,v.y)
+			local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
+
+			if (dist < d) then
+				index = i
+				d = dist
+			end
 		end
-	end
-	
-	local vert = song.track[1][index]
+		
+		local vert = song.track[1][index]
 
-	if vert then
-		while vert.l do
-			vert = vert.l
-		end
-
-		Flatten.table = {}
-		while vert do
-			table.insert(Flatten.table,vert)
-
-			vert = vert.r
-		end
+		Flatten.table = Edit.getNote(vert)
+	else
+		Flatten.table = Selection.list
 	end
 end
 

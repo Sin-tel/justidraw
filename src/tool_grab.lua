@@ -7,9 +7,17 @@ function Grab.mousepressed()
 	Grab.table = {}
 	Grab.x = mouseX
 	Grab.y = mouseY
+
+	local tbl = {}
+	if Selection.isEmpty() then
+		tbl = song.track[1]
+	else
+		tbl = Selection.list
+	end
+
 	local d = math.huge
 	local index = 0
-	for i,v in ipairs(song.track[1]) do
+	for i,v in ipairs(tbl) do
 		local x,y = View.transform(v.x,v.y)
 		local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
 
@@ -20,40 +28,31 @@ function Grab.mousepressed()
 		end
 	end
 	
-	local vert = song.track[1][index]
-	local initVert = vert
+	local vert = tbl[index]
 	local ix,iy = View.transform(vert.x,vert.y)
 
-	local initIndex = 0
+	local tbl2 = Edit.getNote(vert)
 
-	if vert then
-		while vert.l do
-			vert = vert.l
+	Grab.table = {}
+	for i,v in ipairs(tbl2) do
+		local n = {}
+		n.x = v.x
+		n.y = v.y
+		n.vert = v
+
+		local x,y = View.transform(v.x,v.y)
+		local distx = math.abs(mouseX - x)
+		local disty = math.sqrt((ix - x)^2 + (iy - y)^2)
+
+		if Selection.isEmpty() then
+			n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
+			n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
+		else
+			n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
+			n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
 		end
 
-		Grab.table = {}
-		while vert do
-			
-			local n = {}
-			n.x = vert.x
-			n.y = vert.y
-			n.vert = vert
-
-			local x,y = View.transform(vert.x,vert.y)
-			local distx = math.abs(mouseX - x)
-			local disty = math.sqrt((ix - x)^2 + (iy - y)^2)
-			n.wx  = math.exp(-(0.4*distx/Grab.radius)^2)
-			n.wy  = math.exp(-(0.7*disty/Grab.radius)^2)
-
-	
-			if vert == initVert then
-				initIndex = #Grab.table+1
-			end
-
-			table.insert(Grab.table,n)
-
-			vert = vert.r
-		end
+		table.insert(Grab.table,n)
 	end
 end
 

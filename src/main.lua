@@ -4,6 +4,7 @@ View = require "view"
 Audio = require "audio"
 require "file"
 require "undo"
+require "selection"
 
 require "tool_draw"
 require "tool_erase"
@@ -14,6 +15,9 @@ require "tool_grab"
 require "tool_move"
 require "tool_smooth"
 require "tool_flatten"
+require "tool_rectselect"
+require "tool_envelope"
+
 
 
 
@@ -62,15 +66,15 @@ function love.load()
 
 	love.keyboard.setKeyRepeat( true )
 
+	Selection.init()
 
-	selectTool(Flatten)
+	selectTool(Draw)
 	Audio.load()
 
 	File.new()
 	File.loadLast()
 
 	Undo.load()
-
 end
 
 function selectTool(t)
@@ -81,7 +85,7 @@ end
 function setTool()
 	if not (mouseDown[1] or mouseDown[3]) then
 		if modifierKeys.ctrl then
-			if selectedTool.draw then
+			if selectedTool.drawTool then
 				currentTool = Erase
 			elseif selectedTool == Pan then
 				currentTool = Zoom
@@ -89,14 +93,14 @@ function setTool()
 				currentTool = Move
 			end
 		elseif modifierKeys.shift then
-			if selectedTool == Grab or selectedTool.draw then
+			if selectedTool == Grab or selectedTool == Flatten or selectedTool.drawTool then
 				currentTool = Smooth
 			end
 		else
 			currentTool = selectedTool
 		end
 
-		if selectedTool.draw and erase then
+		if selectedTool.drawTool and erase then
 			currentTool = Erase
 		end
 	end
@@ -232,7 +236,11 @@ function love.keypressed(key)
 			Audio.play()
 		end
 	elseif key == "delete" then
-		File.new()
+		if Selection.isEmpty() then
+			File.new()
+		else
+			Edit.remove(Selection.mask)
+		end
 		Undo.register()
 	elseif key == "b" then
 		selectTool(Draw)
@@ -248,7 +256,14 @@ function love.keypressed(key)
 		selectTool(Smooth)
 	elseif key == "f" then
 		selectTool(Flatten)
+	elseif key == "n" then
+		selectTool(Envelope)
+	elseif key == "r" then
+		selectTool(RectSelect)
 
+	elseif key == 'd' then
+		Selection.deselect()
+		Undo.register()
 	elseif key == "[" then
 		if selectedTool.radius then
 			selectedTool.radius = selectedTool.radius*0.9
@@ -266,9 +281,6 @@ function love.keypressed(key)
 	elseif key == "o" and modifierKeys.ctrl then
 		--File.load()
 		love.system.openURL("file://"..love.filesystem.getSaveDirectory())
-	elseif key == "b" then
-		print('bb')
-		debug.debug()
 	elseif key == "escape" then
 		love.event.quit( )
 	end

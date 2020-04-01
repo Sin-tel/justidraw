@@ -7,31 +7,24 @@ function Smooth.mousepressed()
 	Smooth.table = {}
 	Smooth.x = mouseX
 	Smooth.y = mouseY
-	local d = math.huge
-	local index = 0
-	for i,v in ipairs(song.track[1]) do
-		local x,y = View.transform(v.x,v.y)
-		local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
+	if Selection.isEmpty() then
+		local d = math.huge
+		local index = 0
+		for i,v in ipairs(song.track[1]) do
+			local x,y = View.transform(v.x,v.y)
+			local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
 
-		if (dist < d) then
-			index = i
-			d = dist
+			if (dist < d) then
+				index = i
+				d = dist
+			end
 		end
-	end
-	
-	local vert = song.track[1][index]
+		
+		local vert = song.track[1][index]
 
-	if vert then
-		while vert.l do
-			vert = vert.l
-		end
-
-		Smooth.table = {}
-		while vert do
-			table.insert(Smooth.table,vert)
-
-			vert = vert.r
-		end
+		Smooth.table = Edit.getNote(vert)
+	else
+		Smooth.table = Selection.list
 	end
 end
 

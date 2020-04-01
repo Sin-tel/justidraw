@@ -13,8 +13,10 @@ function Undo.register()
 	for i = #Undo.stack, Undo.index, -1 do
 		Undo.stack[i] = nil
 	end
-
-	Undo.stack[Undo.index] = deepcopy(song)
+	local t = {}
+	t.song = deepcopy(song)
+	t.selection = Selection.getIndices()
+	Undo.stack[Undo.index] = t
 
 	if #Undo.stack > Undo.maxSize then
 		table.remove(Undo.stack,1)
@@ -25,7 +27,8 @@ end
 function Undo.undo()
 	Undo.index = Undo.index - 1
 	if Undo.index >= 1 then
-		song = deepcopy(Undo.stack[Undo.index])
+		song = deepcopy(Undo.stack[Undo.index].song)
+		Selection.setFromIndices(Undo.stack[Undo.index].selection)
 	else
 		Undo.index = 1
 		print("nothing to undo!")
@@ -35,7 +38,8 @@ end
 function Undo.redo()
 	Undo.index = Undo.index + 1
 	if Undo.stack[Undo.index] then
-		song = deepcopy(Undo.stack[Undo.index])
+		song = deepcopy(Undo.stack[Undo.index].song)
+		Selection.setFromIndices(Undo.stack[Undo.index].selection)
 	else
 		Undo.index = #Undo.stack
 		print("nothing to redo!")

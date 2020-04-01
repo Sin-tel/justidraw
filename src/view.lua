@@ -69,8 +69,11 @@ function View.draw()
 			love.graphics.setColor(.5,.5,.5)
 			love.graphics.line(sx*v.x,sy*v.y,sx*v.r.x,sy*v.r.y)
 		end
-		--love.graphics.setColor(.4,1,1)
-		love.graphics.setColor(.5,.5,.5)
+		if Selection.mask[v] then
+			love.graphics.setColor(.4,1,1)
+		else
+			love.graphics.setColor(.5,.5,.5)
+		end
 		love.graphics.ellipse("fill",sx*v.x,sy*v.y,2,2)
 	end
 

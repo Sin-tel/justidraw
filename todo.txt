@@ -15,8 +15,10 @@
 [x] move tool
 [x] grab tool
 [x] fix grab time order
-[ ] weight tool
-[ ] rect select tool
+[x] weight tool
+[x] rect select tool
+[ ] fix undo selections
+[ ] make selections work with any tool
 [ ] copy paste
 [x] undo/redo
 [ ] input smoothing?

@@ -5,7 +5,7 @@ Draw.lastpoint = {}
 Draw.name = "freehand draw"
 
 Draw.preview = true
-Draw.draw = true
+Draw.drawTool = true
 
 function Draw.mousepressed()	
 	Draw.points = {}

@@ -19,6 +19,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ### freehand draw tool
 * left click: draw
 * hold ctrl: erase
+* hold shift: smooth
 ### line tool
 * left click: draw flat lines
 * hold alt: draw slanted lines
@@ -28,7 +29,11 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * hold ctrl: zoom
 ### grab tool
 * left click: grab part of note
-* hold ctrl: move whole note
+* hold ctrl: move whole note / selection
+### selection
+* left click: normal select
+* hold shift: add
+* hold ctrl: subtract
 
 ## shortcuts
 * B: freehand draw (Brush)
@@ -38,6 +43,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * G: Grab
 * S: Smooth
 * F: Flatten
+* R: rectangular selection
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo

@@ -56,68 +56,23 @@ function Edit.addNote(list)
 			end
 		end
 	end
+end
 
-	
-	--[[local first = list[1][1]
-	local last = list[#list][1]
+function Edit.getNote(vert)
+	local tbl = {}
+	if vert then
+		while vert.l do
+			vert = vert.l
+		end
 
-	local newTrack = {}
-	local leftIndex = 0
-	local rightIndex = 0
-	for i,v in ipairs(song.track[1]) do
-		if v.x < first then
-			table.insert(newTrack,v)
-			leftIndex = i
-		elseif v.x > last then
-			rightIndex = i
-			break
+		while vert do
+			table.insert(tbl,vert)
+
+			vert = vert.r
 		end
 	end
 
-	pts = {}
-	for i,v in ipairs(list) do
-		pt = {}
-		pt.x = v[1]
-		pt.y = v[2]
-		pt.w = v[3]
-		print(v[3])
-		table.insert(pts,pt)
-	end
-
-	for i,v in ipairs(pts) do
-		if(pts[i-1]) then
-			pts[i].l = pts[i-1]
-		else
-			if leftIndex > 0 and song.track[1][leftIndex].r then
-				song.track[1][leftIndex].r = pts[i]
-				pts[i].l = song.track[1][leftIndex]
-			end
-		end
-		if(pts[i+1]) then
-			pts[i].r = pts[i+1]
-		else
-			if rightIndex > 0 and song.track[1][rightIndex].l then
-				song.track[1][rightIndex].l = pts[i]
-				pts[i].r = song.track[1][rightIndex]
-			end
-		end
-		assert(pts[i].r or pts[i].l)
-		pts[i].tangent = Edit.getTangent(pts[i])
-
-		
-		--pts[i].w = 0.5
-
-		table.insert(newTrack,pts[i])
-	end
-
-	for i,v in ipairs(song.track[1]) do
-		if v.x > last then
-			table.insert(newTrack,v)
-		end
-	end
-
-
-	song.track[1] = newTrack]]
+	return tbl
 end
 
 function Edit.merge(v1,v2)
@@ -137,10 +92,12 @@ function Edit.merge(v1,v2)
 		for i,v in ipairs(song.track[1]) do
 			if v == v2 then
 				table.remove(song.track[1],i)
+				Selection.mask[v] = nil
+				break
 			end
 		end
 	end
-	
+	Selection.refresh()
 end
 
 function Edit.collapse(index)
@@ -152,12 +109,14 @@ function Edit.collapse(index)
 	end
 
 	table.remove(song.track[1], index)
+	Selection.mask[v] = nil
+	Selection.refresh()
 end
 
 function Edit.remove(verts)
 	for i=#song.track[1],1,-1 do
-		if verts[i] then
-			local v = song.track[1][i]
+		local v = song.track[1][i]
+		if verts[v] then
 			if v.l then
 				v.l.w = 0
 				v.l.r = nil
@@ -166,6 +125,7 @@ function Edit.remove(verts)
 				v.r.l = nil
 			end
 			table.remove(song.track[1], i)
+			Selection.mask[v] = nil
 		end
 	end
 	Edit.removeSingles()
@@ -176,8 +136,10 @@ function Edit.removeSingles()
 		local v = song.track[1][i]
 		if not (v.l or v.r) then
 			table.remove(song.track[1], i)
+			Selection.mask[v] = nil
 		end
 	end
+	Selection.refresh()
 end
 
 function Edit.getTangent(pt)

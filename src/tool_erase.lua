@@ -4,19 +4,26 @@ Erase.radius = 20
 Erase.name = "erase"
 
 function Erase.mousepressed()
-	
+
+	Erase.list = {}
+	if Selection.isEmpty() then
+		Erase.list = song.track[1]
+	else
+		Erase.list = Selection.list
+	end
 end
 
 function Erase.mousedown()
 	Erase.tempRadius =  Erase.radius*(0.4+1.2*pres)
 
 	remove = {}
-	for i,v in ipairs(song.track[1]) do
+
+	for i,v in ipairs(Erase.list) do
 		local x,y = View.transform(v.x,v.y)
 		local dist = math.sqrt(0.69*(x-mouseX)^2 + (y-mouseY)^2)
 
 		if(dist < Erase.tempRadius) then
-			remove[i] = true
+			remove[v] = true
 		end
 	end
 	Edit.remove(remove)
