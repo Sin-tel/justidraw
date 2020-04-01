@@ -1,7 +1,6 @@
 Erase = {}
 
-Erase.radius = 15
-Erase.tempRadius = 15
+Erase.radius = 20
 Erase.name = "erase"
 
 function Erase.mousepressed()
@@ -20,7 +19,7 @@ function Erase.mousedown()
 			remove[i] = true
 		end
 	end
-	Edit.removeNotes(remove)
+	Edit.remove(remove)
 end
 
 function Erase.mousereleased()

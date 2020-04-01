@@ -143,9 +143,20 @@ function Edit.merge(v1,v2)
 	
 end
 
-function Edit.removeNotes(remove)
+function Edit.collapse(index)
+	local v = song.track[1][index]
+
+	if v.l and v.r then
+		v.l.r = v.r
+		v.r.l = v.l
+	end
+
+	table.remove(song.track[1], index)
+end
+
+function Edit.remove(verts)
 	for i=#song.track[1],1,-1 do
-		if remove[i] then
+		if verts[i] then
 			local v = song.track[1][i]
 			if v.l then
 				v.l.w = 0

@@ -1,6 +1,6 @@
 Smooth = {}
 
-Smooth.radius = 50
+Smooth.radius = 30
 Smooth.name = "smooth"
 
 function Smooth.mousepressed()

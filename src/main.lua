@@ -13,6 +13,7 @@ require "tool_line"
 require "tool_grab"
 require "tool_move"
 require "tool_smooth"
+require "tool_flatten"
 
 
 
@@ -62,7 +63,7 @@ function love.load()
 	love.keyboard.setKeyRepeat( true )
 
 
-	selectTool(Smooth)
+	selectTool(Flatten)
 	Audio.load()
 
 	File.new()
@@ -88,7 +89,7 @@ function setTool()
 				currentTool = Move
 			end
 		elseif modifierKeys.shift then
-			if selectedTool == Grab then
+			if selectedTool == Grab or selectedTool.draw then
 				currentTool = Smooth
 			end
 		else
@@ -128,20 +129,27 @@ function mousepressed(button)
 		end
 	end
 
-	currentTool.mousepressed()
+	
+
+	if button ~= 2 then
+		currentTool.mousepressed()
+	end
 end
 
 function mousereleased(button)
 	mouseDown[button] = false
 
+	if button ~= 2 then
+		currentTool.mousereleased()
+	end
 	
-	currentTool.mousereleased()
-
 	if currentTool ~= Pan and currentTool ~= Zoom then
 		Undo.register()
 	end
 
-	currentTool = selectedTool
+	if button == 3 then
+		currentTool = selectedTool
+	end
 end
 
 function love.wheelmoved(x, y)
@@ -238,6 +246,8 @@ function love.keypressed(key)
 		selectTool(Erase)
 	elseif key == "s" and not modifierKeys.ctrl then
 		selectTool(Smooth)
+	elseif key == "f" then
+		selectTool(Flatten)
 
 	elseif key == "[" then
 		if selectedTool.radius then

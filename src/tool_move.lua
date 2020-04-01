@@ -2,6 +2,8 @@ Move = {}
 
 Move.name = "move notes"
 
+Move.preview = true
+
 function Move.mousepressed()
 	Move.table = {}
 	Move.x = mouseX
