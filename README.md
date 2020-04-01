@@ -30,6 +30,9 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ### grab tool
 * left click: grab part of note
 * hold ctrl: move whole note / selection
+### envelop tool
+* left click: add
+* hold ctrl: subtract
 ### selection
 * left click: normal select
 * hold shift: add
@@ -43,7 +46,8 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * G: Grab
 * S: Smooth
 * F: Flatten
-* R: rectangular selection
+* R: Rectangular selection
+* N: eNvelope tool
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo
