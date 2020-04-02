@@ -15,8 +15,10 @@ require "tool_grab"
 require "tool_move"
 require "tool_smooth"
 require "tool_flatten"
-require "tool_rectselect"
+require "tool_rectSelect"
 require "tool_envelope"
+
+require "help"
 
 
 
@@ -264,6 +266,8 @@ function love.keypressed(key)
 		selectTool(Envelope)
 	elseif key == "r" then
 		selectTool(RectSelect)
+	elseif key == "h" then
+		selectTool(Help)
 
 	elseif key == 'd' then
 		Selection.deselect()
