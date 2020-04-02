@@ -15,7 +15,7 @@ require "tool_grab"
 require "tool_move"
 require "tool_smooth"
 require "tool_flatten"
-require "tool_rectSelect"
+require "tool_rectselect"
 require "tool_envelope"
 
 require "help"
