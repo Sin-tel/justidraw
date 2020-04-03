@@ -17,6 +17,8 @@
 [x] fix grab time order
 [x] weight tool
 [x] rect select tool
+[ ] add  better help
+[x] better envelope tool
 [ ] fix undo selections
 [ ] make selections work with any tool
 [ ] copy paste
@@ -54,17 +56,10 @@ units: 	y ~ 1 cent (100 = 1st)
 		x ~ 100 = 1/16 note
 
 
-selection = boolean
-edit mask = falloff (number per vertex)
-
-move -> move selection or whole notes
-grab -> move w faloff*selection
-pull -> string IK motion (useful??)
-
 =====
-auto add vibrato?
+how to handle vibrato
 
 press shift: grab
 	middle of note: move whole note
 	end/start: grab w falloff
-
+=> context sensitive editing

@@ -31,8 +31,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * left click: grab part of note
 * hold ctrl: move whole note / selection
 ### envelope tool
-* left click: add
-* hold ctrl: subtract
+* left click: draw envelope 
 ### selection
 * left click: normal select
 * hold shift: add

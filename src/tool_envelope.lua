@@ -32,11 +32,9 @@ end
 
 function Envelope.mousedown()
 	local radius = Envelope.radius
-	local updates = {}
 	for i,v in ipairs(Envelope.table) do
-		updates[i] = {}
+
 		local x,y = View.transform(v.x,v.y)
-		
 		local dist = math.sqrt(0.7*(x-mouseX)^2 + (y-mouseY)^2)
 
 		local weight = math.exp(-(dist/radius)^2)*pres*0.1
