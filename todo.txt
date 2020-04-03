@@ -1,0 +1,65 @@
+[x] make drawing
+[x] line simplification (linear interp)
+[x] grid
+[ ] smarter grid
+[-] song structure tracks, notes
+[x] eraser tool
+[x] zooming 
+[x] panning
+[x] playhead
+[x] simple audio engine
+[x] save/load
+[x] pan key
+[x] automerge
+[x] straight line tool
+[x] move tool
+[x] grab tool
+[x] fix grab time order
+[x] weight tool
+[x] rect select tool
+[ ] add  better help
+[x] better envelope tool
+[ ] fix undo selections
+[ ] make selections work with any tool
+[ ] copy paste
+[x] undo/redo
+[ ] input smoothing?
+[ ] edit time
+[ ] move time
+[x] smooth brush
+[ ] selection handles (move, stretch)
+[ ] copy paste
+[ ] flatten tool
+[ ] add geometry (when moving?) (dynamic subdiv?) -> 'snake hook'
+[ ] overwrite/edit draw brush (holding alt)
+[ ] vibrato?
+[ ] split/seperate selection
+[ ] select time 
+[ ] lasso select tool
+[ ] cursor images
+[ ] entropy relax tool
+[ ] export
+[ ] get some open source fonts
+[ ] add message/popup system
+[ ] brush icons
+[ ] set origin of coord system to center
+[ ] save view to file
+
+[ ] multiple tracks
+[ ] layer manager
+[ ] add more synths to audio engine
+
+[=] xyz color
+[=] blur
+
+units: 	y ~ 1 cent (100 = 1st)
+		x ~ 100 = 1/16 note
+
+
+=====
+how to handle vibrato
+
+press shift: grab
+	middle of note: move whole note
+	end/start: grab w falloff
+=> context sensitive editing
