@@ -47,7 +47,15 @@ function Move.mousedown()
 		local x,y = View.transform(v.x,v.y)
 		local newx = x + mouseX - Move.x
 		local newy = y + mouseY - Move.y
-		v.vert.x, v.vert.y = View.invTransform(newx,newy)
+		if modifierKeys.shift then
+			if math.abs(mouseX - Move.x) < math.abs(mouseY - Move.y) then
+				v.vert.x, v.vert.y = View.invTransform(x,newy)
+			else
+				v.vert.x, v.vert.y = View.invTransform(newx,y)
+			end
+		else
+			v.vert.x, v.vert.y = View.invTransform(newx,newy)
+		end
 	end
 end
 

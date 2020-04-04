@@ -19,21 +19,19 @@
 [x] rect select tool
 [ ] add  better help
 [x] better envelope tool
-[ ] fix undo selections
-[ ] make selections work with any tool
-[ ] copy paste
+[x] fix undo selections
+[x] make selections work with any tool
+[x] duplicate
 [x] undo/redo
-[ ] input smoothing?
 [ ] edit time
 [ ] move time
 [x] smooth brush
 [ ] selection handles (move, stretch)
 [ ] copy paste
-[ ] flatten tool
+[x] flatten tool
 [ ] add geometry (when moving?) (dynamic subdiv?) -> 'snake hook'
 [ ] overwrite/edit draw brush (holding alt)
 [ ] vibrato?
-[ ] split/seperate selection
 [ ] select time 
 [ ] lasso select tool
 [ ] cursor images
@@ -52,7 +50,7 @@
 [=] xyz color
 [=] blur
 
-units: 	y ~ 1 cent (100 = 1st)
+units: 	y ~ 1 cent (100 = 1st) (NEGATIVE)
 		x ~ 100 = 1/16 note
 
 

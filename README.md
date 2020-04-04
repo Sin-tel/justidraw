@@ -27,9 +27,13 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 ### pan/zoom tool
 * left click: pan
 * hold ctrl: zoom
-### grab tool (move tool vice versa)
+### grab tool
 * left click: grab part of note
-* hold ctrl: move whole note / selection
+* hold ctrl: move tool
+### move tool
+* left click: move whole note / selection
+* hold shift while moving: constrain to one axis
+* hold ctrl: grab tool
 ### envelope tool
 * left click: draw envelope 
 ### selection
@@ -49,6 +53,7 @@ This is made to work with a drawing tablet on Windows (wintab driver).
 * R: Rectangular selection
 * N: eNvelope tool
 * D: Deselect
+* shift + D: duplicate selection
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo
@@ -62,5 +67,3 @@ Your last save file will be loaded on startup.
 
 * Escape: quit
 * Delete: clear all
-
-test2

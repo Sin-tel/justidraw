@@ -5,6 +5,7 @@ Audio = require "audio"
 require "file"
 require "undo"
 require "selection"
+require "clipboard"
 
 require "tool_draw"
 require "tool_erase"
@@ -18,8 +19,7 @@ require "tool_flatten"
 require "tool_rectselect"
 require "tool_envelope"
 require "tool_envelopealt"
-
-require "help"
+require "tool_help"
 
 
 
@@ -126,22 +126,26 @@ function love.mousereleased(x, y, button)
 end
 
 function mousepressed(button)
-	mouseDown[button] = true
+	if Clipboard.drag then
+		Clipboard.drag = false
+	else
+		mouseDown[button] = true
 
-	setTool()
+		setTool()
 
-	if button == 3 then
-		if love.keyboard.isDown("lctrl") then
-			currentTool = Zoom
-		else
-			currentTool = Pan
+		if button == 3 then
+			if love.keyboard.isDown("lctrl") then
+				currentTool = Zoom
+			else
+				currentTool = Pan
+			end
 		end
-	end
 
-	
+		
 
-	if button ~= 2 then
-		currentTool.mousepressed()
+		if button ~= 2 then
+			currentTool.mousepressed()
+		end
 	end
 end
 
@@ -182,8 +186,12 @@ function love.update(dt)
 	mousePX, mousePY = mouseX, mouseY
 	Tablet.update()
 	
-	if mouseDown[1] or mouseDown[3] then
-		currentTool.mousedown()
+	if Clipboard.drag then
+		Clipboard.dragUpdate()
+	else
+		if mouseDown[1] or mouseDown[3] then
+			currentTool.mousedown()
+		end
 	end
 
 	Audio.update()
@@ -270,6 +278,8 @@ function love.keypressed(key)
 	elseif key == "h" then
 		currentTool = Help
 
+	elseif key == 'd' and modifierKeys.shift then
+		Clipboard.duplicate()
 	elseif key == 'd' then
 		Selection.deselect()
 		Undo.register()

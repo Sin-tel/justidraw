@@ -23,6 +23,11 @@ function Selection.set(mask)
 	Selection.refresh()
 end
 
+function Selection.setNormal(mask)
+	Selection.mask = mask
+	Selection.refresh()
+end
+
 function Selection.refresh()
 	Selection.list = {}
 	for i,v in pairs(Selection.mask) do

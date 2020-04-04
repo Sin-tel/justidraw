@@ -75,6 +75,12 @@ function Edit.getNote(vert)
 	return tbl
 end
 
+function Edit.add(list)
+	for i,v in ipairs(list) do
+		table.insert(song.track[1],v)
+	end
+end
+
 function Edit.merge(v1,v2)
 	assert(not v1.r)
 	assert(not v2.l)
