@@ -22,13 +22,11 @@ require "tool_envelopealt"
 require "tool_help"
 
 
-
-
 --print console directly
 io.stdout:setvbuf("no")
 
-width = 800  
-height = 600 
+width = 1280  
+height = 720 
 
 --love.window.setMode(width,height,{vsync=true,fullscreen=true,fullscreentype = "desktop",borderless = true, y=0}) 
 love.window.setMode(width,height,{vsync=true,fullscreen=false,fullscreentype = "desktop",borderless = false}) 
@@ -126,9 +124,7 @@ function love.mousereleased(x, y, button)
 end
 
 function mousepressed(button)
-	if Clipboard.drag then
-		Clipboard.drag = false
-	else
+	if not Clipboard.drag then
 		mouseDown[button] = true
 
 		setTool()
@@ -150,18 +146,22 @@ function mousepressed(button)
 end
 
 function mousereleased(button)
-	mouseDown[button] = false
+	if Clipboard.drag then
+		Clipboard.drag = false
+	else
+		mouseDown[button] = false
 
-	if button ~= 2 then
-		currentTool.mousereleased()
-	end
-	
-	if currentTool ~= Pan and currentTool ~= Zoom then
-		Undo.register()
-	end
+		if button ~= 2 then
+			currentTool.mousereleased()
+		end
+		
+		if currentTool ~= Pan and currentTool ~= Zoom then
+			Undo.register()
+		end
 
-	if button == 3 then
-		currentTool = selectedTool
+		if button == 3 then
+			currentTool = selectedTool
+		end
 	end
 end
 

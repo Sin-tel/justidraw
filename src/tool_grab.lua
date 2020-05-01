@@ -1,6 +1,6 @@
 Grab = {}
 
-Grab.radius = 25
+Grab.radius = 50
 Grab.name = "grab"
 
 function Grab.mousepressed()
@@ -22,37 +22,38 @@ function Grab.mousepressed()
 		local dist = math.sqrt((mouseX - x)^2 + (mouseY - y)^2)
 
 		if (dist < d) then
-			
 			index = i
 			d = dist
 		end
 	end
 	
 	local vert = tbl[index]
-	local ix,iy = View.transform(vert.x,vert.y)
+	if vert then
+		local ix,iy = View.transform(vert.x,vert.y)
 
-	local tbl2 = Edit.getNote(vert)
+		local tbl2 = Edit.getNote(vert)
 
-	Grab.table = {}
-	for i,v in ipairs(tbl2) do
-		local n = {}
-		n.x = v.x
-		n.y = v.y
-		n.vert = v
+		Grab.table = {}
+		for i,v in ipairs(tbl2) do
+			local n = {}
+			n.x = v.x
+			n.y = v.y
+			n.vert = v
 
-		local x,y = View.transform(v.x,v.y)
-		local distx = math.abs(mouseX - x)
-		local disty = math.sqrt((ix - x)^2 + (iy - y)^2)
+			local x,y = View.transform(v.x,v.y)
+			local distx = math.abs(mouseX - x)
+			local disty = math.sqrt((ix - x)^2 + (iy - y)^2)
 
-		if Selection.isEmpty() then
-			n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
-			n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
-		else
-			n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
-			n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
+			if Selection.isEmpty() then
+				n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
+				n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) --* (Selection.mask[v] and 1 or 0)
+			else
+				n.wx  = math.exp(-(0.4*distx/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
+				n.wy  = math.exp(-(0.7*disty/Grab.radius)^2) * (Selection.mask[v] and 1 or 0)
+			end
+
+			table.insert(Grab.table,n)
 		end
-
-		table.insert(Grab.table,n)
 	end
 end
 
