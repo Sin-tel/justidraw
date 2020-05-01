@@ -2,7 +2,9 @@
 
 Experimental DAW.
 
-This is made to work with a drawing tablet on Windows (wintab driver).
+For the optimal experience, use with a drawing tablet on Windows (wintab driver).
+
+macOS and Linux work but only mouse input.
 
 # how to run
 
