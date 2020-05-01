@@ -55,6 +55,7 @@ macOS and Linux work but only mouse input.
 * R: Rectangular selection
 * N: eNvelope tool
 * D: Deselect
+* Y: Hold down to view local harmonic series grid
 * shift + D: duplicate selection
 * [ and ]: chage brush radius (when applicable)
 * Space: play/pause

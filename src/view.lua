@@ -66,14 +66,15 @@ function View.draw()
 
 
 
-	
-	--[[for i= math.floor(iy/100)+1,math.floor(ey/100) do
-		love.graphics.setColor(1,1,1,.25*sy)
-		if i%12 == 0 then
-			love.graphics.setColor(1,1,1,3*sy)
+	if not love.keyboard.isDown('y') then
+		for i= math.floor(iy/100)+1,math.floor(ey/100) do
+			love.graphics.setColor(1,1,1,.25*sy)
+			if i%12 == 0 then
+				love.graphics.setColor(1,1,1,3*sy)
+			end
+			love.graphics.line(sx*ix,sy*i*100,sx*ex,sy*i*100)
 		end
-		love.graphics.line(sx*ix,sy*i*100,sx*ex,sy*i*100)
-	end]]
+	end
 	
 	for i= math.floor(ix/100)+1,math.floor(ex/100) do
 		love.graphics.setColor(1,1,1,.25*sx)
@@ -126,8 +127,9 @@ function View.draw()
 
 
 
-
-	--drawHarmonics(ix,iy,ex,ey,sx,sy)
+	if love.keyboard.isDown('y') then
+		drawHarmonics(ix,iy,ex,ey,sx,sy)
+	end
 	
 	--[[love.graphics.setColor(0,1,1,0.2)
 	for i,v in ipairs(song.track[1]) do
