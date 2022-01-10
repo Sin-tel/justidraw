@@ -2,7 +2,6 @@
 
 Experimental DAW.
 
-Video:
 [![Video of Justidraw in action](http://img.youtube.com/vi/JhLQWR3zdeU/0.jpg)](http://www.youtube.com/watch?v=JhLQWR3zdeU)
 
 For the optimal experience, use with a drawing tablet on Windows (wintab driver).
