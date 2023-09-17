@@ -13,7 +13,7 @@ function File.loadLast()
 	if love.filesystem.getInfo("last.txt") then
 		local name = love.filesystem.read("last.txt")
 		if love.filesystem.getInfo(name) then
-			song = binser.deserialize(love.filesystem.read(name))[1]
+			File.read(love.filesystem.read(name))
 			print("loaded last save")
 			return
 		end
@@ -32,6 +32,27 @@ end
 function File.load(f)
 	f:open("r")
 	local data = f:read()
-	song = binser.deserialize(data)[1]
+	File.read(data)
+end
+
+function File.read(f)
+	song = binser.deserialize(f)[1]
+
+	to_remove = {}
+	for _, track in ipairs(song.track) do
+		for i, v in ipairs(track) do
+			-- check nans
+			if v.x ~= v.x then
+				print(i, "x nan")
+				to_remove[v] = true
+			end
+			if v.y ~= v.y then
+				print(i, "y nan")
+				to_remove[v] = true
+			end
+		end
+	end
+	Edit.remove(to_remove)
+
 	Undo.register()
 end

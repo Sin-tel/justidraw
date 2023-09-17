@@ -70,9 +70,8 @@ function love.load()
 	Audio.load()
 
 	File.new()
-	File.loadLast()
-
 	Undo.load()
+	File.loadLast()
 end
 
 function selectTool(t)
