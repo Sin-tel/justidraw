@@ -4,7 +4,6 @@ Erase.radius = 20
 Erase.name = "erase"
 
 function Erase.mousepressed()
-
 	Erase.list = {}
 	if Selection.isEmpty() then
 		Erase.list = song.track[1]
@@ -14,15 +13,15 @@ function Erase.mousepressed()
 end
 
 function Erase.mousedown()
-	Erase.tempRadius =  Erase.radius*(0.4+1.2*pres)
+	Erase.tempRadius = Erase.radius * (0.4 + 1.2 * pres)
 
 	remove = {}
 
-	for i,v in ipairs(Erase.list) do
-		local x,y = View.transform(v.x,v.y)
-		local dist = math.sqrt(0.69*(x-mouseX)^2 + (y-mouseY)^2)
+	for i, v in ipairs(Erase.list) do
+		local x, y = View.transform(v.x, v.y)
+		local dist = math.sqrt(0.69 * (x - mouseX) ^ 2 + (y - mouseY) ^ 2)
 
-		if(dist < Erase.tempRadius) then
+		if dist < Erase.tempRadius then
 			remove[v] = true
 		end
 	end
@@ -32,6 +31,3 @@ end
 function Erase.mousereleased()
 	Erase.tempRadius = nil
 end
-
-
-

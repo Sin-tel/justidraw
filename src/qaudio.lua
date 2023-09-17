@@ -1,22 +1,20 @@
 Qaudio = {}
 
-love.audio.setEffect('reverb', {
-	type = 'reverb',
+love.audio.setEffect("reverb", {
+	type = "reverb",
 	gain = 0.3,
 	decaytime = 3.0,
 })
 
-
-love.audio.setEffect('delay', {
-	type = 'echo',
+love.audio.setEffect("delay", {
+	type = "echo",
 	volume = 0.1,
 	delay = 0.157,
 	tapdelay = 0.044,
 	damping = 0.5,
-	feedback = .3,
+	feedback = 0.3,
 	spread = 1.0,
 })
-
 
 function Qaudio.load()
 	bitDepth = 16
@@ -27,7 +25,7 @@ function Qaudio.load()
 	sd = love.sound.newSoundData(bufferSize, samplingRate, bitDepth, channelCount)
 	qs = love.audio.newQueueableSource(samplingRate, bitDepth, channelCount)
 
-	qs:setEffect('reverb')
+	qs:setEffect("reverb")
 	--qs:setEffect('delay')
 
 	dspTime = 0.0
@@ -40,11 +38,13 @@ function Qaudio.setCallback(f)
 end
 
 function Qaudio.update()
-	if qs:getFreeBufferCount() == 0 then return end -- only render if we can.
+	if qs:getFreeBufferCount() == 0 then
+		return
+	end -- only render if we can.
 	local samplesToMix = bufferSize -- easy way of doing things.
-	for smp = 0, samplesToMix-1 do
-		lambda1 = smp/samplesToMix
-		lambda2 = (smp+0.5)/samplesToMix
+	for smp = 0, samplesToMix - 1 do
+		lambda1 = smp / samplesToMix
+		lambda2 = (smp + 0.5) / samplesToMix
 		-- put your generator function here.
 		sd:setSample(pointer, fun(dspTime))
 		pointer = pointer + 1

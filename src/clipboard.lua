@@ -1,4 +1,3 @@
-
 Clipboard = {}
 
 Clipboard.drag = false
@@ -10,13 +9,12 @@ function Clipboard.duplicate()
 
 		new = deepcopy(list)
 
-
 		local newMask = {}
-		for i,v in ipairs(new) do
+		for i, v in ipairs(new) do
 			newMask[v] = true
 		end
 		Clipboard.table = {}
-		for i,v in ipairs(new) do
+		for i, v in ipairs(new) do
 			if not newMask[v.r] then
 				v.r = nil
 			end
@@ -24,13 +22,11 @@ function Clipboard.duplicate()
 				v.l = nil
 			end
 
-			
-
 			local n = {}
 			n.x = v.x
 			n.y = v.y
 			n.vert = v
-			table.insert(Clipboard.table,n)
+			table.insert(Clipboard.table, n)
 		end
 
 		Selection.setNormal(newMask)
@@ -43,18 +39,18 @@ function Clipboard.duplicate()
 end
 
 function Clipboard.dragUpdate()
-	for i,v in ipairs(Clipboard.table) do
-		local x,y = View.transform(v.x,v.y)
+	for i, v in ipairs(Clipboard.table) do
+		local x, y = View.transform(v.x, v.y)
 		local newx = x + mouseX - Clipboard.ix
 		local newy = y + mouseY - Clipboard.iy
 		if modifierKeys.shift then
 			if math.abs(mouseX - Clipboard.ix) < math.abs(mouseY - Clipboard.iy) then
-				v.vert.x, v.vert.y = View.invTransform(x,newy)
+				v.vert.x, v.vert.y = View.invTransform(x, newy)
 			else
-				v.vert.x, v.vert.y = View.invTransform(newx,y)
+				v.vert.x, v.vert.y = View.invTransform(newx, y)
 			end
 		else
-			v.vert.x, v.vert.y = View.invTransform(newx,newy)
+			v.vert.x, v.vert.y = View.invTransform(newx, newy)
 		end
 	end
 end

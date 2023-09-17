@@ -1,6 +1,5 @@
 Pan = {}
 
-
 Pan.name = "pan"
 
 function Pan.mousepressed()
@@ -18,9 +17,4 @@ function Pan.mousedown()
 	View.y = Pan.vy + (mouseY - Pan.iy)
 end
 
-function Pan.mousereleased()
-	
-end
-
-
-
+function Pan.mousereleased() end

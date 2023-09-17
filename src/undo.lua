@@ -19,7 +19,7 @@ function Undo.register()
 	Undo.stack[Undo.index] = t
 
 	if #Undo.stack > Undo.maxSize then
-		table.remove(Undo.stack,1)
+		table.remove(Undo.stack, 1)
 		Undo.index = Undo.index - 1
 	end
 end
@@ -51,7 +51,7 @@ function deepcopy(orig, copies)
 	copies = copies or {}
 	local orig_type = type(orig)
 	local copy
-	if orig_type == 'table' then
+	if orig_type == "table" then
 		if copies[orig] then
 			copy = copies[orig]
 		else

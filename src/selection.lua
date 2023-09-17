@@ -7,12 +7,12 @@ end
 
 function Selection.set(mask)
 	if modifierKeys.ctrl then
-		for i,v in pairs(mask) do
+		for i, v in pairs(mask) do
 			Selection.mask[i] = nil
 		end
 	else
 		if modifierKeys.shift then
-			for i,v in pairs(mask) do
+			for i, v in pairs(mask) do
 				Selection.mask[i] = true
 			end
 		else
@@ -30,8 +30,8 @@ end
 
 function Selection.refresh()
 	Selection.list = {}
-	for i,v in pairs(Selection.mask) do
-		table.insert(Selection.list,i)
+	for i, v in pairs(Selection.mask) do
+		table.insert(Selection.list, i)
 	end
 end
 
@@ -46,9 +46,9 @@ end
 
 function Selection.getIndices()
 	local list = {}
-	for i,v in ipairs(song.track[1]) do
+	for i, v in ipairs(song.track[1]) do
 		if Selection.mask[v] then
-			table.insert(list,i)
+			table.insert(list, i)
 		end
 	end
 	return list
@@ -56,7 +56,7 @@ end
 
 function Selection.setFromIndices(list)
 	Selection.mask = {}
-	for i,v in ipairs(list) do
+	for i, v in ipairs(list) do
 		local vert = song.track[1][v]
 		Selection.mask[vert] = true
 	end

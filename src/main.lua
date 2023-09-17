@@ -1,47 +1,45 @@
-require "tablet"
-require "edit"
-View = require "view"
-Audio = require "audio"
-require "file"
-require "undo"
-require "selection"
-require "clipboard"
+require("tablet")
+require("edit")
+View = require("view")
+Audio = require("audio")
+require("file")
+require("undo")
+require("selection")
+require("clipboard")
 
-require "tool_draw"
-require "tool_erase"
-require "tool_pan"
-require "tool_zoom"
-require "tool_line"
-require "tool_grab"
-require "tool_move"
-require "tool_smooth"
-require "tool_flatten"
-require "tool_rectselect"
-require "tool_envelope"
-require "tool_envelopealt"
-require "tool_help"
-
+require("tool_draw")
+require("tool_erase")
+require("tool_pan")
+require("tool_zoom")
+require("tool_line")
+require("tool_grab")
+require("tool_move")
+require("tool_smooth")
+require("tool_flatten")
+require("tool_rectselect")
+require("tool_envelope")
+require("tool_envelopealt")
+require("tool_help")
 
 --print console directly
 io.stdout:setvbuf("no")
 
-width = 1280  
-height = 720 
+width = 1280
+height = 720
 
---love.window.setMode(width,height,{vsync=true,fullscreen=true,fullscreentype = "desktop",borderless = true, y=0}) 
-love.window.setMode(width,height,{vsync=true,fullscreen=false,fullscreentype = "desktop",borderless = false}) 
+--love.window.setMode(width,height,{vsync=true,fullscreen=true,fullscreentype = "desktop",borderless = true, y=0})
+love.window.setMode(width, height, { vsync = true, fullscreen = false, fullscreentype = "desktop", borderless = false })
 
-width, height = love.window.getMode( )
-
+width, height = love.window.getMode()
 
 canvas = love.graphics.newCanvas(width, height)
 
 pres = 0
 
-mouseX, mouseY = 0,0
-mousePX, mousePY = 0,0
+mouseX, mouseY = 0, 0
+mousePX, mousePY = 0, 0
 
-mouseDown = {false,false,false}
+mouseDown = { false, false, false }
 modifierKeys = {}
 modifierKeys.ctrl = false
 modifierKeys.shift = false
@@ -52,7 +50,6 @@ modifierKeys.alt = false
 
 mainFont = love.graphics.newFont(22)
 smallFont = love.graphics.newFont(12)
-
 
 minLength = 100
 automergeDist = 100
@@ -65,7 +62,7 @@ function love.load()
 	love.graphics.setLineWidth(1.0)
 	love.graphics.setFont(smallFont)
 
-	love.keyboard.setKeyRepeat( true )
+	love.keyboard.setKeyRepeat(true)
 
 	Selection.init()
 
@@ -137,8 +134,6 @@ function mousepressed(button)
 			end
 		end
 
-		
-
 		if button ~= 2 then
 			currentTool.mousepressed()
 		end
@@ -154,7 +149,7 @@ function mousereleased(button)
 		if button ~= 2 then
 			currentTool.mousereleased()
 		end
-		
+
 		if currentTool ~= Pan and currentTool ~= Zoom then
 			Undo.register()
 		end
@@ -167,25 +162,24 @@ end
 
 function love.wheelmoved(x, y)
 	if y > 0 then
-		View.zoomX = View.zoomX*1.2
-		View.zoomY = View.zoomY*1.2
+		View.zoomX = View.zoomX * 1.2
+		View.zoomY = View.zoomY * 1.2
 
-		View.x = View.x + (mouseX - View.x)*(1 - 1.2)
-		View.y = View.y + (mouseY - View.y)*(1 - 1.2)
-
+		View.x = View.x + (mouseX - View.x) * (1 - 1.2)
+		View.y = View.y + (mouseY - View.y) * (1 - 1.2)
 	elseif y < 0 then
-		View.zoomX = View.zoomX/1.2
-		View.zoomY = View.zoomY/1.2
+		View.zoomX = View.zoomX / 1.2
+		View.zoomY = View.zoomY / 1.2
 
-		View.x = View.x + (mouseX - View.x)*(1 - 1/1.2)
-		View.y = View.y + (mouseY - View.y)*(1 - 1/1.2)
+		View.x = View.x + (mouseX - View.x) * (1 - 1 / 1.2)
+		View.y = View.y + (mouseY - View.y) * (1 - 1 / 1.2)
 	end
 end
 
 function love.update(dt)
 	mousePX, mousePY = mouseX, mouseY
 	Tablet.update()
-	
+
 	if Clipboard.drag then
 		Clipboard.dragUpdate()
 	else
@@ -197,16 +191,13 @@ function love.update(dt)
 	Audio.update()
 end
 
-
-
-
 function love.draw()
 	View.draw()
 	if currentTool.draw then
 		currentTool.draw()
 	end
-	
-	love.graphics.setColor(.5,.5,.5)
+
+	love.graphics.setColor(0.5, 0.5, 0.5)
 	if currentTool.radius then
 		if currentTool.tempRadius then
 			love.graphics.circle("line", mouseX, mouseY, currentTool.tempRadius)
@@ -214,8 +205,8 @@ function love.draw()
 			love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
 		end
 	end
-	love.graphics.setColor(.8,.8,.8)
-	love.graphics.print(currentTool.name,10,10)
+	love.graphics.setColor(0.8, 0.8, 0.8)
+	love.graphics.print(currentTool.name, 10, 10)
 
 	--[[for i,v in ipairs(Audio.voice) do
 		love.graphics.print(math.floor(v.amp*100),10,i*20)
@@ -228,7 +219,6 @@ function love.draw()
 		end]]
 	--love.graphics.print(love.filesystem.getSaveDirectory(),10,30)
 end
-
 
 function love.keypressed(key)
 	if key == "lshift" or key == "rshift" then
@@ -245,7 +235,7 @@ function love.keypressed(key)
 		if Audio.isPlaying then
 			Audio.stop()
 		else
-			Audio.seek(View.invTransform(0,0))
+			Audio.seek(View.invTransform(0, 0))
 			Audio.play()
 		end
 	elseif key == "delete" then
@@ -277,19 +267,18 @@ function love.keypressed(key)
 		selectTool(RectSelect)
 	elseif key == "h" then
 		currentTool = Help
-
-	elseif key == 'd' and modifierKeys.shift then
+	elseif key == "d" and modifierKeys.shift then
 		Clipboard.duplicate()
-	elseif key == 'd' then
+	elseif key == "d" then
 		Selection.deselect()
 		Undo.register()
 	elseif key == "[" then
 		if selectedTool.radius then
-			selectedTool.radius = selectedTool.radius*0.9
+			selectedTool.radius = selectedTool.radius * 0.9
 		end
 	elseif key == "]" then
 		if selectedTool.radius then
-			selectedTool.radius = selectedTool.radius*1.1
+			selectedTool.radius = selectedTool.radius * 1.1
 		end
 	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
 		Undo.undo()
@@ -299,9 +288,9 @@ function love.keypressed(key)
 		File.save()
 	elseif key == "o" and modifierKeys.ctrl then
 		--File.load()
-		love.system.openURL("file://"..love.filesystem.getSaveDirectory())
+		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
 	elseif key == "escape" then
-		love.event.quit( )
+		love.event.quit()
 	end
 end
 
