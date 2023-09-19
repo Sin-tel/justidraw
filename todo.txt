@@ -22,8 +22,10 @@
 [x] undo/redo
 [x] smooth brush
 [x] flatten tool
+[x] resize screen
 [-] add  better help
 [-] song structure tracks, notes
+[ ] mouse stabilizer
 [ ] bring back the other envelope tool
 [ ] toggle playback on mouse press
 [ ] reduce clicking on start/end of notes

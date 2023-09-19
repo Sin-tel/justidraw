@@ -183,7 +183,6 @@ function drawHarmonics(ix, iy, ex, ey, sx, sy)
 
 			love.graphics.setColor(col)
 			love.graphics.print(i, sx * ix + 2, sy * y - 13)
-			--love.graphics.setColor(1,0,0,0.5)
 			love.graphics.line(sx * ix, sy * y, sx * ex, sy * y)
 		end
 	end

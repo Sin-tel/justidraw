@@ -27,8 +27,15 @@ io.stdout:setvbuf("no")
 width = 1280
 height = 720
 
---love.window.setMode(width,height,{vsync=true,fullscreen=true,fullscreentype = "desktop",borderless = true, y=0})
-love.window.setMode(width, height, { vsync = true, fullscreen = false, fullscreentype = "desktop", borderless = false })
+love.window.setMode(width, height, {
+	vsync = true,
+	fullscreen = false,
+	fullscreentype = "desktop",
+	borderless = false,
+	resizable = true,
+	minwidth = 640,
+	minheight = 480,
+})
 
 width, height = love.window.getMode()
 
@@ -44,9 +51,6 @@ modifierKeys = {}
 modifierKeys.ctrl = false
 modifierKeys.shift = false
 modifierKeys.alt = false
-
---mainFont = love.graphics.newFont("res/GothamRoundedLight.ttf", 22, "normal")
---smallFont = love.graphics.newFont("res/GothamRoundedBook.ttf", 12, "normal")
 
 mainFont = love.graphics.newFont(22)
 smallFont = love.graphics.newFont(12)
@@ -303,6 +307,11 @@ function love.keyreleased(key)
 		modifierKeys.alt = false
 	end
 	setTool()
+end
+
+function love.resize(w, h)
+	width = w
+	height = h
 end
 
 function love.quit()
