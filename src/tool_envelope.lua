@@ -3,7 +3,7 @@ Envelope = {}
 Envelope.radius = 30
 Envelope.name = "dodge/burn envelope"
 
-Envelope.preview = true
+Envelope.preview = false
 
 function Envelope.mousepressed()
 	Envelope.table = {}
