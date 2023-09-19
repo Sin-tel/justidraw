@@ -23,13 +23,13 @@
 [x] smooth brush
 [x] flatten tool
 [x] resize screen
+[x] bring back the other envelope tool
+[x] toggle playback on mouse press
+[x] toggle audio effects (reverb/delay)
 [-] add  better help
 [-] song structure tracks, notes
 [ ] mouse stabilizer
-[ ] bring back the other envelope tool
-[ ] toggle playback on mouse press
 [ ] reduce clicking on start/end of notes
-[ ] toggle audio effects (reverb/delay)
 [ ] select whole notes
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
