@@ -1,4 +1,4 @@
-Qaudio = {}
+local Qaudio = {}
 
 love.audio.setEffect("reverb", {
 	type = "reverb",
@@ -6,53 +6,67 @@ love.audio.setEffect("reverb", {
 	decaytime = 3.0,
 })
 
-love.audio.setEffect("delay", {
+love.audio.setEffect("echo", {
 	type = "echo",
-	volume = 0.1,
-	delay = 0.157,
-	tapdelay = 0.044,
-	damping = 0.5,
-	feedback = 0.3,
+	volume = 0.13,
+	delay = 0.17,
+	tapdelay = 0.12,
+	damping = 0.1,
+	feedback = 0.5,
 	spread = 1.0,
 })
 
-function Qaudio.load()
-	bitDepth = 16
-	samplingRate = 44100
-	channelCount = 1
-	bufferSize = 1024
-	pointer = 0
-	sd = love.sound.newSoundData(bufferSize, samplingRate, bitDepth, channelCount)
-	qs = love.audio.newQueueableSource(samplingRate, bitDepth, channelCount)
+function Qaudio:load()
+	local bitDepth = 16
+	local channelCount = 1
 
-	qs:setEffect("reverb")
-	--qs:setEffect('delay')
+	self.samplingRate = 44100
+	self.pointer = 0
+	self.bufferSize = 1024
+
+	self.sd = love.sound.newSoundData(self.bufferSize, self.samplingRate, bitDepth, channelCount)
+	self.qs = love.audio.newQueueableSource(self.samplingRate, bitDepth, channelCount)
+
+	self.qs:setEffect("reverb")
+
+	self.effects = {}
+	self.effects["reverb"] = true
+	self.effects["echo"] = false
 
 	dspTime = 0.0
 
 	fun = nil
 end
 
-function Qaudio.setCallback(f)
+function Qaudio:toggleEffect(effect)
+	enabled = not self.effects[effect]
+	self.effects[effect] = enabled
+	self.qs:setEffect(effect, enabled)
+	return enabled
+end
+
+function Qaudio:setCallback(f)
 	fun = f
 end
 
-function Qaudio.update()
-	if qs:getFreeBufferCount() == 0 then
+function Qaudio:update()
+	if self.qs:getFreeBufferCount() == 0 then
 		return
 	end -- only render if we can.
-	local samplesToMix = bufferSize -- easy way of doing things.
+	local samplesToMix = self.bufferSize -- easy way of doing things.
 	for smp = 0, samplesToMix - 1 do
 		lambda1 = smp / samplesToMix
 		lambda2 = (smp + 0.5) / samplesToMix
 		-- put your generator function here.
-		sd:setSample(pointer, fun(dspTime))
-		pointer = pointer + 1
-		dspTime = dspTime + (1 / samplingRate)
-		if pointer >= sd:getSampleCount() then
-			pointer = 0
-			qs:queue(sd)
-			qs:play()
+		self.sd:setSample(self.pointer, fun(dspTime))
+		self.pointer = self.pointer + 1
+		dspTime = dspTime + (1 / self.samplingRate)
+		if self.pointer >= self.sd:getSampleCount() then
+			self.pointer = 0
+			self.qs:queue(self.sd)
+			self.qs:play()
 		end
 	end
 end
+
+return Qaudio

@@ -54,17 +54,23 @@ macOS and Linux work but only mouse input.
 * F: Flatten
 * R: Rectangular selection
 * N: eNvelope tool
+* H: Dodge/burn envelope (ctrl to decrease)
+
 * D: Deselect
-* Y: Hold down to view local harmonic series grid
-* shift + D: duplicate selection
+* shift+D: duplicate selection
 * Delete / backspace: delete selection. clear all when nothing selected
-* [ and ] : change brush radius (when applicable)
+
 * Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo
 * ctrl+S: save 
 * ctrl+O: open save folder 
 
+* [ and ] : change brush radius (when applicable)
+* Y: Hold down to view local harmonic series grid
+* ctrl+P: toggle audio preview when editing
+* shift+e: toggle echo effect
+* shift+r: toggle reverb effect
 
 Drag and drop save files to open them!
 Your last save file will be loaded on startup.

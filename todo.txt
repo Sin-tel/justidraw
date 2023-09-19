@@ -31,10 +31,11 @@
 [ ] reduce clicking on start/end of notes
 [ ] toggle audio effects (reverb/delay)
 [ ] select whole notes
+[ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
 [ ] lasso select
-[ ] export
+[ ] export auduo
 [ ] time stretch
 [ ] selection handles (move, stretch)
 [ ] copy paste

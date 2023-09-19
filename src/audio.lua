@@ -1,4 +1,4 @@
-require("qaudio")
+local Qaudio = require("qaudio")
 
 local M = {}
 
@@ -47,7 +47,7 @@ local function audiocb()
 			out = out + s
 		end
 	end
-	out = clip(out * 0.5)
+	out = clip(out * 0.2)
 
 	return out
 end
@@ -66,8 +66,8 @@ function M.load()
 		M.voice[i].vert = nil
 	end
 
-	Qaudio.load()
-	Qaudio.setCallback(audiocb)
+	Qaudio:load()
+	Qaudio:setCallback(audiocb)
 
 	M.time = 0
 	M.isPlaying = false
@@ -75,7 +75,7 @@ function M.load()
 end
 
 function M.update()
-	Qaudio.update()
+	Qaudio:update()
 
 	if not M.isPlaying then
 		for i, v in ipairs(M.voice) do
@@ -84,7 +84,7 @@ function M.update()
 		end
 	end
 
-	if mouseDown[1] and currentTool.preview and not M.isPlaying then
+	if mouseDown[1] and currentTool.preview and not M.isPlaying and preview then
 		if currentTool.drawTool then
 			M.voice[M.voiceLimit].amp = pres
 			M.voice[M.voiceLimit].active = pres
@@ -111,6 +111,10 @@ function M.update()
 			end
 		end
 	end
+end
+
+function M.toggleEffect(effect)
+	return Qaudio:toggleEffect(effect)
 end
 
 function M.seek(t)

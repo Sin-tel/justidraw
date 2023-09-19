@@ -1,7 +1,7 @@
 Envelope = {}
 
 Envelope.radius = 30
-Envelope.name = "Envelope"
+Envelope.name = "dodge/burn envelope"
 
 Envelope.preview = true
 
@@ -10,21 +10,7 @@ function Envelope.mousepressed()
 	Envelope.x = mouseX
 	Envelope.y = mouseY
 	if Selection.isEmpty() then
-		local d = math.huge
-		local index = 0
-		for i, v in ipairs(song.track[1]) do
-			local x, y = View.transform(v.x, v.y)
-			local dist = math.sqrt((mouseX - x) ^ 2 + (mouseY - y) ^ 2)
-
-			if dist < d then
-				index = i
-				d = dist
-			end
-		end
-
-		local vert = song.track[1][index]
-
-		Envelope.table = Edit.getNote(vert)
+		Envelope.table = song.track[1]
 	else
 		Envelope.table = Selection.list
 	end

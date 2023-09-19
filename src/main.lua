@@ -43,6 +43,8 @@ canvas = love.graphics.newCanvas(width, height)
 
 pres = 0
 
+preview = true
+
 mouseX, mouseY = 0, 0
 mousePX, mousePY = 0, 0
 
@@ -53,10 +55,18 @@ modifierKeys.shift = false
 modifierKeys.alt = false
 
 mainFont = love.graphics.newFont(22)
-smallFont = love.graphics.newFont(12)
+smallFont = love.graphics.newFont(15)
 
 minLength = 100
 automergeDist = 100
+
+message = ""
+messageTimer = 0.0
+
+function setMessage(m)
+	message = m
+	messageTimer = 2.0
+end
 
 function love.load()
 	math.randomseed(os.time())
@@ -183,6 +193,8 @@ function love.update(dt)
 	mousePX, mousePY = mouseX, mouseY
 	Tablet.update()
 
+	messageTimer = messageTimer - dt
+
 	if Clipboard.drag then
 		Clipboard.dragUpdate()
 	else
@@ -208,9 +220,11 @@ function love.draw()
 			love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
 		end
 	end
-	love.graphics.setColor(0.8, 0.8, 0.8)
+	love.graphics.setColor(0.9, 0.9, 0.9)
 	love.graphics.print(currentTool.name, 10, 10)
-
+	if messageTimer > 0 then
+		love.graphics.print(message, 10, height - 30)
+	end
 	--[[for i,v in ipairs(Audio.voice) do
 		love.graphics.print(math.floor(v.amp*100),10,i*20)
 		love.graphics.print(v.delta,100,i*20)
@@ -241,6 +255,28 @@ function love.keypressed(key)
 			Audio.seek(View.invTransform(0, 0))
 			Audio.play()
 		end
+	elseif key == "p" and modifierKeys.shift then
+		if preview then
+			preview = false
+			setMessage("preview off")
+		else
+			preview = true
+			setMessage("preview on")
+		end
+	elseif key == "e" and modifierKeys.shift then
+		enabled = Audio.toggleEffect("echo")
+		if enabled then
+			setMessage("echo on")
+		else
+			setMessage("echo off")
+		end
+	elseif key == "r" and modifierKeys.shift then
+		enabled = Audio.toggleEffect("reverb")
+		if enabled then
+			setMessage("reverb on")
+		else
+			setMessage("reverb off")
+		end
 	elseif key == "delete" or key == "backspace" then
 		if Selection.isEmpty() then
 			File.new()
@@ -266,7 +302,8 @@ function love.keypressed(key)
 		selectTool(Flatten)
 	elseif key == "n" then
 		selectTool(EnvelopeAlt)
-		-- selectTool(Envelope)
+	elseif key == "h" then
+		selectTool(Envelope)
 	elseif key == "r" then
 		selectTool(RectSelect)
 	elseif key == "h" then

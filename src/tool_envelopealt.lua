@@ -1,6 +1,6 @@
 EnvelopeAlt = {}
 
-EnvelopeAlt.name = "EnvelopeAlt"
+EnvelopeAlt.name = "envelope draw"
 
 EnvelopeAlt.preview = false
 
