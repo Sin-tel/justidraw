@@ -63,6 +63,8 @@ automergeDist = 100
 message = ""
 messageTimer = 0.0
 
+selectNotes = false
+
 function setMessage(m)
 	message = m
 	messageTimer = 2.0
@@ -276,6 +278,14 @@ function love.keypressed(key)
 			setMessage("reverb on")
 		else
 			setMessage("reverb off")
+		end
+	elseif key == "n" and modifierKeys.shift then
+		if selectNotes then
+			selectNotes = false
+			setMessage("select vertices")
+		else
+			selectNotes = true
+			setMessage("select notes")
 		end
 	elseif key == "delete" or key == "backspace" then
 		if Selection.isEmpty() then
