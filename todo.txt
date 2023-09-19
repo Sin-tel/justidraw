@@ -24,6 +24,10 @@
 [x] flatten tool
 [-] add  better help
 [-] song structure tracks, notes
+[ ] bring back the other envelope tool
+[ ] toggle playback on mouse press
+[ ] reduce clicking on start/end of notes
+[ ] toggle audio effects (reverb/delay)
 [ ] select whole notes
 [ ] non-12 grids?
 [ ] smarter grid
