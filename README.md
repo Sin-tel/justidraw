@@ -57,7 +57,8 @@ macOS and Linux work but only mouse input.
 * D: Deselect
 * Y: Hold down to view local harmonic series grid
 * shift + D: duplicate selection
-* [ and ]: chage brush radius (when applicable)
+* Delete / backspace: delete selection. clear all when nothing selected
+* [ and ] : change brush radius (when applicable)
 * Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo
@@ -69,4 +70,3 @@ Drag and drop save files to open them!
 Your last save file will be loaded on startup.
 
 * Escape: quit
-* Delete: clear all

@@ -237,7 +237,7 @@ function love.keypressed(key)
 			Audio.seek(View.invTransform(0, 0))
 			Audio.play()
 		end
-	elseif key == "delete" then
+	elseif key == "delete" or key == "backspace" then
 		if Selection.isEmpty() then
 			File.new()
 		else
@@ -262,6 +262,7 @@ function love.keypressed(key)
 		selectTool(Flatten)
 	elseif key == "n" then
 		selectTool(EnvelopeAlt)
+		-- selectTool(Envelope)
 	elseif key == "r" then
 		selectTool(RectSelect)
 	elseif key == "h" then

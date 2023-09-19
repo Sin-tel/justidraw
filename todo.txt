@@ -31,7 +31,6 @@
 [ ] select whole notes
 [ ] non-12 grids?
 [ ] smarter grid
-[ ] dodge/burn style envelope
 [ ] lasso select
 [ ] export
 [ ] time stretch
@@ -42,6 +41,7 @@
 [ ] vibrato?
 [ ] select time 
 [ ] cursor images
+[ ] join notes
 [ ] entropy relax tool
 [ ] set origin of coord system to center
 [ ] save view to file
