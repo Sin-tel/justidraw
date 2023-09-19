@@ -1,52 +1,14 @@
 --[[
 camera and drawing
-
-
 ]]
 
+local harmonicColorTable = require("harmonics")
 local View = {}
 
 View.x = 0
 View.y = 0
 View.zoomX = 0.3
 View.zoomY = 0.3
-
-HarmonicColors = {}
-
-HarmonicColors[1] = { 0.6, 0.6, 0.6 }
-HarmonicColors[2] = { 0.6, 0.6, 0.6 }
-HarmonicColors[4] = { 0.6, 0.6, 0.6 }
-HarmonicColors[8] = { 0.6, 0.6, 0.6 }
-HarmonicColors[16] = { 0.6, 0.6, 0.6 }
-HarmonicColors[32] = { 0.6, 0.6, 0.6 }
-
-HarmonicColors[3] = { 0.6, 0.2, 0.2 }
-HarmonicColors[6] = { 0.6, 0.2, 0.2 }
-HarmonicColors[12] = { 0.6, 0.2, 0.2 }
-HarmonicColors[24] = { 0.6, 0.2, 0.2 }
-HarmonicColors[9] = { 0.6, 0.2, 0.2 }
-HarmonicColors[18] = { 0.6, 0.2, 0.2 }
-HarmonicColors[5] = { 0.6, 0.2, 0.2 }
-HarmonicColors[10] = { 0.6, 0.2, 0.2 }
-HarmonicColors[20] = { 0.6, 0.2, 0.2 }
-HarmonicColors[15] = { 0.6, 0.2, 0.2 }
-HarmonicColors[30] = { 0.6, 0.2, 0.2 }
-HarmonicColors[25] = { 0.6, 0.2, 0.2 }
-HarmonicColors[7] = { 0.6, 0.2, 0.2 }
-HarmonicColors[14] = { 0.6, 0.2, 0.2 }
-HarmonicColors[28] = { 0.6, 0.2, 0.2 }
-HarmonicColors[21] = { 0.6, 0.2, 0.2 }
-HarmonicColors[11] = { 0.5, 0.1, 0.1 }
-HarmonicColors[22] = { 0.5, 0.1, 0.1 }
-
-HarmonicColors[13] = { 0.4, 0.0, 0.0 }
-HarmonicColors[26] = { 0.4, 0.0, 0.0 }
-HarmonicColors[17] = { 0.4, 0.0, 0.0 }
-HarmonicColors[19] = { 0.3, 0.0, 0.0 }
-HarmonicColors[23] = { 0.3, 0.0, 0.0 }
-HarmonicColors[27] = { 0.2, 0.0, 0.0 }
-HarmonicColors[29] = { 0.2, 0.0, 0.0 }
-HarmonicColors[31] = { 0.2, 0.0, 0.0 }
 
 function log2(x)
 	return math.log(x) / math.log(2)
@@ -177,12 +139,13 @@ function drawHarmonics(ix, iy, ex, ey, sx, sy)
 
 		f1 = f1 / bestFit
 
-		for i, col in pairs(HarmonicColors) do
+		for i, col in pairs(harmonicColorTable) do
 			local f = i * f1
 			local y = -log2(f) * 1200
 
 			love.graphics.setColor(col)
 			love.graphics.print(i, sx * ix + 2, sy * y - 13)
+			--love.graphics.setColor(1,0,0,0.5)
 			love.graphics.line(sx * ix, sy * y, sx * ex, sy * y)
 		end
 	end

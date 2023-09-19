@@ -25,6 +25,7 @@ end
 
 function File.new()
 	song = {}
+	song.version = "0.2" -- for versioned save files
 	song.track = {}
 	song.track[1] = {}
 end
