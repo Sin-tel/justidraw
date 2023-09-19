@@ -78,7 +78,6 @@ function Draw.mousereleased()
 end
 
 function Draw.simplify(i1, i2, alwaysKeep)
-	--print("=============")
 	newTable = {}
 
 	local first = Draw.points[i1]
@@ -102,7 +101,6 @@ function Draw.simplify(i1, i2, alwaysKeep)
 
 		local t = (x - x1) / vx
 		dy = dy + math.abs(Draw.points[i][3] - (last[3] * t + first[3] * (1 - t))) * 20
-		--print(dy)
 		if dy > dmax then
 			dmax = dy
 			index = i
@@ -116,25 +114,10 @@ function Draw.simplify(i1, i2, alwaysKeep)
 end
 
 function Draw.draw()
-	--[[local i = 1
-	local line = {}
-	for  k,v in ipairs(Draw.points) do
-		line[i] = v[1]
-		line[i+1] = v[2]
-		i = i + 2
-	end
-
-	love.graphics.setColor(.7,.0,.0)
-	if(#line >= 4) then
-		love.graphics.line(line)
-	end]]
-
 	love.graphics.setColor(0.7, 0.0, 0.0)
 	for i = 1, #Draw.points - 1 do
 		local v1 = Draw.points[i]
 		local v2 = Draw.points[i + 1]
-
-		--love.graphics.line(v1[1],v1[2],v2[1],v2[2])
 
 		love.graphics.polygon(
 			"fill",

@@ -27,11 +27,11 @@
 [x] toggle playback on mouse press
 [x] toggle audio effects (reverb/delay)
 [x] select whole notes
+[x] reduce clicking on start/end of notes
 [-] add  better help
 [-] song structure tracks, notes
 [ ] lasso select
 [ ] mouse stabilizer
-[ ] reduce clicking on start/end of notes
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
