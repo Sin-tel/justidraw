@@ -12,9 +12,10 @@ shortcuts
  F: Flatten
  R: Rectangular selection  
  N: eNvelope tool
+ H: dodge/burn envelope
  D: Deselect
  Y: Show harmonics
- [ and ]: chage brush radius (when applicable)
+ [ and ]: chage brush radius
  Space: play/pause
  ctrl+Z: undo
  ctrl+Y / ctrl+shift+Z: redo
