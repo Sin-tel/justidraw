@@ -16,7 +16,8 @@ require("tool_grab")
 require("tool_move")
 require("tool_smooth")
 require("tool_flatten")
-require("tool_rectselect")
+require("tool_select_rect")
+require("tool_select_lasso")
 require("tool_envelope")
 require("tool_envelopealt")
 require("tool_help")
@@ -315,7 +316,9 @@ function love.keypressed(key)
 	elseif key == "h" then
 		selectTool(Envelope)
 	elseif key == "r" then
-		selectTool(RectSelect)
+		selectTool(SelectRect)
+	elseif key == "a" then
+		selectTool(SelectLasso)
 	elseif key == "h" then
 		currentTool = Help
 	elseif key == "d" and modifierKeys.shift then

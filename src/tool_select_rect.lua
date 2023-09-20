@@ -1,20 +1,20 @@
-RectSelect = {}
+SelectRect = {}
 
-RectSelect.name = "rectangular selection"
+SelectRect.name = "select rectangle"
 
-RectSelect.select = true
+SelectRect.select = true
 
-function RectSelect.mousepressed()
-	RectSelect.ix = mouseX
-	RectSelect.iy = mouseY
+function SelectRect.mousepressed()
+	SelectRect.ix = mouseX
+	SelectRect.iy = mouseY
 end
 
-function RectSelect.mousedown() end
+function SelectRect.mousedown() end
 
-function RectSelect.mousereleased()
+function SelectRect.mousereleased()
 	local mask = {}
 
-	local x1, y1 = View.invTransform(RectSelect.ix, RectSelect.iy)
+	local x1, y1 = View.invTransform(SelectRect.ix, SelectRect.iy)
 	local x2, y2 = View.invTransform(mouseX, mouseY)
 	if x1 > x2 then
 		x1, x2 = x2, x1
@@ -52,9 +52,9 @@ function RectSelect.mousereleased()
 	Selection.set(mask)
 end
 
-function RectSelect.draw()
+function SelectRect.draw()
 	if mouseDown[1] then
 		love.graphics.setColor(0.0, 0.8, 0.8)
-		love.graphics.rectangle("line", RectSelect.ix, RectSelect.iy, mouseX - RectSelect.ix, mouseY - RectSelect.iy)
+		love.graphics.rectangle("line", SelectRect.ix, SelectRect.iy, mouseX - SelectRect.ix, mouseY - SelectRect.iy)
 	end
 end

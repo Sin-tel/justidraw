@@ -11,6 +11,7 @@ shortcuts
  S: Smooth
  F: Flatten
  R: Rectangular selection  
+ A: Lasso selection  
  N: eNvelope tool
  H: dodge/burn envelope
  D: Deselect

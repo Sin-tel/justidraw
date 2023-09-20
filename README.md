@@ -53,6 +53,7 @@ macOS and Linux work but only mouse input.
 * S: Smooth
 * F: Flatten
 * R: Rectangular selection
+* A: lAsso selection
 * N: eNvelope tool
 * H: Dodge/burn envelope (ctrl to decrease)
 
