@@ -50,4 +50,6 @@ function Flatten.mousedown()
 	end
 end
 
-function Flatten.mousereleased() end
+function Flatten.mousereleased()
+	Edit.resampleAll()
+end

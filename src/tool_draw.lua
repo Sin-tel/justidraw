@@ -75,6 +75,8 @@ function Draw.mousereleased()
 		Edit.addNote(Draw.points)
 	end
 	Draw.points = {}
+
+	Edit.resampleAll()
 end
 
 function Draw.simplify(i1, i2, alwaysKeep)

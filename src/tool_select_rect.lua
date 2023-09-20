@@ -29,26 +29,6 @@ function SelectRect.mousereleased()
 		end
 	end
 
-	if selectNotes then
-		notes = {}
-		newmask = {}
-
-		for v in pairs(mask) do
-			while v.l do
-				v = v.l
-			end
-			if not newmask[v] then
-				newmask[v] = true
-				while v do
-					newmask[v] = true
-					v = v.r
-				end
-			end
-		end
-
-		mask = newmask
-	end
-
 	Selection.set(mask)
 end
 

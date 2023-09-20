@@ -6,6 +6,25 @@ function Selection.init()
 end
 
 function Selection.set(mask)
+	if selectNotes then
+		local notes = {}
+		local newmask = {}
+
+		for v in pairs(mask) do
+			while v.l do
+				v = v.l
+			end
+			if not newmask[v] then
+				newmask[v] = true
+				while v do
+					newmask[v] = true
+					v = v.r
+				end
+			end
+		end
+		mask = newmask
+	end
+
 	if modifierKeys.ctrl then
 		for i, v in pairs(mask) do
 			Selection.mask[i] = nil

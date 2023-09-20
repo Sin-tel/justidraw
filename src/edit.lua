@@ -190,10 +190,48 @@ function Edit.getTangent(pt)
 	elseif not pt.r then
 		return (pt.l.y - pt.y) / (pt.l.x - pt.x)
 	else
-		local m = (pt.l.y - pt.r.y) / (pt.l.x - pt.r.x)
-		local m1 = (pt.y - pt.r.y) / (pt.x - pt.r.x)
-		local m2 = (pt.l.y - pt.y) / (pt.l.x - pt.x)
+		return (pt.l.y - pt.r.y) / (pt.l.x - pt.r.x)
+	end
+end
 
-		return m --/ (1 + .05*math.abs(m1-m2))
+function Edit.resampleAll()
+	list = {}
+	for i, v in ipairs(song.track[1]) do
+		if not v.l then
+			table.insert(list, v)
+		end
+	end
+
+	while true do
+		local count = 0
+		for i, v in ipairs(list) do
+			while v.r do
+				local nextv = v.r
+
+				local dx = v.x - v.r.x
+				local dy = v.y - v.r.y
+
+				if math.sqrt(dx ^ 2 + dy ^ 2) > 150 then
+					local nx = (v.x + v.r.x) * 0.5
+					local ny = (v.y + v.r.y) * 0.5
+					local nw = (v.w + v.r.w) * 0.5
+
+					local new = { x = nx, y = ny, w = nw }
+
+					v.r = new
+					nextv.l = new
+					new.l = v
+					new.r = nextv
+
+					table.insert(song.track[1], new)
+					count = count + 1
+				end
+
+				v = nextv
+			end
+		end
+		if count == 0 then
+			break
+		end
 	end
 end

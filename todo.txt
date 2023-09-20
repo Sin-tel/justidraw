@@ -28,9 +28,9 @@
 [x] toggle audio effects (reverb/delay)
 [x] select whole notes
 [x] reduce clicking on start/end of notes
-[-] add  better help
-[-] song structure tracks, notes
+[x] join notes
 [x] lasso select
+[-] add  better help
 [ ] grab vertical
 [ ] mouse stabilizer
 [ ] toggle log/linear view ?
@@ -45,15 +45,13 @@
 [ ] vibrato?
 [ ] select time 
 [ ] cursor images
-[ ] join notes
 [ ] entropy relax tool
 [ ] set origin of coord system to center
 [ ] save view to file
-[ ] export
 
 not currently planned:
 [ ] brush icons
 [ ] multiple tracks
 [ ] layer manager
 [ ] add more synths to audio engine
-
+[ ] song structure tracks, notes

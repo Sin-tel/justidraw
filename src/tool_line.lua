@@ -108,6 +108,8 @@ function Line.mousereleased()
 		Edit.addNote(Line.points)
 	end
 	Line.points = {}
+
+	Edit.resampleAll()
 end
 function Line.setMinimumSegments()
 	local d = 0

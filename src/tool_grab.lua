@@ -85,4 +85,6 @@ function Grab.mousedown()
 	end
 end
 
-function Grab.mousereleased() end
+function Grab.mousereleased()
+	Edit.resampleAll()
+end
