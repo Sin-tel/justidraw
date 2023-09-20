@@ -61,7 +61,7 @@ modifierKeys.alt = false
 mainFont = love.graphics.newFont(22)
 smallFont = love.graphics.newFont(15)
 
-minLength = 100
+minLength = 50
 automergeDist = 100
 
 message = ""
@@ -324,6 +324,8 @@ function love.keypressed(key)
 		selectTool(SelectLasso)
 	elseif key == "i" then
 		currentTool = Help
+	elseif key == "j" then
+		Edit.join()
 	elseif key == "d" and modifierKeys.shift then
 		Clipboard.duplicate()
 	elseif key == "d" then

@@ -15,6 +15,7 @@ shortcuts
  N: eNvelope tool
  H: dodge/burn envelope
  D: Deselect
+ J: Join notes
  Y: Show harmonics
  [ and ]: chage brush radius
  Space: play/pause

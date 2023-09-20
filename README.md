@@ -61,6 +61,7 @@ macOS and Linux work but only mouse input.
 * D: Deselect
 * shift+D: duplicate selection
 * Delete / backspace: delete selection. clear all when nothing selected
+* J: Join ends of selected notes
 ### File
 * Space: play/pause
 * ctrl+Z: undo

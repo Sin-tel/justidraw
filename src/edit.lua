@@ -77,6 +77,46 @@ function Edit.add(list)
 	end
 end
 
+function Edit.join()
+	if #Selection.list == 0 then
+		setMessage("selection is empty")
+		return
+	end
+	local vset = {}
+	local vlist = {}
+	for v in pairs(Selection.mask) do
+		while v.l do
+			v = v.l
+		end
+		if not vset[v] then
+			vset[v] = true
+			table.insert(vlist, v)
+		end
+	end
+
+	if #vlist == 1 then
+		setMessage("only one note selected")
+		return
+	end
+
+	table.sort(vlist, function(a, b)
+		return a.x < b.x
+	end)
+
+	for i = 1, #vlist - 1 do
+		v1 = vlist[i]
+		v2 = vlist[i + 1]
+
+		while v1.r do
+			v1 = v1.r
+		end
+
+		Edit.merge(v1, v2)
+	end
+
+	Selection.deselect()
+end
+
 function Edit.merge(v1, v2)
 	assert(not v1.r)
 	assert(not v2.l)

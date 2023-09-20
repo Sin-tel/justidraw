@@ -165,25 +165,10 @@ function Line.simplify(i1, i2, alwaysKeep)
 end
 
 function Line.draw()
-	--[[local i = 1
-	local line = {}
-	for  k,v in ipairs(Line.points) do
-		line[i] = v[1]
-		line[i+1] = v[2]
-		i = i + 2
-	end
-
-	love.graphics.setColor(.7,.0,.0)
-	if(#line >= 4) then
-		love.graphics.line(line)
-	end]]
-
 	love.graphics.setColor(0.7, 0.0, 0.0)
 	for i = 1, #Line.points - 1 do
 		local v1 = Line.points[i]
 		local v2 = Line.points[i + 1]
-
-		--love.graphics.line(v1[1],v1[2],v2[1],v2[2])
 
 		love.graphics.polygon(
 			"fill",
