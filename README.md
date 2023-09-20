@@ -44,6 +44,7 @@ macOS and Linux work but only mouse input.
 * hold ctrl: subtract
 
 ## shortcuts
+### Tools
 * B: freehand draw (Brush)
 * L: Line tool
 * E: Eraser
@@ -56,17 +57,18 @@ macOS and Linux work but only mouse input.
 * A: lAsso selection
 * N: eNvelope tool
 * H: Dodge/burn envelope (ctrl to decrease)
-
+### Selection
 * D: Deselect
 * shift+D: duplicate selection
 * Delete / backspace: delete selection. clear all when nothing selected
-
+### File
 * Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo
 * ctrl+S: save 
 * ctrl+O: open save folder 
-
+* Escape: quit
+### Misc
 * [ and ] : change brush radius (when applicable)
 * \+ and - : change bpm grid
 * Y: Hold down to view local harmonic series grid
@@ -79,4 +81,3 @@ macOS and Linux work but only mouse input.
 Drag and drop save files to open them!
 Your last save file will be loaded on startup.
 
-* Escape: quit
