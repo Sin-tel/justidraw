@@ -49,7 +49,7 @@ function View.draw()
 	li = 1
 	ii = 100
 
-	love.graphics.setColor(0.3, 0.3, 0.3)
+	love.graphics.setColor(0.35, 0.35, 0.35)
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
 			love.graphics.polygon(
@@ -70,13 +70,13 @@ function View.draw()
 
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
-			love.graphics.setColor(0.5, 0.5, 0.5)
+			love.graphics.setColor(0.7, 0.7, 0.7)
 			love.graphics.line(sx * v.x, sy * v.y, sx * v.r.x, sy * v.r.y)
 		end
 		if Selection.mask[v] then
 			love.graphics.setColor(0.4, 1, 1)
 		else
-			love.graphics.setColor(0.5, 0.5, 0.5)
+			love.graphics.setColor(0.7, 0.7, 0.7)
 		end
 		love.graphics.ellipse("fill", sx * v.x, sy * v.y, 2, 2)
 	end

@@ -326,6 +326,7 @@ function love.keypressed(key)
 		currentTool = Help
 	elseif key == "j" then
 		Edit.join()
+		Edit.resampleAll()
 	elseif key == "d" and modifierKeys.shift then
 		Clipboard.duplicate()
 	elseif key == "d" then
