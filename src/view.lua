@@ -33,17 +33,15 @@ function View.draw()
 		end
 	end
 
-	local bpm = song.bpm
-	local fact = sx * 120 / bpm
-	for i = math.floor(ix * bpm / 12000) + 1, math.floor(ex * bpm / 12000) do
-		love.graphics.setColor(1, 1, 1, 0.25 * fact)
+	for i = math.floor(ix / 100) + 1, math.floor(ex / 100) do
+		love.graphics.setColor(1, 1, 1, 0.25 * sx)
 		if (i - song.bpmOffset) % 4 == 0 then
-			love.graphics.setColor(1, 1, 1, 1 * fact)
+			love.graphics.setColor(1, 1, 1, 1 * sx)
 		end
 		if (i - song.bpmOffset) % 16 == 0 then
-			love.graphics.setColor(1, 1, 1, 4 * fact)
+			love.graphics.setColor(1, 1, 1, 4 * sx)
 		end
-		love.graphics.line(sx * i * 12000 / bpm, sy * iy, sx * i * 12000 / bpm, sy * ey)
+		love.graphics.line(sx * i * 100, sy * iy, sx * i * 100, sy * ey)
 	end
 
 	line = {}
@@ -90,11 +88,6 @@ function View.draw()
 	if love.keyboard.isDown("y") then
 		drawHarmonics(ix, iy, ex, ey, sx, sy)
 	end
-
-	--[[love.graphics.setColor(0,1,1,0.2)
-	for i,v in ipairs(song.track[1]) do
-		love.graphics.ellipse("line",v.x,v.y,v.w*65,v.w*65)
-	end]]
 
 	love.graphics.pop()
 end

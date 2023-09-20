@@ -25,15 +25,20 @@ function File.loadLast()
 	print("no last save found")
 end
 
+function File.newSong()
+	local new = {}
+	-- versioned save files
+	new.version_major = VERSION_MAJOR
+	new.version_minor = VERSION_MINOR
+	new.bpm = 120
+	new.bpmOffset = 0
+	new.track = {}
+	new.track[1] = {}
+	return new
+end
+
 function File.new()
-	-- for versioned save files
-	song = {}
-	song.version_major = VERSION_MAJOR
-	song.version_minor = VERSION_MINOR
-	song.bpm = 120
-	song.bpmOffset = 0
-	song.track = {}
-	song.track[1] = {}
+	song = File.newSong()
 end
 
 function File.load(f)
@@ -43,40 +48,33 @@ function File.load(f)
 end
 
 function File.read(f)
-	song = binser.deserialize(f)[1]
+	file = binser.deserialize(f)[1]
 
 	-- backwards compatibility housekeeping
-	if not song.version_major then
-		song.version_major = 0
+	if not file.version_major then
+		file.version_major = 0
 	end
-	if not song.version_minor then
-		song.version_minor = 2
+	if not file.version_minor then
+		file.version_minor = 2
 	end
 
-	if song.version_major ~= VERSION_MAJOR or song.version_minor ~= VERSION_MINOR then
+	if file.version_major ~= VERSION_MAJOR or file.version_minor ~= VERSION_MINOR then
 		setMessage(
-			"loaded song saved with a previous version! (" .. song.version_major .. "." .. song.version_minor .. ")"
+			"loaded song saved with a previous version! (" .. file.version_major .. "." .. file.version_minor .. ")"
 		)
 	end
 
-	if not song.bpm then
-		song.bpm = 120
-	end
-
-	if not song.bpmOffset then
-		song.bpmOffset = 0
+	song = File.newSong()
+	for k, v in pairs(file) do
+		song[k] = v
 	end
 
 	-- remove any NaNs
 	to_remove = {}
 	for _, track in ipairs(song.track) do
 		for i, v in ipairs(track) do
-			if v.x ~= v.x then
-				print(i, "x nan")
-				to_remove[v] = true
-			end
-			if v.y ~= v.y then
-				print(i, "y nan")
+			if v.x ~= v.x or v.y ~= v.y or v.w ~= v.w then
+				print(i, "NaN")
 				to_remove[v] = true
 			end
 		end
