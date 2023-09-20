@@ -72,6 +72,7 @@ macOS and Linux work but only mouse input.
 ### Misc
 * [ and ] : change brush radius (when applicable)
 * \+ and - : change bpm grid
+* left/right arrows: move bpm grid
 * Y: Hold down to view local harmonic series grid
 * I: show keyboard shortcuts
 * ctrl+P: toggle audio preview when editing

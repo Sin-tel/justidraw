@@ -345,6 +345,10 @@ function love.keypressed(key)
 	elseif key == "-" or key == "kp-" then
 		song.bpm = math.min(math.max(song.bpm - 4, 32), 240)
 		setMessage("bpm: " .. song.bpm)
+	elseif key == "left" then
+		song.bpmOffset = song.bpmOffset - 1
+	elseif key == "right" then
+		song.bpmOffset = song.bpmOffset + 1
 	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
 		Undo.undo()
 	elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then

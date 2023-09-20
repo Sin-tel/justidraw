@@ -31,6 +31,7 @@ function File.new()
 	song.version_major = VERSION_MAJOR
 	song.version_minor = VERSION_MINOR
 	song.bpm = 120
+	song.bpmOffset = 0
 	song.track = {}
 	song.track[1] = {}
 end
@@ -58,10 +59,12 @@ function File.read(f)
 		)
 	end
 
-	if song.version_major == 0 then
-		if song.version_minor <= 2 then
-			song.bpm = 120
-		end
+	if not song.bpm then
+		song.bpm = 120
+	end
+
+	if not song.bpmOffset then
+		song.bpmOffset = 0
 	end
 
 	-- remove any NaNs

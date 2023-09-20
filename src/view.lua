@@ -37,10 +37,10 @@ function View.draw()
 	local fact = sx * 120 / bpm
 	for i = math.floor(ix * bpm / 12000) + 1, math.floor(ex * bpm / 12000) do
 		love.graphics.setColor(1, 1, 1, 0.25 * fact)
-		if i % 4 == 0 then
+		if (i - song.bpmOffset) % 4 == 0 then
 			love.graphics.setColor(1, 1, 1, 1 * fact)
 		end
-		if i % 16 == 0 then
+		if (i - song.bpmOffset) % 16 == 0 then
 			love.graphics.setColor(1, 1, 1, 4 * fact)
 		end
 		love.graphics.line(sx * i * 12000 / bpm, sy * iy, sx * i * 12000 / bpm, sy * ey)
