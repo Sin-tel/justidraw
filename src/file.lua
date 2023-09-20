@@ -6,9 +6,10 @@ function File.save()
 	song.version_major = VERSION_MAJOR
 	song.version_minor = VERSION_MINOR
 	local name = tostring(os.date("save %a %b %d %H.%M.%S.sav"))
-	print(name)
+
 	love.filesystem.write(name, binser.serialize(song))
 	love.filesystem.write("last.txt", name)
+	setMessage("saved: " .. name)
 end
 
 function File.loadLast()
@@ -16,13 +17,13 @@ function File.loadLast()
 		local name = love.filesystem.read("last.txt")
 		if love.filesystem.getInfo(name) then
 			File.read(love.filesystem.read(name))
-			print("loaded last save")
+			setMessage("loaded last save: " .. name)
 			return
 		end
 	else
 		love.filesystem.write("last.txt", "a")
 	end
-	print("no last save found")
+	setMessage("no last save found")
 end
 
 function File.newSong()

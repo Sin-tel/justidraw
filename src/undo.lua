@@ -31,7 +31,7 @@ function Undo.undo()
 		Selection.setFromIndices(Undo.stack[Undo.index].selection)
 	else
 		Undo.index = 1
-		print("nothing to undo!")
+		setMessage("nothing to undo!")
 	end
 end
 
@@ -42,7 +42,7 @@ function Undo.redo()
 		Selection.setFromIndices(Undo.stack[Undo.index].selection)
 	else
 		Undo.index = #Undo.stack
-		print("nothing to redo!")
+		setMessage("nothing to redo!")
 	end
 end
 

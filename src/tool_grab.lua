@@ -45,8 +45,8 @@ function Grab.mousepressed()
 			local disty = math.sqrt((ix - x) ^ 2 + (iy - y) ^ 2)
 
 			if Selection.isEmpty() then
-				n.wx = math.exp(-(0.4 * distx / Grab.radius) ^ 2) --* (Selection.mask[v] and 1 or 0)
-				n.wy = math.exp(-(0.7 * disty / Grab.radius) ^ 2) --* (Selection.mask[v] and 1 or 0)
+				n.wx = math.exp(-(0.4 * distx / Grab.radius) ^ 2)
+				n.wy = math.exp(-(0.7 * disty / Grab.radius) ^ 2)
 			else
 				n.wx = math.exp(-(0.4 * distx / Grab.radius) ^ 2) * (Selection.mask[v] and 1 or 0)
 				n.wy = math.exp(-(0.7 * disty / Grab.radius) ^ 2) * (Selection.mask[v] and 1 or 0)
