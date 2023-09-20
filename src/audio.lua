@@ -2,13 +2,12 @@ local Qaudio = require("qaudio")
 
 local M = {}
 
-bpm = 120
-
 local fr_to_delta = 440 * 2 * math.pi / 44100
 
 local function audiocb()
 	if M.isPlaying then
-		M.time = M.time + 4 * 100 * bpm / (60 * 44100)
+		-- 100 pixels in one beat at 120bpm
+		M.time = M.time + 4 * 100 * 120 / (60 * 44100)
 
 		while M.startTable[M.startIndex] and M.time > M.startTable[M.startIndex].x do
 			for i, v in ipairs(M.voice) do

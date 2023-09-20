@@ -68,7 +68,9 @@ macOS and Linux work but only mouse input.
 * ctrl+O: open save folder 
 
 * [ and ] : change brush radius (when applicable)
+* \+ and - : change bpm grid
 * Y: Hold down to view local harmonic series grid
+* I: show keyboard shortcuts
 * ctrl+P: toggle audio preview when editing
 * shift+n: toggle between selecting notes or vertices
 * shift+e: toggle echo effect

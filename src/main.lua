@@ -28,6 +28,9 @@ io.stdout:setvbuf("no")
 width = 1280
 height = 720
 
+VERSION_MAJOR = 0
+VERSION_MINOR = 3
+
 love.window.setMode(width, height, {
 	vsync = true,
 	fullscreen = false,
@@ -319,7 +322,7 @@ function love.keypressed(key)
 		selectTool(SelectRect)
 	elseif key == "a" then
 		selectTool(SelectLasso)
-	elseif key == "h" then
+	elseif key == "i" then
 		currentTool = Help
 	elseif key == "d" and modifierKeys.shift then
 		Clipboard.duplicate()
@@ -334,6 +337,12 @@ function love.keypressed(key)
 		if selectedTool.radius then
 			selectedTool.radius = selectedTool.radius * 1.1
 		end
+	elseif key == "+" or key == "kp+" then
+		song.bpm = math.min(math.max(song.bpm + 4, 32), 240)
+		setMessage("bpm: " .. song.bpm)
+	elseif key == "-" or key == "kp-" then
+		song.bpm = math.min(math.max(song.bpm - 4, 32), 240)
+		setMessage("bpm: " .. song.bpm)
 	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
 		Undo.undo()
 	elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then

@@ -1,9 +1,7 @@
 SelectLasso = {}
 
 SelectLasso.name = "select lasso"
-
 SelectLasso.select = true
-
 SelectLasso.points = {}
 
 function SelectLasso.mousepressed()
