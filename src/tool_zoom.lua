@@ -1,4 +1,4 @@
-Zoom = {}
+local Zoom = {}
 
 Zoom.zoomFactor = 0.005
 
@@ -27,3 +27,5 @@ function Zoom.mousedown()
 end
 
 function Zoom.mousereleased() end
+
+return Zoom

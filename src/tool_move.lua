@@ -1,4 +1,4 @@
-Move = {}
+local Move = {}
 
 Move.name = "move notes"
 
@@ -59,3 +59,5 @@ function Move.mousedown()
 end
 
 function Move.mousereleased() end
+
+return Move

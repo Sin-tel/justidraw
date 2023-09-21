@@ -1,4 +1,4 @@
-Smooth = {}
+local Smooth = {}
 
 Smooth.radius = 30
 Smooth.name = "smooth"
@@ -61,3 +61,5 @@ function Smooth.mousedown()
 end
 
 function Smooth.mousereleased() end
+
+return Smooth

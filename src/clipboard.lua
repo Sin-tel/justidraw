@@ -5,9 +5,7 @@ Clipboard.drag = false
 function Clipboard.duplicate()
 	if not Selection.isEmpty() then
 		local list = Selection.list
-		local new = {}
-
-		new = deepcopy(list)
+		local new = deepcopy(list)
 
 		local newMask = {}
 		for i, v in ipairs(new) do

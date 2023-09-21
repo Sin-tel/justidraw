@@ -1,6 +1,4 @@
-Help = {}
-
-Help.name = [[
+return [[
 shortcuts
  B: freehand draw (Brush)
  L: Line tool
@@ -10,8 +8,8 @@ shortcuts
  M: Move
  S: Smooth
  F: Flatten
- R: Rectangular selection  
- A: Lasso selection  
+ R: Rectangular selection
+ A: Lasso selection
  N: eNvelope tool
  H: dodge/burn envelope
  D: Deselect
@@ -25,8 +23,3 @@ shortcuts
  ctrl+O: open save folder
  ctrl+R: render wav
 ]]
-function Help.mousepressed() end
-
-function Help.mousedown() end
-
-function Help.mousereleased() end

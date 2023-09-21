@@ -7,7 +7,6 @@ end
 
 function Selection.set(mask)
 	if selectNotes then
-		local notes = {}
 		local newmask = {}
 
 		for v in pairs(mask) do
@@ -26,13 +25,13 @@ function Selection.set(mask)
 	end
 
 	if modifierKeys.ctrl then
-		for i, v in pairs(mask) do
-			Selection.mask[i] = nil
+		for k in pairs(mask) do
+			Selection.mask[k] = nil
 		end
 	else
 		if modifierKeys.shift then
-			for i, v in pairs(mask) do
-				Selection.mask[i] = true
+			for k in pairs(mask) do
+				Selection.mask[k] = true
 			end
 		else
 			Selection.mask = mask
@@ -49,8 +48,8 @@ end
 
 function Selection.refresh()
 	Selection.list = {}
-	for i, v in pairs(Selection.mask) do
-		table.insert(Selection.list, i)
+	for k in pairs(Selection.mask) do
+		table.insert(Selection.list, k)
 	end
 end
 

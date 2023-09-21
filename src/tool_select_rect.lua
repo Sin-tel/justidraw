@@ -1,4 +1,4 @@
-SelectRect = {}
+local SelectRect = {}
 
 SelectRect.name = "select rectangle"
 
@@ -38,3 +38,5 @@ function SelectRect.draw()
 		love.graphics.rectangle("line", SelectRect.ix, SelectRect.iy, mouseX - SelectRect.ix, mouseY - SelectRect.iy)
 	end
 end
+
+return SelectRect

@@ -1,4 +1,4 @@
-SelectLasso = {}
+local SelectLasso = {}
 
 SelectLasso.name = "select lasso"
 SelectLasso.select = true
@@ -38,9 +38,9 @@ end
 function SelectLasso.mousereleased()
 	-- first restrict to bounding box
 	local tbl = {}
-	local x1, y1, x2, y2 = SelectLasso.boundingBox()
+	local bx1, by1, bx2, by2 = SelectLasso.boundingBox()
 	for i, v in ipairs(song.track[1]) do
-		if x1 < v.x and v.x < x2 and y1 < v.y and v.y < y2 then
+		if bx1 < v.x and v.x < bx2 and by1 < v.y and v.y < by2 then
 			table.insert(tbl, v)
 		end
 	end
@@ -48,7 +48,7 @@ function SelectLasso.mousereleased()
 	-- raycast upwards
 	local mask = {}
 	local n = #SelectLasso.points
-	for i, v in ipairs(tbl) do
+	for _, v in ipairs(tbl) do
 		local count = 0
 		for i = 1, n do
 			local x1 = SelectLasso.points[i][1]
@@ -91,3 +91,5 @@ function SelectLasso.draw()
 		end
 	end
 end
+
+return SelectLasso

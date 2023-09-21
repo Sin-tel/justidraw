@@ -1,4 +1,4 @@
-Draw = {}
+local Draw = {}
 
 Draw.points = {}
 Draw.lastpoint = {}
@@ -36,10 +36,9 @@ function Draw.removePoints()
 		rev = true
 	end
 
-	newTable = {}
+	local newTable = {}
 	for k, v in ipairs(Draw.points) do
-		if v[1] > x1 and v[1] < x2 or (rev and v[1] == x1) or (not rev and v[1] == x2) then
-		else
+		if not (v[1] > x1 and v[1] < x2 or (rev and v[1] == x1) or (not rev and v[1] == x2)) then
 			table.insert(newTable, { v[1], v[2], v[3] })
 		end
 	end
@@ -60,7 +59,7 @@ function Draw.mousereleased()
 
 		Draw.simplify(1, #Draw.points, true)
 
-		newTable = {}
+		local newTable = {}
 		for i, v in ipairs(Draw.points) do
 			if Draw.keep[i] then
 				table.insert(newTable, v)
@@ -80,8 +79,6 @@ function Draw.mousereleased()
 end
 
 function Draw.simplify(i1, i2, alwaysKeep)
-	newTable = {}
-
 	local first = Draw.points[i1]
 	local last = Draw.points[i2]
 
@@ -109,7 +106,7 @@ function Draw.simplify(i1, i2, alwaysKeep)
 		end
 	end
 
-	if dmax > 1 or (alwaysKeep and index > 0) then
+	if dmax > 2 or (alwaysKeep and index > 0) then
 		Draw.simplify(i1, index)
 		Draw.simplify(index, i2)
 	end
@@ -134,3 +131,5 @@ function Draw.draw()
 		)
 	end
 end
+
+return Draw

@@ -1,4 +1,4 @@
-Pan = {}
+local Pan = {}
 
 Pan.name = "pan"
 
@@ -18,3 +18,5 @@ function Pan.mousedown()
 end
 
 function Pan.mousereleased() end
+
+return Pan

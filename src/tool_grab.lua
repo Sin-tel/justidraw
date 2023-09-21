@@ -1,4 +1,4 @@
-Grab = {}
+local Grab = {}
 
 Grab.radius = 50
 Grab.name = "grab"
@@ -8,7 +8,7 @@ function Grab.mousepressed()
 	Grab.x = mouseX
 	Grab.y = mouseY
 
-	local tbl = {}
+	local tbl
 	if Selection.isEmpty() then
 		tbl = song.track[1]
 	else
@@ -66,7 +66,6 @@ function Grab.mousedown()
 		v.vert.x, v.vert.y = View.invTransform(newx, newy)
 
 		local left = Grab.table[i - 1]
-		local right = Grab.table[i + 1]
 		if left then
 			if left.wx >= v.wx and left.vert.x >= v.vert.x then
 				v.vert.x = left.vert.x + (v.x - left.x) * 0.5
@@ -75,7 +74,6 @@ function Grab.mousedown()
 	end
 	for i = #Grab.table, 1, -1 do
 		local v = Grab.table[i]
-		local left = Grab.table[i - 1]
 		local right = Grab.table[i + 1]
 		if right then
 			if right.wx >= v.wx and right.vert.x <= v.vert.x then
@@ -88,3 +86,5 @@ end
 function Grab.mousereleased()
 	Edit.resampleAll()
 end
+
+return Grab

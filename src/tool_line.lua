@@ -1,4 +1,4 @@
-Line = {}
+local Line = {}
 
 Line.points = {}
 Line.lastpoint = {}
@@ -45,9 +45,9 @@ function Line.mousedown()
 end
 
 function Line.removePointsLine()
-	newTable = {}
+	local newTable = {}
 	for k, v in ipairs(Line.points) do
-		sign = 1
+		local sign = 1
 		if mouseX < Line.first[1] then
 			sign = -1
 		end
@@ -67,10 +67,9 @@ function Line.removePoints()
 		rev = true
 	end
 
-	newTable = {}
+	local newTable = {}
 	for k, v in ipairs(Line.points) do
-		if v[1] > x1 and v[1] < x2 or (rev and v[1] == x1) or (not rev and v[1] == x2) then
-		else
+		if not (v[1] > x1 and v[1] < x2 or (rev and v[1] == x1) or (not rev and v[1] == x2)) then
 			table.insert(newTable, { v[1], v[2], v[3] })
 		end
 	end
@@ -93,7 +92,7 @@ function Line.mousereleased()
 
 		Line.setMinimumSegments()
 
-		newTable = {}
+		local newTable = {}
 		for i, v in ipairs(Line.points) do
 			if Line.keep[i] then
 				table.insert(newTable, v)
@@ -132,8 +131,6 @@ function Line.setMinimumSegments()
 	end
 end
 function Line.simplify(i1, i2, alwaysKeep)
-	newTable = {}
-
 	local first = Line.points[i1]
 	local last = Line.points[i2]
 
@@ -141,11 +138,7 @@ function Line.simplify(i1, i2, alwaysKeep)
 	Line.keep[i2] = true
 
 	local vx = last[1] - first[1]
-	local vy = last[2] - first[2]
-
 	local x1 = first[1]
-	local y1 = first[2]
-	local m = vy / vx
 
 	local dmax = 0
 	local index = 0
@@ -153,7 +146,7 @@ function Line.simplify(i1, i2, alwaysKeep)
 		local x = Line.points[i][1]
 
 		local t = (x - x1) / vx
-		dy = math.abs(Line.points[i][3] - (last[3] * t + first[3] * (1 - t))) * 20
+		local dy = math.abs(Line.points[i][3] - (last[3] * t + first[3] * (1 - t))) * 20
 		if dy > dmax then
 			dmax = dy
 			index = i
@@ -185,3 +178,5 @@ function Line.draw()
 		)
 	end
 end
+
+return Line

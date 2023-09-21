@@ -7,20 +7,20 @@ require("undo")
 require("selection")
 require("clipboard")
 
-require("tool_draw")
-require("tool_erase")
-require("tool_pan")
-require("tool_zoom")
-require("tool_line")
-require("tool_grab")
-require("tool_move")
-require("tool_smooth")
-require("tool_flatten")
-require("tool_select_rect")
-require("tool_select_lasso")
-require("tool_envelope")
-require("tool_envelopealt")
-require("tool_help")
+local Draw = require("tool_draw")
+local Erase = require("tool_erase")
+local Pan = require("tool_pan")
+local Zoom = require("tool_zoom")
+local Line = require("tool_line")
+local Grab = require("tool_grab")
+local Move = require("tool_move")
+local Smooth = require("tool_smooth")
+local Flatten = require("tool_flatten")
+local SelectRect = require("tool_select_rect")
+local SelectLasso = require("tool_select_lasso")
+local Envelope = require("tool_envelope")
+local EnvelopeAlt = require("tool_envelopealt")
+local helpString = require("help")
 
 --print console directly
 io.stdout:setvbuf("no")
@@ -28,8 +28,10 @@ io.stdout:setvbuf("no")
 width = 1280
 height = 720
 
+-- luacheck: push ignore 121
 VERSION_MAJOR = 0
 VERSION_MINOR = 3
+-- luacheck: pop
 
 love.window.setMode(width, height, {
 	vsync = true,
@@ -42,8 +44,6 @@ love.window.setMode(width, height, {
 })
 
 width, height = love.window.getMode()
-
-canvas = love.graphics.newCanvas(width, height)
 
 pres = 0
 
@@ -58,14 +58,14 @@ modifierKeys.ctrl = false
 modifierKeys.shift = false
 modifierKeys.alt = false
 
-mainFont = love.graphics.newFont(22)
-smallFont = love.graphics.newFont(15)
+-- local mainFont = love.graphics.newFont(22)
+local smallFont = love.graphics.newFont(15)
 
 minLength = 50
-automergeDist = 100
+automergeDist = 50
 
-message = ""
-messageTimer = 0.0
+local message = ""
+local messageTimer = 0.0
 
 selectNotes = false
 
@@ -119,7 +119,7 @@ function setTool()
 			currentTool = selectedTool
 		end
 
-		if selectedTool.drawTool and erase then
+		if selectedTool.drawTool and Tablet.erase then
 			currentTool = Erase
 		end
 	end
@@ -227,7 +227,12 @@ function love.draw()
 		end
 	end
 	love.graphics.setColor(0.9, 0.9, 0.9)
-	love.graphics.print(currentTool.name, 10, 10)
+
+	local showString = currentTool.name
+	if love.keyboard.isDown("i") then
+		showString = helpString
+	end
+	love.graphics.print(showString, 10, 10)
 	if messageTimer > 0 then
 		love.graphics.print(message, 10, height - 30)
 	end
@@ -272,14 +277,14 @@ function love.keypressed(key)
 			setMessage("preview on")
 		end
 	elseif key == "e" and modifierKeys.shift then
-		enabled = Audio.toggleEffect("echo")
+		local enabled = Audio.toggleEffect("echo")
 		if enabled then
 			setMessage("echo on")
 		else
 			setMessage("echo off")
 		end
 	elseif key == "r" and modifierKeys.shift then
-		enabled = Audio.toggleEffect("reverb")
+		local enabled = Audio.toggleEffect("reverb")
 		if enabled then
 			setMessage("reverb on")
 		else
@@ -325,7 +330,7 @@ function love.keypressed(key)
 	elseif key == "a" then
 		selectTool(SelectLasso)
 	elseif key == "i" then
-		currentTool = Help
+		-- currentTool = Help
 	elseif key == "j" then
 		Edit.join()
 		Edit.resampleAll()

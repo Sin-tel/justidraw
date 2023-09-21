@@ -6,10 +6,10 @@ adding notes, cleanup etc
 Edit = {}
 
 function Edit.addNote(list)
-	pts = {}
+	local pts = {}
 
 	for i, v in ipairs(list) do
-		pt = {}
+		local pt = {}
 		pt.x = v[1]
 		pt.y = v[2]
 		pt.w = v[3]
@@ -104,8 +104,8 @@ function Edit.join()
 	end)
 
 	for i = 1, #vlist - 1 do
-		v1 = vlist[i]
-		v2 = vlist[i + 1]
+		local v1 = vlist[i]
+		local v2 = vlist[i + 1]
 
 		while v1.r do
 			v1 = v1.r
@@ -195,7 +195,7 @@ function Edit.getTangent(pt)
 end
 
 function Edit.resampleAll()
-	list = {}
+	local list = {}
 	for i, v in ipairs(song.track[1]) do
 		if not v.l then
 			table.insert(list, v)

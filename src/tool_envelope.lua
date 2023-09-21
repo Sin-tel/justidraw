@@ -1,4 +1,4 @@
-Envelope = {}
+local Envelope = {}
 
 Envelope.radius = 30
 Envelope.name = "dodge/burn envelope"
@@ -33,3 +33,5 @@ function Envelope.mousedown()
 end
 
 function Envelope.mousereleased() end
+
+return Envelope

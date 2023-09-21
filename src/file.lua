@@ -53,7 +53,7 @@ function File.load(f)
 end
 
 function File.read(f)
-	file = binser.deserialize(f)[1]
+	local file = binser.deserialize(f)[1]
 
 	-- backwards compatibility housekeeping
 	if not file.version_major then
@@ -75,7 +75,7 @@ function File.read(f)
 	end
 
 	-- remove any NaNs
-	to_remove = {}
+	local to_remove = {}
 	for _, track in ipairs(song.track) do
 		for i, v in ipairs(track) do
 			if v.x ~= v.x or v.y ~= v.y or v.w ~= v.w then

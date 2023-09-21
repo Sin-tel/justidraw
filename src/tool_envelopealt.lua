@@ -1,4 +1,4 @@
-EnvelopeAlt = {}
+local EnvelopeAlt = {}
 
 EnvelopeAlt.name = "envelope draw"
 
@@ -39,13 +39,11 @@ function EnvelopeAlt.mousepressed()
 end
 
 function EnvelopeAlt.mousedown()
-	local radius = EnvelopeAlt.radius
-
 	local d = math.huge
 	local index = 0
 
 	for i, v in ipairs(EnvelopeAlt.table) do
-		local x, y = View.transform(v.x, v.y)
+		local x, _ = View.transform(v.x, v.y)
 		local dist = math.abs(mouseX - x)
 
 		--v.w = 0
@@ -82,3 +80,5 @@ function EnvelopeAlt.mousedown()
 end
 
 function EnvelopeAlt.mousereleased() end
+
+return EnvelopeAlt

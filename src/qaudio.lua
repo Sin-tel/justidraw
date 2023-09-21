@@ -37,7 +37,7 @@ function Qaudio:load()
 end
 
 function Qaudio:toggleEffect(effect)
-	enabled = not self.effects[effect]
+	local enabled = not self.effects[effect]
 	self.effects[effect] = enabled
 	self.qs:setEffect(effect, enabled)
 	return enabled
@@ -50,12 +50,10 @@ end
 function Qaudio:update()
 	if self.qs:getFreeBufferCount() == 0 then
 		return
-	end -- only render if we can.
+	end
+
 	local samplesToMix = self.bufferSize -- easy way of doing things.
-	for smp = 0, samplesToMix - 1 do
-		lambda1 = smp / samplesToMix
-		lambda2 = (smp + 0.5) / samplesToMix
-		-- put your generator function here.
+	for _ = 0, samplesToMix - 1 do
 		self.sd:setSample(self.pointer, callback())
 		self.pointer = self.pointer + 1
 		if self.pointer >= self.sd:getSampleCount() then

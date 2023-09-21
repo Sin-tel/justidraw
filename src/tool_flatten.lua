@@ -1,4 +1,4 @@
-Flatten = {}
+local Flatten = {}
 
 Flatten.radius = 30
 Flatten.name = "flatten"
@@ -53,3 +53,5 @@ end
 function Flatten.mousereleased()
 	Edit.resampleAll()
 end
+
+return Flatten

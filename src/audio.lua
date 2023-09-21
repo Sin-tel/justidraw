@@ -106,10 +106,11 @@ function M.update()
 	end
 
 	if mouseDown[1] and currentTool.preview and not M.isPlaying and preview then
+		local x, y = View.invTransform(mouseX, mouseY)
+
 		if currentTool.drawTool then
 			M.voice[M.voiceLimit].target_amp = pres
 			M.voice[M.voiceLimit].preview = true
-			local x, y = View.invTransform(mouseX, mouseY)
 			local fr = 440 * 2 ^ (-y / 1200)
 			M.voice[M.voiceLimit].delta = fr * 2 * math.pi / 44100
 		end
@@ -117,7 +118,6 @@ function M.update()
 		local j = 1
 
 		for i, v in ipairs(song.track[1]) do
-			local x, y = View.invTransform(mouseX, mouseY)
 			if v.r and v.x <= x and v.r.x > x then
 				local a = (x - v.x) / (v.r.x - v.x)
 

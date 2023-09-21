@@ -31,12 +31,13 @@
 [x] join notes
 [x] lasso select
 [-] add  better help
+[ ] refactor simplify and use it in resample
 [ ] grab vertical
 [ ] mouse stabilizer
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
-[ ] export audio
+[x] export audio
 [ ] time stretch
 [ ] selection handles (move, stretch)
 [ ] copy paste

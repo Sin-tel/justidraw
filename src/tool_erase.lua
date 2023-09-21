@@ -1,4 +1,4 @@
-Erase = {}
+local Erase = {}
 
 Erase.radius = 20
 Erase.name = "erase"
@@ -15,7 +15,7 @@ end
 function Erase.mousedown()
 	Erase.tempRadius = Erase.radius * (0.4 + 1.2 * pres)
 
-	remove = {}
+	local remove = {}
 
 	for i, v in ipairs(Erase.list) do
 		local x, y = View.transform(v.x, v.y)
@@ -31,3 +31,5 @@ end
 function Erase.mousereleased()
 	Erase.tempRadius = nil
 end
+
+return Erase
