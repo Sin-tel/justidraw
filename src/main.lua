@@ -261,6 +261,8 @@ function love.keypressed(key)
 			Audio.seek(View.invTransform(0, 0))
 			Audio.play()
 		end
+	elseif key == "r" and modifierKeys.ctrl then
+		Audio.render()
 	elseif key == "p" and modifierKeys.shift then
 		if preview then
 			preview = false
@@ -357,7 +359,6 @@ function love.keypressed(key)
 	elseif key == "s" and modifierKeys.ctrl then
 		File.save()
 	elseif key == "o" and modifierKeys.ctrl then
-		--File.load()
 		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
 	elseif key == "escape" then
 		love.event.quit()

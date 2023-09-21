@@ -16,6 +16,8 @@ love.audio.setEffect("echo", {
 	spread = 1.0,
 })
 
+local callback = nil
+
 function Qaudio:load()
 	local bitDepth = 16
 	local channelCount = 1
@@ -32,10 +34,6 @@ function Qaudio:load()
 	self.effects = {}
 	self.effects["reverb"] = true
 	self.effects["echo"] = false
-
-	dspTime = 0.0
-
-	fun = nil
 end
 
 function Qaudio:toggleEffect(effect)
@@ -46,7 +44,7 @@ function Qaudio:toggleEffect(effect)
 end
 
 function Qaudio:setCallback(f)
-	fun = f
+	callback = f
 end
 
 function Qaudio:update()
@@ -58,9 +56,8 @@ function Qaudio:update()
 		lambda1 = smp / samplesToMix
 		lambda2 = (smp + 0.5) / samplesToMix
 		-- put your generator function here.
-		self.sd:setSample(self.pointer, fun(dspTime))
+		self.sd:setSample(self.pointer, callback())
 		self.pointer = self.pointer + 1
-		dspTime = dspTime + (1 / self.samplingRate)
 		if self.pointer >= self.sd:getSampleCount() then
 			self.pointer = 0
 			self.qs:queue(self.sd)

@@ -2,10 +2,14 @@ local binser = require("lib/binser")
 
 File = {}
 
+function File.getName()
+	return tostring(os.date("save %a %b %d %H.%M.%S"))
+end
+
 function File.save()
 	song.version_major = VERSION_MAJOR
 	song.version_minor = VERSION_MINOR
-	local name = tostring(os.date("save %a %b %d %H.%M.%S.sav"))
+	local name = File.getName() .. ".sav"
 
 	love.filesystem.write(name, binser.serialize(song))
 	love.filesystem.write("last.txt", name)

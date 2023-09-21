@@ -66,6 +66,7 @@ macOS and Linux work but only mouse input.
 * Space: play/pause
 * ctrl+Z: undo
 * ctrl+Y / ctrl+shift+Z: redo
+* ctrl+R: render wav
 * ctrl+S: save 
 * ctrl+O: open save folder 
 * Escape: quit

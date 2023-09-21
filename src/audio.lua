@@ -1,8 +1,23 @@
 local Qaudio = require("qaudio")
+local wav = require("lib/wav_save")
 
 local M = {}
 
 local fr_to_delta = 440 * 2 * math.pi / 44100
+
+local function clip(x)
+	if x <= -1.5 then
+		return -1
+	elseif x >= 1.5 then
+		return 1
+	else
+		return x - (4 / 27) * x * x * x
+	end
+end
+
+local function emtptycb()
+	return 0
+end
 
 local function audiocb()
 	if M.isPlaying then
@@ -55,9 +70,7 @@ local function audiocb()
 	return out
 end
 
-function M.load()
-	M.voiceLimit = 100
-
+function M.resetVoices()
 	M.voice = {}
 	for i = 1, M.voiceLimit do
 		M.voice[i] = {}
@@ -67,15 +80,20 @@ function M.load()
 		M.voice[i].delta = 440 * 2 * math.pi / 44100
 		M.voice[i].pout = 0
 		M.voice[i].active = false
+		M.voice[i].preview = false
 		M.voice[i].vert = nil
 	end
+end
 
-	Qaudio:load()
-	Qaudio:setCallback(audiocb)
-
+function M.load()
+	M.voiceLimit = 100
+	M.resetVoices()
 	M.time = 0
 	M.isPlaying = false
 	M.startTable = {}
+
+	Qaudio:load()
+	Qaudio:setCallback(audiocb)
 end
 
 function M.update()
@@ -167,14 +185,68 @@ function M.stop()
 	end
 end
 
-function clip(x)
-	if x <= -1.5 then
-		return -1
-	elseif x >= 1.5 then
-		return 1
-	else
-		return x - (4 / 27) * x * x * x
+function M.render()
+	local wait_cursor = love.mouse.getSystemCursor("wait")
+	love.mouse.setCursor(wait_cursor)
+
+	local restore_time = M.time
+
+	-- find first and last vertex
+	local startTime = math.huge
+	local endTime = -math.huge
+	for i, v in ipairs(song.track[1]) do
+		startTime = math.min(startTime, v.x)
+		endTime = math.max(endTime, v.x)
 	end
+
+	-- a bit of padding
+	startTime = startTime - 100
+	endTime = endTime + 100
+
+	-- mute all voices
+	M.stop()
+	M.resetVoices()
+
+	-- prepare for playback
+	M.seek(startTime)
+	M.play()
+
+	local filename = File.getName()
+	wav.open(filename)
+	local block = {}
+	while true do
+		for i = 1, 64 do
+			local sample = audiocb()
+			-- convert to 16bit
+			if sample >= 0 then
+				sample = sample * 32767
+			else
+				sample = sample * 32768
+			end
+
+			-- interlace
+			block[i * 2 - 1] = sample
+			block[i * 2] = sample
+		end
+		wav.append(block)
+
+		if M.time > endTime then
+			break
+		end
+	end
+	wav.close()
+
+	-- flush callback
+	Qaudio:setCallback(emtptycb)
+	Qaudio:update()
+	Qaudio:setCallback(audiocb)
+
+	setMessage("done rendering! (" .. filename .. ".wav)")
+
+	M.stop()
+	M.seek(restore_time)
+
+	love.mouse.setCursor()
 end
 
 return M

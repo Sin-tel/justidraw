@@ -23,6 +23,7 @@ shortcuts
  ctrl+Y / ctrl+shift+Z: redo
  ctrl+S: save
  ctrl+O: open save folder
+ ctrl+R: render wav
 ]]
 function Help.mousepressed() end
 
