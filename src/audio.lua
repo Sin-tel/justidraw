@@ -234,7 +234,7 @@ function M.render()
 			break
 		end
 	end
-	wav.close()
+	wav.close(filename)
 
 	-- flush callback
 	Qaudio:setCallback(emtptycb)

@@ -44,7 +44,8 @@ local wav = {
 			error('invalid function parameters, expected filename and mode "r" or "w"', 2)
 		end
 		-- Audio file handle
-		local file = io.open(filename, mode == "r" and "rb" or "wb")
+		-- local file = io.open(filename, mode == "r" and "rb" or "wb")
+		local file = io.tmpfile()
 		if not file then
 			error(string.format("couldn't open file %q", filename), 2)
 		end
@@ -386,8 +387,12 @@ local wav = {
 					file:seek("set", 40)
 					file:write(ntob(file_size - 44, 4))
 					-- Finalize file for secure reading
+
+					file:seek("set", 0)
+					data = file:read("*all")
 					file:close()
 					file = nil
+					return data
 				end,
 			}
 		end
