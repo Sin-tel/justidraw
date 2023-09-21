@@ -340,7 +340,7 @@ function love.keypressed(key)
 		if selectedTool.radius then
 			selectedTool.radius = selectedTool.radius * 1.1
 		end
-	elseif key == "+" or key == "kp+" then
+	elseif key == "+" or key == "kp+" or key == "=" then
 		song.bpm = math.min(math.max(song.bpm + 4, 32), 320)
 		setMessage("bpm: " .. song.bpm)
 	elseif key == "-" or key == "kp-" then
