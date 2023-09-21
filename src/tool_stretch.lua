@@ -8,7 +8,7 @@ function Stretch.mousepressed()
 	Stretch.x = mouseX
 	Stretch.y = mouseY
 
-	local selected = {}
+	local selected
 	if Selection.isEmpty() then
 		selected = song.track[1]
 	else

@@ -33,8 +33,8 @@ macOS and Linux work but only mouse input.
 * left click: grab part of note
 * hold ctrl: move tool
 ### transpose/stretch tool
-* shift: only affect time
-* ctrl: only affect pitch
+* hold shift: only affect time
+* hold ctrl: only affect pitch
 ### move tool
 * left click: move whole note / selection
 * hold shift while moving: constrain to one axis

@@ -21,7 +21,7 @@ local SelectRect = require("tool_select_rect")
 local SelectLasso = require("tool_select_lasso")
 local Envelope = require("tool_envelope")
 local EnvelopeAlt = require("tool_envelopealt")
-local Timestretch = require("tool_timestretch")
+local Stretch = require("tool_stretch")
 
 --print console directly
 io.stdout:setvbuf("no")
@@ -321,7 +321,7 @@ function love.keypressed(key)
 	elseif key == "a" then
 		selectTool(SelectLasso)
 	elseif key == "t" then
-		selectTool(Timestretch)
+		selectTool(Stretch)
 	elseif key == "j" then
 		Edit.join()
 		Edit.resampleAll()
