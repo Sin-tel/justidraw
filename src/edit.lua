@@ -228,6 +228,9 @@ function Edit.resampleAll()
 						new.r = nextv
 
 						table.insert(song.track[1], new)
+						if Selection.mask[v] then
+							Selection.mask[new] = true
+						end
 						count = count + 1
 					end
 				end
@@ -240,4 +243,6 @@ function Edit.resampleAll()
 		end
 	end
 	Edit.removeSingles()
+
+	Selection.refresh()
 end
