@@ -208,23 +208,28 @@ function Edit.resampleAll()
 			while v.r do
 				local nextv = v.r
 
-				local dx = v.x - v.r.x
-				local dy = v.y - v.r.y
+				local dx = v.r.x - v.x
+				local dy = v.r.y - v.y
 
-				if math.sqrt(dx ^ 2 + dy ^ 2) > 150 then
-					local nx = (v.x + v.r.x) * 0.5
-					local ny = (v.y + v.r.y) * 0.5
-					local nw = (v.w + v.r.w) * 0.5
+				if dx < 0 then
+					v.r = nil
+					nextv.l = nil
+				else
+					if math.sqrt(dx ^ 2 + dy ^ 2) > 150 then
+						local nx = (v.x + v.r.x) * 0.5
+						local ny = (v.y + v.r.y) * 0.5
+						local nw = (v.w + v.r.w) * 0.5
 
-					local new = { x = nx, y = ny, w = nw }
+						local new = { x = nx, y = ny, w = nw }
 
-					v.r = new
-					nextv.l = new
-					new.l = v
-					new.r = nextv
+						v.r = new
+						nextv.l = new
+						new.l = v
+						new.r = nextv
 
-					table.insert(song.track[1], new)
-					count = count + 1
+						table.insert(song.track[1], new)
+						count = count + 1
+					end
 				end
 
 				v = nextv
@@ -234,4 +239,5 @@ function Edit.resampleAll()
 			break
 		end
 	end
+	Edit.removeSingles()
 end

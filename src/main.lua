@@ -6,6 +6,7 @@ require("file")
 require("undo")
 require("selection")
 require("clipboard")
+local helpString = require("help")
 
 local Draw = require("tool_draw")
 local Erase = require("tool_erase")
@@ -20,7 +21,7 @@ local SelectRect = require("tool_select_rect")
 local SelectLasso = require("tool_select_lasso")
 local Envelope = require("tool_envelope")
 local EnvelopeAlt = require("tool_envelopealt")
-local helpString = require("help")
+local Timestretch = require("tool_timestretch")
 
 --print console directly
 io.stdout:setvbuf("no")
@@ -236,16 +237,6 @@ function love.draw()
 	if messageTimer > 0 then
 		love.graphics.print(message, 10, height - 30)
 	end
-	--[[for i,v in ipairs(Audio.voice) do
-		love.graphics.print(math.floor(v.amp*100),10,i*20)
-		love.graphics.print(v.delta,100,i*20)
-		end]]
-	--[[love.graphics.print(#Undo.stack,10,20)
-	love.graphics.print(Undo.index,10,30)
-	for i,v in ipairs(Undo.stack) do
-		love.graphics.print(#v.track[1],50,i*20)
-		end]]
-	--love.graphics.print(love.filesystem.getSaveDirectory(),10,30)
 end
 
 function love.keypressed(key)
@@ -329,8 +320,8 @@ function love.keypressed(key)
 		selectTool(SelectRect)
 	elseif key == "a" then
 		selectTool(SelectLasso)
-	elseif key == "i" then
-		-- currentTool = Help
+	elseif key == "t" then
+		selectTool(Timestretch)
 	elseif key == "j" then
 		Edit.join()
 		Edit.resampleAll()

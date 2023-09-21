@@ -32,6 +32,9 @@ macOS and Linux work but only mouse input.
 ### grab tool
 * left click: grab part of note
 * hold ctrl: move tool
+### transpose/stretch tool
+* shift: only affect time
+* ctrl: only affect pitch
 ### move tool
 * left click: move whole note / selection
 * hold shift while moving: constrain to one axis
@@ -57,6 +60,7 @@ macOS and Linux work but only mouse input.
 * A: lAsso selection
 * N: eNvelope tool
 * H: Dodge/burn envelope (ctrl to decrease)
+* T: Transpose/stretch
 ### Selection
 * D: Deselect
 * shift+D: duplicate selection

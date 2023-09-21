@@ -12,6 +12,8 @@ shortcuts
  A: Lasso selection
  N: eNvelope tool
  H: dodge/burn envelope
+ T: transpose/stretch
+
  D: Deselect
  J: Join notes
  Y: Show harmonics
