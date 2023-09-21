@@ -60,15 +60,16 @@ modifierKeys.shift = false
 modifierKeys.alt = false
 
 -- local mainFont = love.graphics.newFont(22)
-local smallFont = love.graphics.newFont(15)
+local smallFont = love.graphics.newFont(16)
 
 minLength = 50
 automergeDist = 50
+selectNotes = false
 
 local message = ""
 local messageTimer = 0.0
 
-selectNotes = false
+local _, helpStringSize = string.gsub(helpString, "\n", "\n")
 
 function setMessage(m)
 	message = m
@@ -229,11 +230,18 @@ function love.draw()
 	end
 	love.graphics.setColor(0.9, 0.9, 0.9)
 
-	local showString = currentTool.name
 	if love.keyboard.isDown("i") then
-		showString = helpString
+		local f = love.graphics.getFont()
+		love.graphics.setColor(0.0, 0.0, 0.0, 0.5)
+		local w = f:getWidth(helpString)
+		local h = f:getHeight(helpString) * helpStringSize
+		love.graphics.rectangle("fill", 0, 0, w + 20, h + 20)
+
+		love.graphics.setColor(0.9, 0.9, 0.9)
+		love.graphics.print(helpString, 10, 10)
+	else
+		love.graphics.print(currentTool.name, 10, 10)
 	end
-	love.graphics.print(showString, 10, 10)
 	if messageTimer > 0 then
 		love.graphics.print(message, 10, height - 30)
 	end

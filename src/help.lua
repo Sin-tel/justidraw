@@ -17,7 +17,10 @@ shortcuts
  D: Deselect
  J: Join notes
  Y: Show harmonics
- [ and ]: chage brush radius
+ [ and ]: change brush radius
+ + and -: change tempo
+ shift+N: toggle selecting notes or vertices
+
  Space: play/pause
  ctrl+Z: undo
  ctrl+Y / ctrl+shift+Z: redo

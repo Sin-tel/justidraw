@@ -30,27 +30,25 @@
 [x] reduce clicking on start/end of notes
 [x] join notes
 [x] lasso select
-[-] add  better help
+[x] export audio
+[x] time stretch
+[x] add geometry
+[x] add  better help
+[ ] smudge tool
 [ ] refactor simplify and use it in resample
-[ ] grab vertical
 [ ] mouse stabilizer
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
-[x] export audio
-[ ] time stretch
-[ ] selection handles (move, stretch)
-[ ] copy paste
-[ ] add geometry (when moving?) (dynamic subdiv?) -> 'snake hook'
 [ ] overwrite/edit draw brush (holding alt)
 [ ] vibrato?
-[ ] select time 
 [ ] cursor images
-[ ] entropy relax tool
 [ ] set origin of coord system to center
 [ ] save view to file
 
 not currently planned:
+[ ] entropy relax tool
+[ ] copy paste
 [ ] brush icons
 [ ] multiple tracks
 [ ] layer manager
