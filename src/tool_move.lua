@@ -9,8 +9,8 @@ function Move.mousepressed()
 	Move.x = mouseX
 	Move.y = mouseY
 
-	local tbl = {}
-	local list = {}
+	local tbl
+	local list
 	if Selection.isEmpty() then
 		tbl = song.track[1]
 		local d = math.huge

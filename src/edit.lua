@@ -209,30 +209,27 @@ function Edit.resampleAll()
 				local nextv = v.r
 
 				local dx = v.r.x - v.x
-				local dy = v.r.y - v.y
 
 				if dx < 0 then
 					v.r = nil
 					nextv.l = nil
-				else
-					if math.sqrt(dx ^ 2 + dy ^ 2) > 150 then
-						local nx = (v.x + v.r.x) * 0.5
-						local ny = (v.y + v.r.y) * 0.5
-						local nw = (v.w + v.r.w) * 0.5
+				elseif dx > 80 then
+					local nx = (v.x + v.r.x) * 0.5
+					local ny = (v.y + v.r.y) * 0.5
+					local nw = (v.w + v.r.w) * 0.5
 
-						local new = { x = nx, y = ny, w = nw }
+					local new = { x = nx, y = ny, w = nw }
 
-						v.r = new
-						nextv.l = new
-						new.l = v
-						new.r = nextv
+					v.r = new
+					nextv.l = new
+					new.l = v
+					new.r = nextv
 
-						table.insert(song.track[1], new)
-						if Selection.mask[v] then
-							Selection.mask[new] = true
-						end
-						count = count + 1
+					table.insert(song.track[1], new)
+					if Selection.mask[v] then
+						Selection.mask[new] = true
 					end
+					count = count + 1
 				end
 
 				v = nextv

@@ -7,9 +7,8 @@ local sampleRate = 44100
 local bitDepth = 16
 local w
 
-function M.open(name)
-	local filename = love.filesystem.getSaveDirectory() .. "/" .. name .. ".wav"
-	w = wav.create_context(filename, "w")
+function M.open()
+	w = wav.create_context("temp", "w")
 
 	w.init(channelCount, sampleRate, bitDepth)
 end

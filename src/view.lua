@@ -19,7 +19,7 @@ local function drawHarmonics(ix, iy, ex, ey, sx, sy)
 	local j = 1
 
 	for i, v in ipairs(song.track[1]) do
-		local x, y = View.invTransform(mouseX, mouseY)
+		local x, _ = View.invTransform(mouseX, mouseY)
 		if v.r and v.x <= x and v.r.x > x then
 			local a = (x - v.x) / (v.r.x - v.x)
 
@@ -76,6 +76,7 @@ function View.draw()
 	local ix, iy = View.invTransform(0, 0)
 	local ex, ey = View.invTransform(width, height)
 
+	-- draw 12edo grid
 	if not love.keyboard.isDown("y") then
 		for i = math.floor(iy / 100) + 1, math.floor(ey / 100) do
 			love.graphics.setColor(1, 1, 1, 0.25 * sy)
@@ -86,6 +87,7 @@ function View.draw()
 		end
 	end
 
+	-- draw bpm grid
 	for i = math.floor(ix / 100) + 1, math.floor(ex / 100) do
 		love.graphics.setColor(1, 1, 1, 0.25 * sx)
 		if (i - song.bpmOffset) % 4 == 0 then
@@ -97,26 +99,31 @@ function View.draw()
 		love.graphics.line(sx * i * 100, sy * iy, sx * i * 100, sy * ey)
 	end
 
-	love.graphics.setColor(0.35, 0.35, 0.35)
+	-- variable width lines showing pressure
+	local lw = 80
+	love.graphics.setColor(0.4, 0.4, 0.4)
+
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
+			-- local b = (v.w + v.r.w) * 0.5
+			-- love.graphics.setColor(b, b, b)
 			love.graphics.polygon(
 				"fill",
 				sx * v.x,
-				sy * (v.y + v.w * 65 + 1),
+				sy * (v.y + v.w * lw + 1),
 				sx * v.r.x,
-				sy * (v.r.y + v.r.w * 65 + 1),
+				sy * (v.r.y + v.r.w * lw + 1),
 				sx * v.r.x,
-				sy * (v.r.y - v.r.w * 65 - 1),
+				sy * (v.r.y - v.r.w * lw - 1),
 				sx * v.x,
-				sy * (v.y - v.w * 65 - 1)
+				sy * (v.y - v.w * lw - 1)
 			)
-			love.graphics.line(sx * v.x, sy * (v.y + v.w * 65 + 1), sx * v.r.x, sy * (v.r.y + v.r.w * 65 + 1))
-			love.graphics.line(sx * v.x, sy * (v.y - v.w * 65 - 1), sx * v.r.x, sy * (v.r.y - v.r.w * 65 - 1))
+			love.graphics.line(sx * v.x, sy * (v.y + v.w * lw + 1), sx * v.r.x, sy * (v.r.y + v.r.w * lw + 1))
+			love.graphics.line(sx * v.x, sy * (v.y - v.w * lw - 1), sx * v.r.x, sy * (v.r.y - v.r.w * lw - 1))
 		end
 	end
 
-	local ptSize = math.min(4 * sx, 3)
+	local ptSize = math.min(4 * math.sqrt(sx ^ 2 + sy ^ 2), 3)
 	local ptSizeSel = math.max(ptSize * 1.2, 2)
 
 	for i, v in ipairs(song.track[1]) do

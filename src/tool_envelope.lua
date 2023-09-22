@@ -22,12 +22,18 @@ function Envelope.mousedown()
 		local x, y = View.transform(v.x, v.y)
 		local dist = math.sqrt(0.7 * (x - mouseX) ^ 2 + (y - mouseY) ^ 2)
 
-		local weight = math.exp(-(dist / radius) ^ 2) * pres * 0.1
+		local weight = math.exp(-(dist / radius) ^ 2) * pres * 0.2
 
-		if modifierKeys.ctrl then
-			v.w = v.w * (1 - weight)
-		else
-			v.w = v.w * (1 - weight) + 1 * weight
+		if weight > 0.001 then
+			local wt = math.min(math.max(v.w, 0.01), 0.99)
+			wt = math.log(wt / (1 - wt))
+
+			if modifierKeys.ctrl then
+				wt = wt - weight
+			else
+				wt = wt + weight
+			end
+			v.w = 1 / (1 + math.exp(-wt))
 		end
 	end
 end

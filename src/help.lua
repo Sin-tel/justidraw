@@ -1,18 +1,19 @@
 return [[
 shortcuts
  B: freehand draw (Brush)
- L: Line tool
+ P: line tool (Pen)
  E: Eraser
- P: Pan/zoom
+ O: Pan/zoom
  G: Grab
  M: Move
  S: Smooth
  F: Flatten
  R: Rectangular selection
- A: Lasso selection
- N: eNvelope tool
+ L: Lasso selection
  H: dodge/burn envelope
+ N: envelope tool
  T: transpose/stretch
+ U: smudge
 
  D: Deselect
  J: Join notes

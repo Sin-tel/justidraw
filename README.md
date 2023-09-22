@@ -49,18 +49,19 @@ macOS and Linux work but only mouse input.
 ## shortcuts
 ### Tools
 * B: freehand draw (Brush)
-* L: Line tool
+* P: line tool (Pen)
 * E: Eraser
-* P: Pan/zoom
+* O: pan/zoom
 * G: Grab
 * M: Move
 * S: Smooth
 * F: Flatten
 * R: Rectangular selection
-* A: lAsso selection
+* L: Lasso selection
 * N: eNvelope tool
 * H: Dodge/burn envelope (ctrl to decrease)
 * T: Transpose/stretch
+* U: smUdge / (ctrl: vibrato)
 ### Selection
 * D: Deselect
 * shift+D: duplicate selection

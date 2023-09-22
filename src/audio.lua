@@ -211,8 +211,7 @@ function M.render()
 	M.seek(startTime)
 	M.play()
 
-	local filename = File.getName()
-	wav.open(filename)
+	wav.open()
 	local block = {}
 	while true do
 		for i = 1, 64 do
@@ -234,6 +233,7 @@ function M.render()
 			break
 		end
 	end
+	local filename = File.getName()
 	wav.close(filename)
 
 	-- flush callback

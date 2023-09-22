@@ -22,6 +22,7 @@ local SelectLasso = require("tool_select_lasso")
 local Envelope = require("tool_envelope")
 local EnvelopeAlt = require("tool_envelopealt")
 local Stretch = require("tool_stretch")
+local Smudge = require("tool_smudge")
 
 --print console directly
 io.stdout:setvbuf("no")
@@ -114,7 +115,13 @@ function setTool()
 				currentTool = Grab
 			end
 		elseif modifierKeys.shift then
-			if selectedTool == Grab or selectedTool == Flatten or selectedTool == Envelope or selectedTool.drawTool then
+			if
+				selectedTool == Grab
+				or selectedTool == Flatten
+				or selectedTool == Envelope
+				or selectedTool == Smudge
+				or selectedTool.drawTool
+			then
 				currentTool = Smooth
 			end
 		else
@@ -265,6 +272,8 @@ function love.keypressed(key)
 			Audio.seek(View.invTransform(0, 0))
 			Audio.play()
 		end
+	elseif key == "o" and modifierKeys.ctrl then
+		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
 	elseif key == "r" and modifierKeys.ctrl then
 		Audio.render()
 	elseif key == "p" and modifierKeys.shift then
@@ -306,9 +315,9 @@ function love.keypressed(key)
 		Undo.register()
 	elseif key == "b" then
 		selectTool(Draw)
-	elseif key == "p" then
+	elseif key == "o" then
 		selectTool(Pan)
-	elseif key == "l" then
+	elseif key == "p" then
 		selectTool(Line)
 	elseif key == "g" then
 		selectTool(Grab)
@@ -326,10 +335,12 @@ function love.keypressed(key)
 		selectTool(Envelope)
 	elseif key == "r" then
 		selectTool(SelectRect)
-	elseif key == "a" then
+	elseif key == "l" then
 		selectTool(SelectLasso)
 	elseif key == "t" then
 		selectTool(Stretch)
+	elseif key == "u" then
+		selectTool(Smudge)
 	elseif key == "j" then
 		Edit.join()
 		Edit.resampleAll()
@@ -362,8 +373,6 @@ function love.keypressed(key)
 		Undo.redo()
 	elseif key == "s" and modifierKeys.ctrl then
 		File.save()
-	elseif key == "o" and modifierKeys.ctrl then
-		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
 	elseif key == "escape" then
 		love.event.quit()
 	end

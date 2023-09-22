@@ -34,15 +34,17 @@
 [x] time stretch
 [x] add geometry
 [x] add  better help
-[ ] smudge tool
-[ ] refactor simplify and use it in resample
+[x] smudge tool
+[x] vibrato
+[ ] make envelopes easier to see (fade?)
+[ ] change looks / theme (user config / one file)
+[ ] change filename
+[ ] refactor "simplify" and use it in resample
 [ ] mouse stabilizer
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
 [ ] overwrite/edit draw brush (holding alt)
-[ ] vibrato?
-[ ] cursor images
 [ ] set origin of coord system to center
 [ ] save view to file
 
