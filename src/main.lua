@@ -33,8 +33,8 @@ width = 1280
 height = 720
 
 -- luacheck: push ignore 121
-VERSION_MAJOR = 0
-VERSION_MINOR = 3
+VERSION_MAJOR = 1
+VERSION_MINOR = 0
 -- luacheck: pop
 
 love.window.setMode(width, height, {
