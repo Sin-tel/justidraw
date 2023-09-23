@@ -252,6 +252,26 @@ function love.draw()
 	if messageTimer > 0 then
 		love.graphics.print(message, 10, height - 30)
 	end
+
+	local peak = 20 * math.log(Audio.peak) / math.log(10)
+	local clip = false
+	if peak > -3.0 then
+		clip = true
+	end
+	peak = math.max(peak, -40.0)
+	peak = math.min(peak, 0)
+	peak = 1 + peak / 40
+	love.graphics.setColor(0.7, 0.7, 0.05)
+	love.graphics.rectangle("fill", width - 100, 10, 80 * Audio.cpuLoad, 10)
+	if clip then
+		love.graphics.setColor(0.8, 0.1, 0.1)
+	else
+		love.graphics.setColor(0.1, 0.8, 0.1)
+	end
+	love.graphics.rectangle("fill", width - 100, 25, 80 * peak, 10)
+	love.graphics.setColor(0.5, 0.5, 0.5)
+	love.graphics.rectangle("line", width - 100, 10, 80, 10)
+	love.graphics.rectangle("line", width - 100, 25, 80, 10)
 end
 
 function love.keypressed(key)

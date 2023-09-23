@@ -17,6 +17,7 @@ love.audio.setEffect("echo", {
 })
 
 local callback = nil
+local cpuLoad = 0.0
 
 function Qaudio:load()
 	local bitDepth = 16
@@ -52,6 +53,8 @@ function Qaudio:update()
 		return
 	end
 
+	local time = love.timer.getTime()
+
 	local samplesToMix = self.bufferSize -- easy way of doing things.
 	for _ = 0, samplesToMix - 1 do
 		self.sd:setSample(self.pointer, callback())
@@ -62,6 +65,13 @@ function Qaudio:update()
 			self.qs:play()
 		end
 	end
+
+	local elapsed = love.timer.getTime() - time
+	local cpuNew = elapsed * self.samplingRate / self.bufferSize
+	cpuLoad = cpuLoad + 0.1 * (cpuNew - cpuLoad)
+	cpuLoad = math.max(cpuLoad, cpuNew)
+
+	return cpuLoad
 end
 
 return Qaudio

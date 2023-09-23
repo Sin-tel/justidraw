@@ -3,6 +3,9 @@ local wav = require("lib/wav_save")
 
 local M = {}
 
+M.peak = 0.0
+M.cpuLoad = 0.0
+
 local fr_to_delta = 440 * 2 * math.pi / 44100
 
 local function clip(x)
@@ -18,6 +21,8 @@ end
 local function emtptycb()
 	return 0
 end
+
+local sin = math.sin
 
 local function audiocb()
 	if M.isPlaying then
@@ -56,7 +61,7 @@ local function audiocb()
 		if v.active or v.preview then
 			v.amp = 0.99 * v.amp + 0.01 * v.target_amp
 			v.accum = v.accum + v.delta
-			local s = v.amp * math.sin(v.accum + 2 * v.pout)
+			local s = v.amp * sin(v.accum + 2 * v.pout)
 			v.pout = (v.pout + s) * 0.5
 			out = out + s
 			if v.amp < 0.001 and v.target_amp == 0 then
@@ -65,9 +70,13 @@ local function audiocb()
 			end
 		end
 	end
-	out = clip(out * 0.2)
+	out = out * 0.12
 
-	return out
+	local newPeak = math.abs(out)
+	M.peak = M.peak + 0.00005 * (newPeak - M.peak)
+	M.peak = math.max(M.peak, newPeak)
+
+	return clip(out)
 end
 
 function M.resetVoices()
@@ -97,7 +106,7 @@ function M.load()
 end
 
 function M.update()
-	Qaudio:update()
+	M.cpuLoad = Qaudio:update()
 
 	if not M.isPlaying then
 		for i, v in ipairs(M.voice) do
