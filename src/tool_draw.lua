@@ -11,18 +11,35 @@ shift: smooth
 Draw.preview = true
 Draw.drawTool = true
 
+Draw.radius = 5
+
+Draw.x = 0
+Draw.y = 0
+
 function Draw.mousepressed()
 	Draw.points = {}
 
-	local pt = { mouseX, mouseY, pres }
+	Draw.x = mouseX
+	Draw.y = mouseY
+
+	local pt = { Draw.x, Draw.y, pres }
 	table.insert(Draw.points, pt)
 	Draw.lastpoint = pt
 end
 
 function Draw.mousedown()
-	if not (Draw.lastpoint[1] == mouseX and Draw.lastpoint[2] == mouseY) then
+	local dx = mouseX - Draw.x
+	local dy = mouseY - Draw.y
+
+	local l = math.sqrt(dx ^ 2 + dy ^ 2)
+	if l > Draw.radius then
+		Draw.x = mouseX - (Draw.radius * dx / l)
+		Draw.y = mouseY - (Draw.radius * dy / l)
+	end
+
+	if not (Draw.lastpoint[1] == Draw.x and Draw.lastpoint[2] == Draw.y) then
 		Draw.removePoints()
-		local pt = { mouseX, mouseY, pres }
+		local pt = { Draw.x, Draw.y, pres }
 		table.insert(Draw.points, pt)
 		table.sort(Draw.points, function(a, b)
 			return a[1] < b[1]
@@ -117,6 +134,15 @@ function Draw.simplify(i1, i2, alwaysKeep)
 end
 
 function Draw.draw()
+	-- love.graphics.setColor(Theme.current.cursor)
+
+	-- if not mouseDown[1] then
+	-- 	Draw.x = mouseX
+	-- 	Draw.y = mouseY
+	-- end
+
+	-- love.graphics.ellipse("line", Draw.x, Draw.y, 5)
+
 	love.graphics.setColor(Theme.current.draw)
 	for i = 1, #Draw.points - 1 do
 		local v1 = Draw.points[i]

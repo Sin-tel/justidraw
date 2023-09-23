@@ -20,6 +20,7 @@ macOS and Linux work but only mouse input.
 * left click: draw
 * hold ctrl: erase
 * hold shift: smooth
+* radius determines input stabilization
 ### line tool
 * left click: draw flat lines
 * hold alt: draw slanted lines
