@@ -39,8 +39,8 @@
 [x] make envelopes easier to see (fade?)
 [x] change looks / theme (user config / one file)
 [x] change filename
+[x] mouse stabilizer
 [ ] refactor "simplify" and use it in resample
-[ ] mouse stabilizer
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
 [ ] smarter grid
