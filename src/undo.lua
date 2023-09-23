@@ -51,6 +51,9 @@ function Undo.undo()
 	if Undo.index >= 1 then
 		song = deepcopy(Undo.stack[Undo.index].song)
 		Selection.setFromIndices(Undo.stack[Undo.index].selection)
+
+		-- title can change
+		File.setTitle()
 	else
 		Undo.index = 1
 		setMessage("nothing to undo!")
@@ -62,6 +65,9 @@ function Undo.redo()
 	if Undo.stack[Undo.index] then
 		song = deepcopy(Undo.stack[Undo.index].song)
 		Selection.setFromIndices(Undo.stack[Undo.index].selection)
+
+		-- title can change
+		File.setTitle()
 	else
 		Undo.index = #Undo.stack
 		setMessage("nothing to redo!")
