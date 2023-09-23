@@ -12,9 +12,8 @@ theme.dark = {
 	draw = { 0.8, 0.2, 0.2 },
 	cursor = { 0.6, 0.6, 0.6 },
 
-	-- disabled by default
 	vertices = { 0.8, 0.8, 0.8 },
-	showVertices = false,
+	showVertices = true,
 
 	grid = { 0.9, 0.9, 0.9 },
 	showGridTime = true,
@@ -36,6 +35,7 @@ theme.light = {
 	highlight = { 1.0, 0.2, 0.4 },
 	playhead = { 0.3, 0.3, 0.3 },
 	draw = { 0.6, 0.2, 0.2 },
+	vertices = { 0.2, 0.2, 0.2 },
 }
 
 theme.pink = {
@@ -47,6 +47,7 @@ theme.pink = {
 	highlight = "#642ca9",
 	playhead = "#642ca9",
 	cursor = "#642ca9",
+	vertices = "#B231AA",
 }
 
 theme.minimal = {
@@ -58,6 +59,7 @@ theme.minimal = {
 	showGridPitch = false,
 	showTooltip = false,
 	showMeter = false,
+	showVertices = false,
 }
 
 -- don't remove this line!
