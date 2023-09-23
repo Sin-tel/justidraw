@@ -45,8 +45,8 @@ function Theme.load()
 	Theme.index = 1
 	Theme.setName("dark")
 
-	if love.filesystem.getInfo("theme.txt") then
-		local name = love.filesystem.read("theme.txt")
+	if love.filesystem.getInfo("last_theme") then
+		local name = love.filesystem.read("last_theme")
 		Theme.setName(name)
 	end
 

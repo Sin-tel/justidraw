@@ -80,9 +80,13 @@ function View.draw()
 	local grid_g = Theme.current.grid[2]
 	local grid_b = Theme.current.grid[3]
 
-	if Theme.current.showGridPitch then
-		-- draw 12edo grid
-		if not love.keyboard.isDown("y") then
+	local showHarmonics = love.keyboard.isDown("y") and not textInput
+
+	if showHarmonics then
+		drawHarmonics(ix, iy, ex, ey, sx, sy)
+	else
+		if Theme.current.showGridPitch then
+			-- draw 12edo grid
 			for i = math.floor(iy / 100) + 1, math.floor(ey / 100) do
 				love.graphics.setColor(grid_r, grid_g, grid_b, 0.25 * sy)
 				if i % 12 == 0 then
@@ -158,10 +162,6 @@ function View.draw()
 	love.graphics.setColor(Theme.current.playhead)
 	local at = Audio.timeSmooth
 	love.graphics.line(sx * at, sy * iy, sx * at, sy * ey)
-
-	if love.keyboard.isDown("y") then
-		drawHarmonics(ix, iy, ex, ey, sx, sy)
-	end
 
 	love.graphics.pop()
 end

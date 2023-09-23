@@ -17,9 +17,9 @@ function M.append(samples)
 	w.write_samples_interlaced(samples)
 end
 
-function M.close(name)
+function M.close(filename)
 	local data = w.finish()
-	love.filesystem.write(name .. ".wav", data)
+	love.filesystem.write(filename, data)
 end
 
 return M

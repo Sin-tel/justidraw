@@ -249,7 +249,7 @@ function M.render()
 			break
 		end
 	end
-	local filename = File.getName()
+	local filename = song.name .. ".wav"
 	wav.close(filename)
 
 	-- flush callback
@@ -257,7 +257,7 @@ function M.render()
 	Qaudio:update()
 	Qaudio:setCallback(audiocb)
 
-	setMessage("done rendering! (" .. filename .. ".wav)")
+	setMessage("done rendering! (" .. filename .. ")")
 
 	M.stop()
 	M.seek(restore_time)

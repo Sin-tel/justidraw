@@ -8,6 +8,7 @@ require("undo")
 require("selection")
 require("clipboard")
 local helpString = require("help")
+local utf8 = require("utf8")
 
 local Draw = require("tool_draw")
 local Erase = require("tool_erase")
@@ -51,6 +52,9 @@ width, height = love.window.getMode()
 pres = 0
 
 preview = true
+textInput = false
+
+local textEntered = "song title"
 
 mouseX, mouseY = 0, 0
 mousePX, mousePY = 0, 0
@@ -81,8 +85,8 @@ function setMessage(m)
 end
 
 function love.load()
-	Theme.load()
 	math.randomseed(os.time())
+	Theme.load()
 	Tablet.init()
 	love.graphics.setLineStyle("smooth")
 	love.graphics.setLineJoin("none")
@@ -159,7 +163,7 @@ function mousepressed(button)
 		setTool()
 
 		if button == 3 then
-			if love.keyboard.isDown("lctrl") then
+			if modifierKeys.ctrl then
 				currentTool = Zoom
 			else
 				currentTool = Pan
@@ -248,7 +252,7 @@ function love.draw()
 		end
 	end
 
-	if love.keyboard.isDown("i") then
+	if love.keyboard.isDown("i") and not textInput then
 		local f = love.graphics.getFont()
 		local c = Theme.current.background
 		love.graphics.setColor(c[1], c[2], c[3], 0.65)
@@ -292,6 +296,22 @@ function love.draw()
 		love.graphics.rectangle("line", width - 100, 10, 80, 10)
 		love.graphics.rectangle("line", width - 100, 25, 80, 10)
 	end
+
+	if textInput then
+		local c = Theme.current.background
+		love.graphics.setColor(c[1], c[2], c[3], 0.65)
+		love.graphics.rectangle("fill", 0, 0, width, height)
+
+		local f = love.graphics.getFont()
+		local w = f:getWidth(textEntered)
+		local w2 = f:getWidth("project name:")
+		local h = f:getHeight(textEntered)
+
+		love.graphics.setColor(Theme.current.text)
+
+		love.graphics.print("project name:", math.floor((width - w2) * 0.5), math.floor((height - h) * 0.5 - h))
+		love.graphics.print(textEntered, math.floor((width - w) * 0.5), math.floor((height - h) * 0.5))
+	end
 end
 
 function love.keypressed(key)
@@ -303,138 +323,164 @@ function love.keypressed(key)
 		modifierKeys.alt = true
 	end
 
-	setTool()
-
-	if key == "space" then
-		if Audio.isPlaying then
-			Audio.stop()
-		else
-			Audio.seek(View.invTransform(0, 0))
-			Audio.play()
-		end
-	elseif key == "o" and modifierKeys.ctrl then
-		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
-	elseif key == "r" and modifierKeys.ctrl then
-		Audio.render()
-	elseif key == "t" and modifierKeys.ctrl then
-		Theme.next()
-	elseif key == "f" and modifierKeys.ctrl then
-		if followPlay then
-			followPlay = false
-			setMessage("follow off")
-		else
-			followPlay = true
-			setMessage("follow on")
-			if not Audio.isPlaying then
-				Audio.seek(View.invTransform(0, 0))
+	if textInput then
+		if key == "backspace" then
+			local byteoffset = utf8.offset(textEntered, -1)
+			if byteoffset then
+				textEntered = string.sub(textEntered, 1, byteoffset - 1)
 			end
+		elseif key == "return" then
+			if textEntered ~= "" then
+				File.setName(textEntered)
+				textInput = false
+			end
+		elseif key == "escape" then
+			textInput = false
 		end
-	elseif key == "p" and modifierKeys.shift then
-		if preview then
-			preview = false
-			setMessage("preview off")
-		else
-			preview = true
-			setMessage("preview on")
+	else
+		setTool()
+
+		if key == "space" then
+			if Audio.isPlaying then
+				Audio.stop()
+			else
+				Audio.seek(View.invTransform(0, 0))
+				Audio.play()
+			end
+		elseif key == "o" and modifierKeys.ctrl then
+			love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
+		elseif key == "r" and modifierKeys.ctrl then
+			Audio.render()
+		elseif key == "t" and modifierKeys.ctrl then
+			Theme.next()
+		elseif key == "n" and modifierKeys.ctrl then
+			print(song.name)
+			textEntered = song.name
+			textInput = true
+		elseif key == "f" and modifierKeys.ctrl then
+			if followPlay then
+				followPlay = false
+				setMessage("follow off")
+			else
+				followPlay = true
+				setMessage("follow on")
+				if not Audio.isPlaying then
+					Audio.seek(View.invTransform(0, 0))
+				end
+			end
+		elseif key == "p" and modifierKeys.shift then
+			if preview then
+				preview = false
+				setMessage("preview off")
+			else
+				preview = true
+				setMessage("preview on")
+			end
+		elseif key == "e" and modifierKeys.shift then
+			local enabled = Audio.toggleEffect("echo")
+			if enabled then
+				setMessage("echo on")
+			else
+				setMessage("echo off")
+			end
+		elseif key == "r" and modifierKeys.shift then
+			local enabled = Audio.toggleEffect("reverb")
+			if enabled then
+				setMessage("reverb on")
+			else
+				setMessage("reverb off")
+			end
+		elseif key == "n" and modifierKeys.shift then
+			if selectNotes then
+				selectNotes = false
+				setMessage("select vertices")
+			else
+				selectNotes = true
+				setMessage("select notes")
+			end
+		elseif key == "delete" or key == "backspace" then
+			if Selection.isEmpty() then
+				File.new()
+			else
+				Edit.remove(Selection.mask)
+			end
+			Undo.register()
+		elseif key == "b" then
+			selectTool(Draw)
+		elseif key == "o" then
+			selectTool(Pan)
+		elseif key == "p" then
+			selectTool(Line)
+		elseif key == "g" then
+			selectTool(Grab)
+		elseif key == "m" then
+			selectTool(Move)
+		elseif key == "e" then
+			selectTool(Erase)
+		elseif key == "s" and not modifierKeys.ctrl then
+			selectTool(Smooth)
+		elseif key == "f" then
+			selectTool(Flatten)
+		elseif key == "n" then
+			selectTool(EnvelopeAlt)
+		elseif key == "h" then
+			selectTool(Envelope)
+		elseif key == "r" then
+			selectTool(SelectRect)
+		elseif key == "l" then
+			selectTool(SelectLasso)
+		elseif key == "t" then
+			selectTool(Stretch)
+		elseif key == "u" then
+			selectTool(Smudge)
+		elseif key == "j" then
+			Edit.join()
+			Edit.resampleAll()
+		elseif key == "d" and modifierKeys.shift then
+			Clipboard.duplicate()
+		elseif key == "d" then
+			Selection.deselect()
+			Undo.register()
+		elseif key == "[" then
+			if selectedTool.radius then
+				selectedTool.radius = selectedTool.radius * 0.9
+			end
+		elseif key == "]" then
+			if selectedTool.radius then
+				selectedTool.radius = selectedTool.radius * 1.1
+			end
+		elseif key == "+" or key == "kp+" or key == "=" then
+			song.bpm = math.min(math.max(song.bpm + 4, 32), 320)
+			setMessage("bpm: " .. song.bpm)
+		elseif key == "-" or key == "kp-" then
+			song.bpm = math.min(math.max(song.bpm - 4, 32), 320)
+			setMessage("bpm: " .. song.bpm)
+		elseif key == "left" then
+			song.bpmOffset = song.bpmOffset - 1
+		elseif key == "right" then
+			song.bpmOffset = song.bpmOffset + 1
+		elseif key == "up" then
+			song.gain = song.gain * 1.41421
+			song.gain = math.min(song.gain, 0.5)
+			setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
+		elseif key == "down" then
+			song.gain = song.gain / 1.41421
+			setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
+		elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
+			Undo.undo()
+		elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then
+			Undo.redo()
+		elseif key == "s" and modifierKeys.ctrl then
+			File.save()
+		elseif key == "escape" then
+			love.event.quit()
 		end
-	elseif key == "e" and modifierKeys.shift then
-		local enabled = Audio.toggleEffect("echo")
-		if enabled then
-			setMessage("echo on")
-		else
-			setMessage("echo off")
-		end
-	elseif key == "r" and modifierKeys.shift then
-		local enabled = Audio.toggleEffect("reverb")
-		if enabled then
-			setMessage("reverb on")
-		else
-			setMessage("reverb off")
-		end
-	elseif key == "n" and modifierKeys.shift then
-		if selectNotes then
-			selectNotes = false
-			setMessage("select vertices")
-		else
-			selectNotes = true
-			setMessage("select notes")
-		end
-	elseif key == "delete" or key == "backspace" then
-		if Selection.isEmpty() then
-			File.new()
-		else
-			Edit.remove(Selection.mask)
-		end
-		Undo.register()
-	elseif key == "b" then
-		selectTool(Draw)
-	elseif key == "o" then
-		selectTool(Pan)
-	elseif key == "p" then
-		selectTool(Line)
-	elseif key == "g" then
-		selectTool(Grab)
-	elseif key == "m" then
-		selectTool(Move)
-	elseif key == "e" then
-		selectTool(Erase)
-	elseif key == "s" and not modifierKeys.ctrl then
-		selectTool(Smooth)
-	elseif key == "f" then
-		selectTool(Flatten)
-	elseif key == "n" then
-		selectTool(EnvelopeAlt)
-	elseif key == "h" then
-		selectTool(Envelope)
-	elseif key == "r" then
-		selectTool(SelectRect)
-	elseif key == "l" then
-		selectTool(SelectLasso)
-	elseif key == "t" then
-		selectTool(Stretch)
-	elseif key == "u" then
-		selectTool(Smudge)
-	elseif key == "j" then
-		Edit.join()
-		Edit.resampleAll()
-	elseif key == "d" and modifierKeys.shift then
-		Clipboard.duplicate()
-	elseif key == "d" then
-		Selection.deselect()
-		Undo.register()
-	elseif key == "[" then
-		if selectedTool.radius then
-			selectedTool.radius = selectedTool.radius * 0.9
-		end
-	elseif key == "]" then
-		if selectedTool.radius then
-			selectedTool.radius = selectedTool.radius * 1.1
-		end
-	elseif key == "+" or key == "kp+" or key == "=" then
-		song.bpm = math.min(math.max(song.bpm + 4, 32), 320)
-		setMessage("bpm: " .. song.bpm)
-	elseif key == "-" or key == "kp-" then
-		song.bpm = math.min(math.max(song.bpm - 4, 32), 320)
-		setMessage("bpm: " .. song.bpm)
-	elseif key == "left" then
-		song.bpmOffset = song.bpmOffset - 1
-	elseif key == "right" then
-		song.bpmOffset = song.bpmOffset + 1
-	elseif key == "up" then
-		song.gain = song.gain * 1.41421
-		song.gain = math.min(song.gain, 0.5)
-		setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
-	elseif key == "down" then
-		song.gain = song.gain / 1.41421
-		setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
-	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
-		Undo.undo()
-	elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then
-		Undo.redo()
-	elseif key == "s" and modifierKeys.ctrl then
-		File.save()
-	elseif key == "escape" then
-		love.event.quit()
+	end
+end
+
+function love.textinput(t)
+	if textInput then
+		textEntered = textEntered .. t
 	end
 end
 
@@ -446,7 +492,10 @@ function love.keyreleased(key)
 	elseif key == "lalt" or key == "ralt" then
 		modifierKeys.alt = false
 	end
-	setTool()
+
+	if not textInput then
+		setTool()
+	end
 end
 
 function love.resize(w, h)
@@ -455,7 +504,7 @@ function love.resize(w, h)
 end
 
 function love.quit()
-	love.filesystem.write("theme.txt", Theme.getName())
+	love.filesystem.write("last_theme", Theme.getName())
 	Tablet.close()
 end
 

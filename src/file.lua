@@ -1,4 +1,6 @@
 local binser = require("lib/binser")
+local nouns = require("res/nouns")
+local adjectives = require("res/adjectives")
 
 File = {}
 
@@ -9,25 +11,29 @@ end
 function File.save()
 	song.version_major = VERSION_MAJOR
 	song.version_minor = VERSION_MINOR
-	local name = File.getName() .. ".sav"
+	local filename = song.name .. ".sav"
 
-	love.filesystem.write(name, binser.serialize(song))
-	love.filesystem.write("last.txt", name)
-	setMessage("saved: " .. name)
+	love.filesystem.write(filename, binser.serialize(song))
+	love.filesystem.write("last_save", filename)
+	setMessage("saved: " .. filename)
 end
 
 function File.loadLast()
-	if love.filesystem.getInfo("last.txt") then
-		local name = love.filesystem.read("last.txt")
+	if love.filesystem.getInfo("last_save") then
+		local name = love.filesystem.read("last_save")
 		if love.filesystem.getInfo(name) then
 			File.read(love.filesystem.read(name))
 			setMessage("loaded last save: " .. name)
 			return
 		end
 	else
-		love.filesystem.write("last.txt", "a")
+		love.filesystem.write("last_save", "a")
 	end
 	setMessage("no last save found")
+end
+
+function File.randomName()
+	return adjectives[math.random(#adjectives)] .. " " .. nouns[math.random(#nouns)]
 end
 
 function File.newSong()
@@ -40,17 +46,28 @@ function File.newSong()
 	new.track = {}
 	new.track[1] = {}
 	new.gain = 0.125
+	new.name = File.randomName()
 	return new
 end
 
 function File.new()
 	song = File.newSong()
+	File.setTitle()
 end
 
 function File.load(f)
 	f:open("r")
 	local data = f:read()
 	File.read(data)
+end
+
+function File.setName(name)
+	song.name = name
+	File.setTitle()
+end
+
+function File.setTitle()
+	love.window.setTitle("justidraw (" .. song.name .. ")")
 end
 
 function File.read(f)
@@ -88,4 +105,6 @@ function File.read(f)
 	Edit.remove(to_remove)
 
 	Undo.register()
+
+	File.setTitle()
 end

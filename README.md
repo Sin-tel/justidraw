@@ -52,7 +52,7 @@ macOS and Linux work but only mouse input.
 * L: Lasso selection
 * D: Deselect
 * shift+D: duplicate selection
-* Delete / backspace: delete selection. clear all when nothing selected
+* Delete / backspace: delete selection. With nothing selected, opens a new project.
 * J: Join ends of selected notes
 * shift+n: toggle between selecting notes or vertices
 ### File
@@ -62,6 +62,7 @@ macOS and Linux work but only mouse input.
 * ctrl+R: render wav
 * ctrl+S: save 
 * ctrl+O: open save folder 
+* ctrl+N: rename project
 * Escape: quit
 ### Misc
 * [ and ] : change brush radius (when applicable)
@@ -77,6 +78,8 @@ macOS and Linux work but only mouse input.
 
 Drag and drop save files to open them!
 Your last save file will be loaded on startup.
+Start a new project with by hitting backspace or delete with nothing selected.
+New projects get a randomly generated name, rename them with `ctrl+N`.
 
 You will find a file `user_themes.lua` in your save directory.
 Edit it to define custom themes (requires restart).

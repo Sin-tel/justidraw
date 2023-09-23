@@ -23,6 +23,7 @@ stds.justidaw = {
       "selectedTool",
       "preview",
       "tabletInput",
+      "textInput",
 
       -- functions
       "setMessage",
