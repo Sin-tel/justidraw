@@ -17,7 +17,7 @@ function Theme.load()
 		Theme.themes = loadstring(contents)()
 	else
 		local contents, _ = love.filesystem.read("theme_default.lua")
-		-- love.filesystem.write("user_themes.lua", contents)
+		love.filesystem.write("user_themes.lua", contents)
 		Theme.themes = Theme.default
 	end
 	for _, th in pairs(Theme.themes) do
