@@ -333,7 +333,6 @@ function love.keypressed(key)
 			local name = textEntered
 			-- trim spaces
 			name = string.gsub(name, "^%s*(.-)%s*$", "%1")
-
 			if name == "" then
 				name = File.randomName()
 			end

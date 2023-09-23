@@ -147,14 +147,21 @@ function View.draw()
 	local ptSize = math.min(4 * math.sqrt(sx ^ 2 + sy ^ 2), 3)
 	local ptSizeSel = math.max(ptSize * 1.2, 2)
 
-	love.graphics.setColor(Theme.current.highlight)
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
 			if Selection.mask[v] and Selection.mask[v.r] then
+				love.graphics.setColor(Theme.current.highlight)
+				love.graphics.line(sx * v.x, sy * v.y, sx * v.r.x, sy * v.r.y)
+			elseif Theme.current.showVertices then
+				love.graphics.setColor(Theme.current.vertices)
 				love.graphics.line(sx * v.x, sy * v.y, sx * v.r.x, sy * v.r.y)
 			end
 		end
 		if Selection.mask[v] then
+			love.graphics.setColor(Theme.current.highlight)
+			love.graphics.ellipse("fill", sx * v.x, sy * v.y, ptSizeSel, ptSizeSel)
+		elseif Theme.current.showVertices then
+			love.graphics.setColor(Theme.current.vertices)
 			love.graphics.ellipse("fill", sx * v.x, sy * v.y, ptSizeSel, ptSizeSel)
 		end
 	end

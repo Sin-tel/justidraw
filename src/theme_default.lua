@@ -7,17 +7,22 @@ theme.dark = {
 	background = { 0.0, 0.0, 0.0 },
 	text = { 0.9, 0.9, 0.9 },
 	envelope = { 0.8, 0.8, 0.8 },
-	grid = { 0.9, 0.9, 0.9 },
 	highlight = { 0.1, 0.8, 1.0 },
 	playhead = { 0.7, 0.7, 0.7 },
 	draw = { 0.8, 0.2, 0.2 },
 	cursor = { 0.6, 0.6, 0.6 },
 
+	-- disabled by default
+	vertices = { 0.8, 0.8, 0.8 },
+	showVertices = false,
+
+	grid = { 0.9, 0.9, 0.9 },
+	showGridTime = true,
+	showGridPitch = true,
+
 	-- width of the notes
 	lineWidth = 65,
 
-	showGridTime = true,
-	showGridPitch = true,
 	showTooltip = true,
 	showMeter = true,
 }
