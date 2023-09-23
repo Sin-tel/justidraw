@@ -4,10 +4,6 @@ local adjectives = require("res/adjectives")
 
 File = {}
 
-function File.getName()
-	return tostring(os.date("save %a %b %d %H.%M.%S"))
-end
-
 function File.save()
 	song.version_major = VERSION_MAJOR
 	song.version_minor = VERSION_MINOR
@@ -56,9 +52,16 @@ function File.new()
 end
 
 function File.load(f)
+	local filename = f:getFilename()
+	local name = filename:match("[^/\\]*.sav$")
+	name = name:sub(0, #name - 4)
+
 	f:open("r")
 	local data = f:read()
 	File.read(data)
+
+	song.name = name
+	File.setTitle()
 end
 
 function File.setName(name)

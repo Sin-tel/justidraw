@@ -509,5 +509,10 @@ function love.quit()
 end
 
 function love.filedropped(f)
-	File.load(f)
+	local filename = f:getFilename()
+	if string.sub(filename, -4) == ".sav" then
+		File.load(f)
+	else
+		setMessage("not a save file! (.sav)")
+	end
 end
