@@ -2,7 +2,11 @@ local Draw = {}
 
 Draw.points = {}
 Draw.lastpoint = {}
-Draw.name = "freehand draw"
+Draw.name = [[
+freehand draw
+ctrl: erase
+shift: smooth
+]]
 
 Draw.preview = true
 Draw.drawTool = true
@@ -113,7 +117,7 @@ function Draw.simplify(i1, i2, alwaysKeep)
 end
 
 function Draw.draw()
-	love.graphics.setColor(0.7, 0.0, 0.0)
+	love.graphics.setColor(Theme.current.draw)
 	for i = 1, #Draw.points - 1 do
 		local v1 = Draw.points[i]
 		local v2 = Draw.points[i + 1]

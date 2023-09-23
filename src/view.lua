@@ -76,76 +76,87 @@ function View.draw()
 	local ix, iy = View.invTransform(0, 0)
 	local ex, ey = View.invTransform(width, height)
 
-	-- draw 12edo grid
-	if not love.keyboard.isDown("y") then
-		for i = math.floor(iy / 100) + 1, math.floor(ey / 100) do
-			love.graphics.setColor(1, 1, 1, 0.25 * sy)
-			if i % 12 == 0 then
-				love.graphics.setColor(1, 1, 1, 3 * sy)
+	local grid_r = Theme.current.grid[1]
+	local grid_g = Theme.current.grid[2]
+	local grid_b = Theme.current.grid[3]
+
+	if Theme.current.showGridPitch then
+		-- draw 12edo grid
+		if not love.keyboard.isDown("y") then
+			for i = math.floor(iy / 100) + 1, math.floor(ey / 100) do
+				love.graphics.setColor(grid_r, grid_g, grid_b, 0.25 * sy)
+				if i % 12 == 0 then
+					love.graphics.setColor(grid_r, grid_g, grid_b, 3 * sy)
+				end
+				love.graphics.line(sx * ix, sy * i * 100, sx * ex, sy * i * 100)
 			end
-			love.graphics.line(sx * ix, sy * i * 100, sx * ex, sy * i * 100)
 		end
 	end
 
-	-- draw bpm grid
-	for i = math.floor(ix / 100) + 1, math.floor(ex / 100) do
-		love.graphics.setColor(1, 1, 1, 0.25 * sx)
-		if (i - song.bpmOffset) % 4 == 0 then
-			love.graphics.setColor(1, 1, 1, 1 * sx)
+	if Theme.current.showGridTime then
+		-- draw bpm grid
+		for i = math.floor(ix / 100) + 1, math.floor(ex / 100) do
+			love.graphics.setColor(grid_r, grid_g, grid_b, 0.25 * sx)
+			if (i - song.bpmOffset) % 4 == 0 then
+				love.graphics.setColor(grid_r, grid_g, grid_b, 1 * sx)
+			end
+			if (i - song.bpmOffset) % 16 == 0 then
+				love.graphics.setColor(grid_r, grid_g, grid_b, 4 * sx)
+			end
+			love.graphics.line(sx * i * 100, sy * iy, sx * i * 100, sy * ey)
 		end
-		if (i - song.bpmOffset) % 16 == 0 then
-			love.graphics.setColor(1, 1, 1, 4 * sx)
-		end
-		love.graphics.line(sx * i * 100, sy * iy, sx * i * 100, sy * ey)
 	end
 
 	-- variable width lines showing pressure
-	local lw = 80
-	love.graphics.setColor(0.4, 0.4, 0.4)
+	local lw = Theme.current.lineWidth
+	-- love.graphics.setColor(Theme.current.envelope)
+	local env_r = Theme.current.envelope[1]
+	local env_g = Theme.current.envelope[2]
+	local env_b = Theme.current.envelope[3]
+
+	local bg_r = Theme.current.background[1]
+	local bg_g = Theme.current.background[2]
+	local bg_b = Theme.current.background[3]
 
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
-			-- local b = (v.w + v.r.w) * 0.5
-			-- love.graphics.setColor(b, b, b)
+			local b = (v.w + v.r.w) * 0.4 + 0.2
+			love.graphics.setColor(env_r * b + bg_r * (1 - b), env_g * b + bg_g * (1 - b), env_b * b + bg_b * (1 - b))
+			local w1 = v.w * lw
+			local w2 = v.r.w * lw
 			love.graphics.polygon(
 				"fill",
 				sx * v.x,
-				sy * (v.y + v.w * lw + 1),
+				sy * (v.y + w1 + 1),
 				sx * v.r.x,
-				sy * (v.r.y + v.r.w * lw + 1),
+				sy * (v.r.y + w2 + 1),
 				sx * v.r.x,
-				sy * (v.r.y - v.r.w * lw - 1),
+				sy * (v.r.y - w2 - 1),
 				sx * v.x,
-				sy * (v.y - v.w * lw - 1)
+				sy * (v.y - w1 - 1)
 			)
-			love.graphics.line(sx * v.x, sy * (v.y + v.w * lw + 1), sx * v.r.x, sy * (v.r.y + v.r.w * lw + 1))
-			love.graphics.line(sx * v.x, sy * (v.y - v.w * lw - 1), sx * v.r.x, sy * (v.r.y - v.r.w * lw - 1))
+			love.graphics.line(sx * v.x, sy * (v.y + w1 + 1), sx * v.r.x, sy * (v.r.y + w2 + 1))
+			love.graphics.line(sx * v.x, sy * (v.y - w1 - 1), sx * v.r.x, sy * (v.r.y - w2 - 1))
 		end
 	end
 
 	local ptSize = math.min(4 * math.sqrt(sx ^ 2 + sy ^ 2), 3)
 	local ptSizeSel = math.max(ptSize * 1.2, 2)
 
+	love.graphics.setColor(Theme.current.highlight)
 	for i, v in ipairs(song.track[1]) do
 		if v.r then
 			if Selection.mask[v] and Selection.mask[v.r] then
-				love.graphics.setColor(0.4, 1, 1)
-			else
-				love.graphics.setColor(0.7, 0.7, 0.7)
+				love.graphics.line(sx * v.x, sy * v.y, sx * v.r.x, sy * v.r.y)
 			end
-			love.graphics.line(sx * v.x, sy * v.y, sx * v.r.x, sy * v.r.y)
 		end
 		if Selection.mask[v] then
-			love.graphics.setColor(0.4, 1, 1)
 			love.graphics.ellipse("fill", sx * v.x, sy * v.y, ptSizeSel, ptSizeSel)
-		else
-			love.graphics.setColor(0.7, 0.7, 0.7)
-			love.graphics.ellipse("fill", sx * v.x, sy * v.y, ptSize, ptSize)
 		end
 	end
 
-	love.graphics.setColor(0, 1, 1)
-	local at = Audio.time
+	love.graphics.setColor(Theme.current.playhead)
+	local at = Audio.timeSmooth
 	love.graphics.line(sx * at, sy * iy, sx * at, sy * ey)
 
 	if love.keyboard.isDown("y") then

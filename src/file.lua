@@ -39,6 +39,7 @@ function File.newSong()
 	new.bpmOffset = 0
 	new.track = {}
 	new.track[1] = {}
+	new.gain = 0.125
 	return new
 end
 

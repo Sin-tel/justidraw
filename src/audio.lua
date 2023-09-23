@@ -70,7 +70,7 @@ local function audiocb()
 			end
 		end
 	end
-	out = out * 0.12
+	out = out * song.gain
 
 	local newPeak = math.abs(out)
 	M.peak = M.peak + 0.00005 * (newPeak - M.peak)
@@ -98,6 +98,7 @@ function M.load()
 	M.voiceLimit = 100
 	M.resetVoices()
 	M.time = 0
+	M.timeSmooth = 0
 	M.isPlaying = false
 	M.startTable = {}
 
@@ -106,7 +107,12 @@ function M.load()
 end
 
 function M.update()
-	M.cpuLoad = Qaudio:update()
+	local cpuLoad = Qaudio:update()
+	if cpuLoad then
+		M.cpuLoad = cpuLoad
+	end
+
+	M.timeSmooth = M.timeSmooth + 0.2 * (M.time - M.timeSmooth)
 
 	if not M.isPlaying then
 		for i, v in ipairs(M.voice) do
@@ -149,6 +155,7 @@ end
 
 function M.seek(t)
 	M.time = t
+	M.timeSmooth = t
 end
 
 function M.play()

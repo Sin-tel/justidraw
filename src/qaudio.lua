@@ -3,7 +3,7 @@ local Qaudio = {}
 love.audio.setEffect("reverb", {
 	type = "reverb",
 	gain = 0.3,
-	decaytime = 3.0,
+	decaytime = 3.5,
 })
 
 love.audio.setEffect("echo", {
@@ -49,26 +49,22 @@ function Qaudio:setCallback(f)
 end
 
 function Qaudio:update()
-	if self.qs:getFreeBufferCount() == 0 then
-		return
-	end
-
 	local time = love.timer.getTime()
-
-	local samplesToMix = self.bufferSize -- easy way of doing things.
-	for _ = 0, samplesToMix - 1 do
-		self.sd:setSample(self.pointer, callback())
-		self.pointer = self.pointer + 1
-		if self.pointer >= self.sd:getSampleCount() then
-			self.pointer = 0
-			self.qs:queue(self.sd)
-			self.qs:play()
+	while self.qs:getFreeBufferCount() > 0 do
+		local samplesToMix = self.bufferSize -- easy way of doing things.
+		for _ = 0, samplesToMix - 1 do
+			self.sd:setSample(self.pointer, callback())
+			self.pointer = self.pointer + 1
+			if self.pointer >= self.sd:getSampleCount() then
+				self.pointer = 0
+				self.qs:queue(self.sd)
+				self.qs:play()
+			end
 		end
 	end
-
 	local elapsed = love.timer.getTime() - time
 	local cpuNew = elapsed * self.samplingRate / self.bufferSize
-	cpuLoad = cpuLoad + 0.1 * (cpuNew - cpuLoad)
+	cpuLoad = cpuLoad + 0.05 * (cpuNew - cpuLoad)
 	cpuLoad = math.max(cpuLoad, cpuNew)
 
 	return cpuLoad

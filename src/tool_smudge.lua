@@ -1,7 +1,10 @@
 local Smudge = {}
 
 Smudge.radius = 50
-Smudge.name = "smudge (ctrl: vibrato)"
+Smudge.name = [[
+smudge
+ctrl: add vibrato
+]]
 
 Smudge.preview = false
 

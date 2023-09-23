@@ -1,7 +1,10 @@
 local Envelope = {}
 
 Envelope.radius = 30
-Envelope.name = "dodge/burn envelope"
+Envelope.name = [[
+increase envelope
+ctrl: decrease
+]]
 
 Envelope.preview = false
 

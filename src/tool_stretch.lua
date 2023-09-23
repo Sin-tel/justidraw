@@ -1,7 +1,11 @@
 local Stretch = {}
 
 Stretch.radius = 100
-Stretch.name = "transpose / stretch"
+Stretch.name = [[
+transpose / stretch
+shift: time only
+ctrl: pitch only
+]]
 
 function Stretch.mousepressed()
 	Stretch.table = {}

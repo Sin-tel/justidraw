@@ -2,7 +2,11 @@ local Line = {}
 
 Line.points = {}
 Line.lastpoint = {}
-Line.name = "draw lines"
+Line.name = [[
+draw lines
+alt: slanted lines
+ctrl: erase
+]]
 
 Line.preview = true
 Line.drawTool = true

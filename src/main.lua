@@ -2,6 +2,7 @@ require("tablet")
 require("edit")
 View = require("view")
 Audio = require("audio")
+Theme = require("theme")
 require("file")
 require("undo")
 require("selection")
@@ -70,6 +71,8 @@ selectNotes = false
 local message = ""
 local messageTimer = 0.0
 
+local followPlay = false
+-- count newlines
 local _, helpStringSize = string.gsub(helpString, "\n", "\n")
 
 function setMessage(m)
@@ -78,6 +81,7 @@ function setMessage(m)
 end
 
 function love.load()
+	Theme.load()
 	math.randomseed(os.time())
 	Tablet.init()
 	love.graphics.setLineStyle("smooth")
@@ -219,15 +223,23 @@ function love.update(dt)
 	end
 
 	Audio.update()
+
+	if followPlay and Audio.isPlaying then
+		local vx, _ = View.transform(Audio.timeSmooth, 0)
+		if vx / width > 0.33 then
+			View.x = -Audio.timeSmooth * View.zoomX + width * 0.33
+		end
+	end
 end
 
 function love.draw()
+	love.graphics.setBackgroundColor(Theme.current.background)
 	View.draw()
 	if currentTool.draw then
 		currentTool.draw()
 	end
 
-	love.graphics.setColor(0.5, 0.5, 0.5)
+	love.graphics.setColor(Theme.current.cursor)
 	if currentTool.radius then
 		if currentTool.tempRadius then
 			love.graphics.circle("line", mouseX, mouseY, currentTool.tempRadius)
@@ -235,43 +247,51 @@ function love.draw()
 			love.graphics.circle("line", mouseX, mouseY, currentTool.radius)
 		end
 	end
-	love.graphics.setColor(0.9, 0.9, 0.9)
 
 	if love.keyboard.isDown("i") then
 		local f = love.graphics.getFont()
-		love.graphics.setColor(0.0, 0.0, 0.0, 0.5)
+		local c = Theme.current.background
+		love.graphics.setColor(c[1], c[2], c[3], 0.65)
 		local w = f:getWidth(helpString)
 		local h = f:getHeight(helpString) * helpStringSize
 		love.graphics.rectangle("fill", 0, 0, w + 20, h + 20)
 
-		love.graphics.setColor(0.9, 0.9, 0.9)
+		love.graphics.setColor(Theme.current.text)
 		love.graphics.print(helpString, 10, 10)
-	else
-		love.graphics.print(currentTool.name, 10, 10)
+	elseif Theme.current.showTooltip then
+		love.graphics.setColor(Theme.current.text)
+		love.graphics.print(selectedTool.name, 10, 10)
 	end
+
 	if messageTimer > 0 then
+		love.graphics.setColor(Theme.current.text)
 		love.graphics.print(message, 10, height - 30)
 	end
 
-	local peak = 20 * math.log(Audio.peak) / math.log(10)
-	local clip = false
-	if peak > -3.0 then
-		clip = true
+	if Theme.current.showMeter then
+		love.graphics.setColor(Theme.current.background)
+		love.graphics.rectangle("fill", width - 100, 10, 80, 10)
+		love.graphics.rectangle("fill", width - 100, 25, 80, 10)
+		local peak = 20 * math.log(Audio.peak) / math.log(10)
+		local clip = false
+		if peak > -3.0 then
+			clip = true
+		end
+		peak = math.max(peak, -40.0)
+		peak = math.min(peak, 0)
+		peak = 1 + peak / 40
+		love.graphics.setColor(0.8, 0.8, 0.05)
+		love.graphics.rectangle("fill", width - 100, 10, 80 * Audio.cpuLoad, 10)
+		if clip then
+			love.graphics.setColor(0.8, 0.1, 0.1)
+		else
+			love.graphics.setColor(0.1, 0.8, 0.1)
+		end
+		love.graphics.rectangle("fill", width - 100, 25, 80 * peak, 10)
+		love.graphics.setColor(Theme.current.cursor)
+		love.graphics.rectangle("line", width - 100, 10, 80, 10)
+		love.graphics.rectangle("line", width - 100, 25, 80, 10)
 	end
-	peak = math.max(peak, -40.0)
-	peak = math.min(peak, 0)
-	peak = 1 + peak / 40
-	love.graphics.setColor(0.7, 0.7, 0.05)
-	love.graphics.rectangle("fill", width - 100, 10, 80 * Audio.cpuLoad, 10)
-	if clip then
-		love.graphics.setColor(0.8, 0.1, 0.1)
-	else
-		love.graphics.setColor(0.1, 0.8, 0.1)
-	end
-	love.graphics.rectangle("fill", width - 100, 25, 80 * peak, 10)
-	love.graphics.setColor(0.5, 0.5, 0.5)
-	love.graphics.rectangle("line", width - 100, 10, 80, 10)
-	love.graphics.rectangle("line", width - 100, 25, 80, 10)
 end
 
 function love.keypressed(key)
@@ -296,6 +316,19 @@ function love.keypressed(key)
 		love.system.openURL("file://" .. love.filesystem.getSaveDirectory())
 	elseif key == "r" and modifierKeys.ctrl then
 		Audio.render()
+	elseif key == "t" and modifierKeys.ctrl then
+		Theme.next()
+	elseif key == "f" and modifierKeys.ctrl then
+		if followPlay then
+			followPlay = false
+			setMessage("follow off")
+		else
+			followPlay = true
+			setMessage("follow on")
+			if not Audio.isPlaying then
+				Audio.seek(View.invTransform(0, 0))
+			end
+		end
 	elseif key == "p" and modifierKeys.shift then
 		if preview then
 			preview = false
@@ -387,6 +420,13 @@ function love.keypressed(key)
 		song.bpmOffset = song.bpmOffset - 1
 	elseif key == "right" then
 		song.bpmOffset = song.bpmOffset + 1
+	elseif key == "up" then
+		song.gain = song.gain * 1.41421
+		song.gain = math.min(song.gain, 0.5)
+		setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
+	elseif key == "down" then
+		song.gain = song.gain / 1.41421
+		setMessage("volume: " .. math.floor(0.5 + 20 * math.log(song.gain) / math.log(10)) .. "dB")
 	elseif key == "z" and modifierKeys.ctrl and not modifierKeys.shift then
 		Undo.undo()
 	elseif (key == "y" and modifierKeys.ctrl) or (key == "z" and modifierKeys.ctrl and modifierKeys.shift) then
@@ -415,6 +455,7 @@ function love.resize(w, h)
 end
 
 function love.quit()
+	love.filesystem.write("theme.txt", Theme.getName())
 	Tablet.close()
 end
 

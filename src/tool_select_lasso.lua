@@ -1,6 +1,10 @@
 local SelectLasso = {}
 
-SelectLasso.name = "select lasso"
+SelectLasso.name = [[
+lasso selection
+shift: add
+ctrl: subtract
+]]
 SelectLasso.select = true
 SelectLasso.points = {}
 
@@ -81,7 +85,7 @@ end
 function SelectLasso.draw()
 	local n = #SelectLasso.points
 	if mouseDown[1] and n >= 2 then
-		love.graphics.setColor(0.0, 0.8, 0.8)
+		love.graphics.setColor(Theme.current.cursor)
 
 		for i = 1, n - 1 do
 			local x1, y1 = View.transform(SelectLasso.points[i][1], SelectLasso.points[i][2])

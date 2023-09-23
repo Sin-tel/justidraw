@@ -41,6 +41,7 @@ stds.justidaw = {
       "Selection",
       "Tablet",
       "Undo",
+      "Theme",
    },
    read_globals = { "VERSION_MAJOR", "VERSION_MINOR" },
 }

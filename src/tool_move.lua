@@ -1,6 +1,10 @@
 local Move = {}
 
-Move.name = "move notes"
+Move.name = [[
+move notes
+shift: constrain axis
+ctrl: grab
+]]
 
 Move.preview = true
 

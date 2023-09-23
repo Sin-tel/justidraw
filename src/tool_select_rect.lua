@@ -1,6 +1,10 @@
 local SelectRect = {}
 
-SelectRect.name = "select rectangle"
+SelectRect.name = [[
+rectangular selection
+shift: add
+ctrl: subtract
+]]
 
 SelectRect.select = true
 
@@ -34,7 +38,7 @@ end
 
 function SelectRect.draw()
 	if mouseDown[1] then
-		love.graphics.setColor(0.0, 0.8, 0.8)
+		love.graphics.setColor(Theme.current.cursor)
 		love.graphics.rectangle("line", SelectRect.ix, SelectRect.iy, mouseX - SelectRect.ix, mouseY - SelectRect.iy)
 	end
 end
