@@ -36,9 +36,9 @@
 [x] add  better help
 [x] smudge tool
 [x] vibrato
-[ ] make envelopes easier to see (fade?)
-[ ] change looks / theme (user config / one file)
-[ ] change filename
+[x] make envelopes easier to see (fade?)
+[x] change looks / theme (user config / one file)
+[x] change filename
 [ ] refactor "simplify" and use it in resample
 [ ] mouse stabilizer
 [ ] toggle log/linear view ?

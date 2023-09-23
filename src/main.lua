@@ -330,10 +330,15 @@ function love.keypressed(key)
 				textEntered = string.sub(textEntered, 1, byteoffset - 1)
 			end
 		elseif key == "return" then
-			if textEntered ~= "" then
-				File.setName(textEntered)
-				textInput = false
+			local name = textEntered
+			-- trim spaces
+			name = string.gsub(name, "^%s*(.-)%s*$", "%1")
+
+			if name == "" then
+				name = File.randomName()
 			end
+			File.setName(name)
+			textInput = false
 		elseif key == "escape" then
 			textInput = false
 		end
