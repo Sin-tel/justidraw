@@ -25,9 +25,6 @@ macOS and Linux work but only mouse input.
 * left click: draw flat lines
 * hold alt: draw slanted lines
 * hold ctrl: erase
-### pan/zoom tool
-* left click: pan
-* hold ctrl: zoom
 ### selection
 * left click: normal select
 * hold shift: add
