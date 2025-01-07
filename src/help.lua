@@ -11,7 +11,7 @@ shortcuts
  H: dodge/burn envelope
  N: envelope tool
  T: transpose/stretch
- U: smudge
+ U: smudge / vibrato
 
  R: Rectangular selection
  L: Lasso selection
@@ -31,5 +31,6 @@ shortcuts
  ctrl+O: open save folder
  ctrl+R: render wav
  ctrl+T: cycle between themes
+ ctrl+B: cycle between synths
  Escape: quit
 ]]

@@ -34,7 +34,7 @@ height = 720
 
 -- luacheck: push ignore 121
 VERSION_MAJOR = 1
-VERSION_MINOR = 0
+VERSION_MINOR = 1
 -- luacheck: pop
 
 love.window.setMode(width, height, {
@@ -72,16 +72,15 @@ minLength = 50
 automergeDist = 50
 selectNotes = false
 
-local message = ""
-local messageTimer = 0.0
+local messageList = {}
+local MESSAGE_TIME = 3.0
 
 local followPlay = false
 -- count newlines
 local _, helpStringSize = string.gsub(helpString, "\n", "\n")
 
 function setMessage(m)
-	message = m
-	messageTimer = 2.0
+	table.insert(messageList, { m, MESSAGE_TIME })
 end
 
 function love.load()
@@ -216,7 +215,19 @@ function love.update(dt)
 	mousePX, mousePY = mouseX, mouseY
 	Tablet.update()
 
-	messageTimer = messageTimer - dt
+	--prevent extreme spikes
+	local max_dt = 1.0 / 30.0
+	if dt > max_dt then
+		dt = max_dt
+	end
+
+	for i = #messageList, 1, -1 do
+		local m = messageList[i]
+		m[2] = m[2] - dt
+		if m[2] < 0 then
+			table.remove(messageList, i)
+		end
+	end
 
 	if Clipboard.drag then
 		Clipboard.dragUpdate()
@@ -252,13 +263,14 @@ function love.draw()
 		end
 	end
 
+	local font = love.graphics.getFont()
+	local font_h = font:getHeight()
+
 	if love.keyboard.isDown("i") and not textInput then
-		local f = love.graphics.getFont()
 		local c = Theme.current.background
 		love.graphics.setColor(c[1], c[2], c[3], 0.65)
-		local w = f:getWidth(helpString)
-		local h = f:getHeight(helpString) * helpStringSize
-		love.graphics.rectangle("fill", 0, 0, w + 20, h + 20)
+		local w = font:getWidth(helpString)
+		love.graphics.rectangle("fill", 0, 0, w + 20, font_h * helpStringSize + 20)
 
 		love.graphics.setColor(Theme.current.text)
 		love.graphics.print(helpString, 10, 10)
@@ -267,9 +279,11 @@ function love.draw()
 		love.graphics.print(selectedTool.name, 10, 10)
 	end
 
-	if messageTimer > 0 then
-		love.graphics.setColor(Theme.current.text)
-		love.graphics.print(message, 10, height - 30)
+	for i, v in ipairs(messageList) do
+		local c = math.min(v[2] * 30, 1)
+		love.graphics.setColor(Theme.current.text[1], Theme.current.text[2], Theme.current.text[3], c)
+		local k = #messageList - i
+		love.graphics.print(v[1], 10, height - 30 - font_h * k)
 	end
 
 	if Theme.current.showMeter then
@@ -357,6 +371,8 @@ function love.keypressed(key)
 			Audio.render()
 		elseif key == "t" and modifierKeys.ctrl then
 			Theme.next()
+		elseif key == "b" and modifierKeys.ctrl then
+			Audio.nextSynth()
 		elseif key == "n" and modifierKeys.ctrl then
 			print(song.name)
 			textEntered = song.name
@@ -514,9 +530,12 @@ end
 
 function love.filedropped(f)
 	local filename = f:getFilename()
-	if string.sub(filename, -4) == ".sav" then
+	local f_sub = filename:match("[^/\\]*.sav$")
+	if f_sub then
 		File.load(f)
+		setMessage("loaded save file: " .. f_sub)
 	else
-		setMessage("not a save file! (.sav)")
+		setMessage("not a save file!")
+		setMessage("file must end in '.sav'")
 	end
 end

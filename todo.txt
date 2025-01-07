@@ -40,6 +40,7 @@
 [x] change looks / theme (user config / one file)
 [x] change filename
 [x] mouse stabilizer
+[x] add more synths to audio engine
 [ ] refactor "simplify" and use it in resample
 [ ] toggle log/linear view ?
 [ ] non-12 grids?
@@ -54,5 +55,4 @@ not currently planned:
 [ ] brush icons
 [ ] multiple tracks
 [ ] layer manager
-[ ] add more synths to audio engine
 [ ] song structure tracks, notes

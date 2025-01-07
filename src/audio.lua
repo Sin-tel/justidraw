@@ -6,7 +6,12 @@ local M = {}
 M.peak = 0.0
 M.cpuLoad = 0.0
 
-local fr_to_delta = 440 * 2 * math.pi / 44100
+local fr_to_delta = 440 / 44100
+
+local sin = math.sin
+local sqrt = math.sqrt
+local random = math.random
+local TWO_PI = 2 * math.pi
 
 local function clip(x)
 	if x <= -1.5 then
@@ -22,7 +27,81 @@ local function emtptycb()
 	return 0
 end
 
-local sin = math.sin
+local function amp_curve(x)
+	return x * x
+end
+
+local synth_names = {
+	"filter saw",
+	"filter square",
+	"glassy",
+	"sine",
+	"noisy sine",
+	"warm",
+	"semisine",
+	"resonant",
+}
+
+local function synth_saw(v)
+	v.accum = v.accum + TWO_PI * v.delta
+	local s = v.amp * sin(v.accum + 2 * v.pout)
+	v.pout = (v.pout + s) * 0.5
+	return s
+end
+
+local function synth_square(v)
+	v.accum = v.accum + TWO_PI * v.delta
+	local s = v.amp * sin(v.accum + 2 * v.pout * v.pout)
+	v.pout = (v.pout + s) * 0.5
+	return s
+end
+
+local function synth_glass(v)
+	v.accum = v.accum + TWO_PI * v.delta
+	local s = v.amp * sin(v.accum + 1.6 * v.amp * sin(3 * v.accum))
+	return s
+end
+
+local function synth_sine(v)
+	v.accum = v.accum + TWO_PI * v.delta
+	local s = v.amp * sin(v.accum)
+	return s
+end
+
+local function synth_noisy(v)
+	local n = random() - 0.5
+	v.pout = v.pout + (n - v.pout) * 0.05
+	v.accum = v.accum + TWO_PI * v.delta + 0.4 * sqrt(v.delta) * v.pout * (1.1 - v.amp)
+	local s = v.amp * sin(v.accum)
+	return s
+end
+
+local function synth_warm(v)
+	v.accum = v.accum + TWO_PI * v.delta
+	local s = v.amp * sin(v.accum + 1.2 * v.amp * sin(v.accum))
+	return s
+end
+
+local function synth_semisine(v)
+	v.accum = v.accum + v.delta
+	local x = v.accum - math.floor(v.accum)
+	local s1 = (3 * x * x - 2 * x * x * x - x)
+	local s = 1.5 * v.amp * (v.pout - s1) / v.delta
+	v.pout = s1
+	return s
+end
+
+local function synth_resonant(v)
+	v.accum = v.accum + v.delta
+	v.accum = v.accum - math.floor(v.accum)
+
+	local f = (0.5 + 5 * v.amp)
+	-- local f = (0.5 + 0.1 * v.amp / (0.01 + v.delta))
+
+	local x = v.accum
+	local s = v.amp * (4 * x * (1.0 - x) * (1.0 - x)) * (1 + sin(f * v.accum * TWO_PI))
+	return s
+end
 
 local function audiocb()
 	if M.isPlaying then
@@ -34,6 +113,7 @@ local function audiocb()
 				if not v.active then
 					v.vert = M.startTable[M.startIndex]
 					v.active = true
+					v.accum = 0
 					break
 				end
 			end
@@ -51,18 +131,37 @@ local function audiocb()
 					local a = (M.time - v.vert.x) / (v.vert.r.x - v.vert.x)
 					local yy = (1 - a) * v.vert.y + a * v.vert.r.y
 					v.delta = fr_to_delta * 2 ^ (-yy / 1200)
-					v.target_amp = (1 - a) * v.vert.w + a * v.vert.r.w
+					v.target_amp = amp_curve((1 - a) * v.vert.w + a * v.vert.r.w)
 				end
 			end
 		end
 	end
+
 	local out = 0
 	for i, v in ipairs(M.voice) do
 		if v.active or v.preview then
 			v.amp = 0.99 * v.amp + 0.01 * v.target_amp
-			v.accum = v.accum + v.delta
-			local s = v.amp * sin(v.accum + 2 * v.pout)
-			v.pout = (v.pout + s) * 0.5
+			local synth = song.synth
+
+			local s
+			if synth == 1 then
+				s = synth_saw(v)
+			elseif synth == 2 then
+				s = synth_square(v)
+			elseif synth == 3 then
+				s = synth_glass(v)
+			elseif synth == 4 then
+				s = synth_sine(v)
+			elseif synth == 5 then
+				s = synth_noisy(v)
+			elseif synth == 6 then
+				s = synth_warm(v)
+			elseif synth == 7 then
+				s = synth_semisine(v)
+			elseif synth == 8 then
+				s = synth_resonant(v)
+			end
+
 			out = out + s
 			if v.amp < 0.001 and v.target_amp == 0 then
 				v.preview = false
@@ -86,7 +185,7 @@ function M.resetVoices()
 		M.voice[i].amp = 0
 		M.voice[i].target_amp = 0
 		M.voice[i].accum = 0
-		M.voice[i].delta = 440 * 2 * math.pi / 44100
+		M.voice[i].delta = 440 / 44100
 		M.voice[i].pout = 0
 		M.voice[i].active = false
 		M.voice[i].preview = false
@@ -127,7 +226,7 @@ function M.update()
 			M.voice[M.voiceLimit].target_amp = pres
 			M.voice[M.voiceLimit].preview = true
 			local fr = 440 * 2 ^ (-y / 1200)
-			M.voice[M.voiceLimit].delta = fr * 2 * math.pi / 44100
+			M.voice[M.voiceLimit].delta = fr / 44100
 		end
 
 		local j = 1
@@ -138,7 +237,7 @@ function M.update()
 
 				local yy = (1 - a) * v.y + a * v.r.y
 				local fr = 440 * 2 ^ (-yy / 1200)
-				M.voice[j].delta = fr * 2 * math.pi / 44100
+				M.voice[j].delta = fr / 44100
 				M.voice[j].target_amp = (1 - a) * v.w + a * v.r.w
 				M.voice[j].preview = true
 				if j < M.voiceLimit then
@@ -263,6 +362,22 @@ function M.render()
 	M.seek(restore_time)
 
 	love.mouse.setCursor()
+end
+
+function M.nextSynth()
+	song.synth = song.synth + 1
+	if song.synth > #synth_names then
+		song.synth = 1
+	end
+	for i, v in ipairs(M.voice) do
+		if v.active or v.preview then
+			v.pout = 0
+			v.accum = 0
+			v.amp = 0
+		end
+	end
+
+	setMessage("synth: " .. synth_names[song.synth])
 end
 
 return M

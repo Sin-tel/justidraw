@@ -69,6 +69,7 @@ macOS and Linux work but only mouse input.
 * up/down arrows: change volume
 * Y: Hold down to view local harmonic series grid
 * ctrl+T: cycle between themes
+* ctrl+B: cycle between synthesizers
 * ctrl+P: toggle audio preview when editing
 * ctrl+F: toggle follow mode (nice for recording videos)
 * shift+e: toggle echo effect

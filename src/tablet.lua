@@ -14,7 +14,6 @@ Tablet.erase = false
 function Tablet.init()
 	local ok, lib = pcall(ffi.load, "wintab32.dll")
 
-	print("CHECK", ok, lib)
 	if ok then
 		wt = lib
 
@@ -227,6 +226,7 @@ function Tablet.init()
 		print(glogContext[0].lcSysExtX,glogContext[0].lcSysExtY)]]
 	else
 		print("no wintab found!")
+		print(lib)
 	end
 end
 

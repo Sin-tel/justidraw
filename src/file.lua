@@ -43,6 +43,7 @@ function File.newSong()
 	new.track[1] = {}
 	new.gain = 0.125
 	new.name = File.randomName()
+	new.synth = 1
 	return new
 end
 
@@ -85,14 +86,22 @@ function File.read(f)
 	end
 
 	if file.version_major ~= VERSION_MAJOR or file.version_minor ~= VERSION_MINOR then
-		setMessage(
-			"loaded song saved with a previous version! (" .. file.version_major .. "." .. file.version_minor .. ")"
-		)
+		local message = "loaded song saved with a previous version! ("
+			.. file.version_major
+			.. "."
+			.. file.version_minor
+			.. ")"
+		setMessage(message)
+		print(message)
 	end
 
 	song = File.newSong()
 	for k, v in pairs(file) do
 		song[k] = v
+	end
+
+	if not song.synth then
+		song.synth = 1
 	end
 
 	-- remove any NaNs
