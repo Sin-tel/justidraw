@@ -469,6 +469,40 @@ function love.keypressed(key)
 			if selectedTool.radius then
 				selectedTool.radius = selectedTool.radius * 1.1
 			end
+		elseif key == "." and modifierKeys.shift then -- increase pressure with '>'
+			if not Selection.isEmpty() then
+				for _, v in ipairs(Selection.list) do
+					v.w = math.min(v.w + 0.05, 1)
+				end
+				Undo.register()
+			end
+		elseif key == "," and modifierKeys.shift then -- decrease pressure with '<'
+			if not Selection.isEmpty() then
+				for _, v in ipairs(Selection.list) do
+					v.w = math.max(v.w - 0.05, 0)
+				end
+				Undo.register()
+			end
+		elseif key == "/" and modifierKeys.shift then -- "normalize" pressure with '?'
+			if not Selection.isEmpty() then
+				local max_w_selected = 0
+				for _, v in ipairs(Selection.list) do
+					max_w_selected = math.max(max_w_selected, v.w)
+				end
+
+				if max_w_selected == 0 then
+					-- If all are 0, set all to 1 (full pressure)
+					for _, v in ipairs(Selection.list) do
+						v.w = 1
+					end
+				else
+					local scaling_factor = 1 / max_w_selected
+					for _, v in ipairs(Selection.list) do
+						v.w = math.min(1, v.w * scaling_factor)
+					end
+				end
+				Undo.register()
+			end
 		elseif key == "+" or key == "kp+" or key == "=" then
 			song.bpm = math.min(math.max(song.bpm + 4, 32), 320)
 			setMessage("bpm: " .. song.bpm)

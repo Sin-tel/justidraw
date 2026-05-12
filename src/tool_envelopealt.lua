@@ -28,13 +28,13 @@ function EnvelopeAlt.mousepressed()
 		--EnvelopeAlt.y = vert.y
 		--EnvelopeAlt.w = vert.w
 
-		--if Selection.isEmpty() then
-		EnvelopeAlt.table = Edit.getNote(vert)
-		EnvelopeAlt.w = vert.w
-		EnvelopeAlt.prevIndex = 0
-		--else
-		--	EnvelopeAlt.table = Selection.list
-		--end
+		if Selection.isEmpty() then
+			EnvelopeAlt.table = Edit.getNote(vert)
+			EnvelopeAlt.w = vert.w
+			EnvelopeAlt.prevIndex = 0
+		else
+			EnvelopeAlt.table = Selection.list
+		end
 	end
 end
 
