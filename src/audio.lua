@@ -58,7 +58,7 @@ end
 
 local function synth_glass(v)
 	v.accum = v.accum + TWO_PI * v.delta
-	local s = v.amp * sin(v.accum + 1.6 * v.amp * sin(3 * v.accum))
+	local s = v.amp * sin(v.accum + 1.2 * (v.amp + 0.2) * sin(3 * v.accum))
 	return s
 end
 
@@ -78,7 +78,7 @@ end
 
 local function synth_warm(v)
 	v.accum = v.accum + TWO_PI * v.delta
-	local s = v.amp * sin(v.accum + 1.2 * v.amp * sin(v.accum))
+	local s = v.amp * sin(v.accum + v.amp * sin(v.accum))
 	return s
 end
 
