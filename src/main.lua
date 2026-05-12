@@ -331,7 +331,7 @@ end
 function love.keypressed(key)
 	if key == "lshift" or key == "rshift" then
 		modifierKeys.shift = true
-	elseif key == "lctrl" or key == "rctrl" then
+	elseif key == "lctrl" or key == "rctrl" or key == "lgui" or key == "rgui" then
 		modifierKeys.ctrl = true
 	elseif key == "lalt" or key == "ralt" then
 		modifierKeys.alt = true
@@ -507,7 +507,7 @@ end
 function love.keyreleased(key)
 	if key == "lshift" or key == "rshift" then
 		modifierKeys.shift = false
-	elseif key == "lctrl" or key == "rctrl" then
+	elseif key == "lctrl" or key == "rctrl" or key == "lgui" or key == "rgui" then
 		modifierKeys.ctrl = false
 	elseif key == "lalt" or key == "ralt" then
 		modifierKeys.alt = false
